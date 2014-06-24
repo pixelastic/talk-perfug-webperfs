@@ -112,3 +112,9 @@ lent.
 
 
 
+Utiliser une identité visuelle marrante pour lier tout ça. Les maisons GoT
+? (Tyrion pour la compression). Ou BSG. Ou Bref. Utiliser le flying step pour
+la compression gzip. Utiliser la métaphore du client/serveur (épisode du resto)
+pour "il m'a regardé, je l'ai regardé" pour les échanges de requetes.
+
+

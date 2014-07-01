@@ -28,9 +28,7 @@
 </head>
 
 <body>
-
   <div class="reveal">
-
     <div class="slides">
 
       <section>
@@ -47,17 +45,40 @@
         </ul>
       </section>
 
-
       <section>
-        <h1>Pourquoi</h1>
-        Chiffres habituels de l'influence de la vitesse sur le CA. Amazon, etc. Temps d'attente moyen des utilisateurs de plus en plus faible, génération habitué à instanané. Si le site de votre concurrent est plus rapide que le votre, il a un avantage
+        <section>
+          <h1>Pourquoi ?</h1>
+        </section>
+        <section>
+          <blockquote>Amazon perds 1% de ventes pour chaque tranche de 100ms de chargement.</blockquote>
+        </section>
+        <section>
+          <ul>
+            <li>Temps d'attente moyen en baisse, habitude de l'instantané</li>
+            <li class="fragment">Avantage concurrentiel</li>
+            <li class="fragment">Impacte directement la marque</li>
+          </ul>
+          <aside class="notes">
+            - Site considéré lent au bout de 4s en 2008, 3s aujourd'hui.
+            - Si le site du concurrent est plus rapide, cela lui donne un avantage sur vous
+            - La performance du site est directement affectée à la marque dans l'esprit des utilisateurs
+          </aside>
+        </section>
+        <section>
+          <h2>Pas nouveau</h2>
+          <a href="http://www.dailymotion.com/video/x7op91_eric-daspet-nicole-sullivan-perform_tech" class="fragment">ParisWeb 2008</a>
+        </section>
       </section>
 
       <section>
-        <h1>Anatomie d'une requete</h1>
-        Exemple sur un site existant. Requete initiale, HTML recu, assets chargés, startRender, startExecution.
-        WebPageTest
-        Parler des solutions en SaaS pour simuler des connections mobiles.
+        <section>
+          <h1>Anatomie d'une requête</h1>
+        </section>
+        <section>
+          Exemple sur un site existant. Requete initiale, HTML recu, assets chargés, startRender, startExecution.
+          WebPageTest
+          Parler des solutions en SaaS pour simuler des connections mobiles.
+        </section>
       </section>
 
       <section>
@@ -244,6 +265,20 @@
         <section>
           <h1>Humain</h1>
         </section>
+
+        <section>
+          http://calendar.perfplanet.com/2012/why-bother-with-performance-metrics-when-you-can-cheat/
+          Mozilla make the throbber faster
+          Tricher sur le easing, slow, puis de plus en plus fast
+          Avoir des bandes qui bougent dans le sens inverse, augmente perception de vitesse
+        </section>
+
+        <section>
+          Les utilsiateurs ne se disent pas "oh, ce site est lent, c'est dommage", mais "cette marque est pas très performante".
+          Même site, même ergo, testée en ajoutant simplement un délai de 500ms est passé de "simple, facile à utiliser", à "lent, basique, dur à utiliser".
+          http://calendar.perfplanet.com/2013/slow-pages-damage-perception/
+        </section>
+
 
         <section>
           Finalement on optimise le chargement de nso pages pour que l'utilisateur final

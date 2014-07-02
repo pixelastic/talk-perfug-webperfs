@@ -117,7 +117,7 @@
               <li class="fragment">Limite de connections simultanées coté client</li>
             </ul>
           </div>
-          <div class="fragment solution">
+          <div class="fragment">
             <h3>Solution<span class="fragment fade-out">s</span></h3>
             <ul>
               <li class="fragment">Limiter le nombre de (sous) domaines</li>
@@ -133,7 +133,7 @@
               <li>Limite physique (vitesse du signal)</li>
             </ul>
           </div>
-          <div class="fragment solution" data-fragment-index="3">
+          <div class="fragment" data-fragment-index="3">
             <h3>Solution<span class="fragment" data-fragment-index="5"> ?</span></h3>
             <ul class="fragment" data-fragment-index="4">
               <li>CDN</li>
@@ -165,18 +165,36 @@ Cookie: t5aei=1404298241633; pepne2103780757=popin_vue; xtvrn=$475540$; JSESSION
         </section>
 
         <section>
-          Globalement, c'est pas là le bottleneck. Si vraiment long, on peut, mais il y a beaucoup plus à gagner à coté.
+          <h1>Server-side processing</h1>
+          <p class="fragment">Out of scope</p>
         </section>
 
         <section>
-          Réduire la taille des assets à télécharger
-          Ah, ça devient intéressant. On gzip tout ce qui est texte.
-          (Vérifier qui ne supporte pas gzip). CSS, JS, Woff, xml, json. On divise
-          par trois en moyenne.
-          Ne pas compresser en gzip les images.
-        Micro-optim :
-        Toujours mettre attributs HTML, CSS, etc dans le même ordre pour améliorer la compression gzip.
-        grunt to the rescue
+          <h1>Filesize</h1>
+          <img src="./img/server-gzip.jpg" alt="GZIP all the things!" class="fragment" />
+        </section>
+
+        <section>
+          <p>Divise la taille des assets texte par 3 en moyenne.</p>
+          <ul>
+            <li class="fragment">CSS</li>
+            <li class="fragment">Javascript / Json</li>
+            <li class="fragment">HTML / XML / SVG / WOFF</li>
+          </ul>
+          <div class="fragment">
+            <h3>Attention</h3>
+            <ul>
+              <li class="fragment">Proxies peuvent supprimer le Accept-Encoding</li>
+              <li class="fragment">Ne pas gzipper les images !</li>
+              <li class="fragment">Micro-optim en gardant une convention d'ordre d'attributs</li>
+            </ul>
+          </div>
+          <aside class="notes">
+            - Proxy peuvent supprimer le Request Header, il est donc impossible d'utiliser une version statique
+            gzippée par défaut, il faut alors faire la compression on the fly coté serveur, ce qui implique plus de CPU.
+          </aside>
+
+
         </section>
 
         <section>

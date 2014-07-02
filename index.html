@@ -138,12 +138,30 @@
             <ul class="fragment" data-fragment-index="4">
               <li>CDN</li>
             </ul>
+          </div>
         </section>
 
         <section>
-          HTTP Request
-          Limiter en baissant les cookies
-          IE envoie des User-Agent énorme.
+          <h1>HTTP Request</h1>
+          <pre><code>
+GET /candidat/assets/142.0.14-C14/tap-composant-ihm/statics/js/commun.js HTTP/1.1
+Host: candidat.pole-emploi.fr
+Connection: keep-alive
+Cache-Control: no-cache
+Pragma: no-cache
+Accept: */*
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/34.0.1847.116 Chrome/34.0.1847.116 Safari/537.36
+Referer: https://candidat.pole-emploi.fr/candidat/espacepersonnel/regroupements
+Accept-Encoding: gzip,deflate,sdch
+Accept-Language: en-US,en;q=0.8
+Cookie: t5aei=1404298241633; pepne2103780757=popin_vue; xtvrn=$475540$; JSESSIONID_CANDIDAT=GblcTzjFp1zqkB1T2QBDxxWc21YSsbXTmQnxLLBQMCrDHhl4kSYS!-849660442; a_TapestryDE_pt28a=xZZyKWcoJcyXZFpA/RByPw==; CANDIDAT_COOKIE=16619098; xtan475540=2-2103780757; xtant475540=1; PE_SELECT=1392748736.16420.0000
+          </code></pre>
+          <ul>
+            <li class="fragment">Utiliser sous-domaines pour assets statiques</li>
+            <li class="fragment">Enfin, ça dépends (cf. <a href="http://www.jonathanklein.net/2014/02/revisiting-cookieless-domain.html">Etsy</a>)</li>
+            <li class="fragment">On ne peut <a href="http://webaim.org/blog/user-agent-string-history/">rien faire</a> pour le User-Agent</li>
+            <li class="fragment">To be continued...</li>
+          </ul>
         </section>
 
         <section>

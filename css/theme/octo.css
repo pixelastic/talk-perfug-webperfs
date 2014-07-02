@@ -69,11 +69,16 @@ body {
   text-shadow: none;
   border: none;
 }
+
+/* Lists */
+.reveal ul {
+  margin-bottom:20px;
+}
 /* Progress bar */
 
 .reveal .progress {
   background: url('/img/ui-octo-pattern.png') 0 5px repeat-x #030e2b;
-  height: 55px;
+  height: 30px;
 }
 .reveal .progress span {
   position: absolute;

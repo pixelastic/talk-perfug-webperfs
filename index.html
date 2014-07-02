@@ -11,6 +11,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <link rel="stylesheet" href="css/reveal.min.css">
   <link rel="stylesheet" href="css/theme/default.css" id="theme">
+  <link rel="stylesheet" href="css/custom.css">
   <link rel="stylesheet" href="lib/css/zenburn.css">
   <!-- If the query includes 'print-pdf', include the PDF print sheet -->
   <script>
@@ -104,17 +105,24 @@
         <section>
           <h1>Serveur</h1>
         </section>
-        <section>
-          Quoi commencer à optimiser ? Inutile de perdre trop de temps à optimiser coté back.
-          Globalement, c'est pas là le bottleneck. Si vraiment long, on peut, mais il y a beaucoup plus à gagner à coté.
-        </section>
 
         <section>
-          Gagner sur les DNS
-          Pas grand chose à faire, si ce n'est éviter de charger des assets depuis des domaines différents
-
-            Connection DNS, etc, on peut pas y faire grand chose. Limité par la vitesse de la lumière, on peut grapiller, mais pas beaucoup.
-          Browser ont une maximum de connections simultanées, et simultanée par host (sous-domaines considérés comme différents hosts).
+          <h1>DNS</h1>
+          <div class="fragment">
+            <h3>Problèmes</h3>
+            <ul>
+              <li class="fragment">Passage obligatoire</li>
+              <li class="fragment">Pas controlable</li>
+              <li class="fragment">Limite physique (vitesse de la lumière)</li>
+              <li class="fragment">Limite de connections simultanées coté client</li>
+            </ul>
+          </div>
+          <div class="fragment solution" style="font-weight:bold">
+            <h3>Solution<span class="fragment fade-out">s</span></h3>
+            <ul>
+              <li class="fragment">Limiter le nombre de (sous) domaines</li>
+            </ul>
+          </div>
         </section>
 
 
@@ -123,6 +131,11 @@
           Mettre un CDN pour être au plus proche des utilisateurs.
           Souvent employé comme solution miracle, alors qu'il y a beaucoup plus à gagner en
           optimisant le reste
+        </section>
+
+        <section>
+          Quoi commencer à optimiser ? Inutile de perdre trop de temps à optimiser coté back.
+          Globalement, c'est pas là le bottleneck. Si vraiment long, on peut, mais il y a beaucoup plus à gagner à coté.
         </section>
 
         <section>

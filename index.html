@@ -113,11 +113,11 @@
             <ul>
               <li class="fragment">Passage obligatoire</li>
               <li class="fragment">Pas controlable</li>
-              <li class="fragment">Limite physique (vitesse de la lumière)</li>
+              <li class="fragment">Limite physique (vitesse du signal)</li>
               <li class="fragment">Limite de connections simultanées coté client</li>
             </ul>
           </div>
-          <div class="fragment solution" style="font-weight:bold">
+          <div class="fragment solution">
             <h3>Solution<span class="fragment fade-out">s</span></h3>
             <ul>
               <li class="fragment">Limiter le nombre de (sous) domaines</li>
@@ -125,16 +125,28 @@
           </div>
         </section>
 
-
         <section>
-          Gagner sur le temps de connection après DNS
-          Mettre un CDN pour être au plus proche des utilisateurs.
-          Souvent employé comme solution miracle, alors qu'il y a beaucoup plus à gagner en
-          optimisant le reste
+          <h1>TCP connection</h1>
+          <div class="fragment" data-fragment-index="1">
+            <h3>Problème</h3>
+            <ul class="fragment" data-fragment-index="2">
+              <li>Limite physique (vitesse du signal)</li>
+            </ul>
+          </div>
+          <div class="fragment solution" data-fragment-index="3">
+            <h3>Solution<span class="fragment" data-fragment-index="5"> ?</span></h3>
+            <ul class="fragment" data-fragment-index="4">
+              <li>CDN</li>
+            </ul>
         </section>
 
         <section>
-          Quoi commencer à optimiser ? Inutile de perdre trop de temps à optimiser coté back.
+          HTTP Request
+          Limiter en baissant les cookies
+          IE envoie des User-Agent énorme.
+        </section>
+
+        <section>
           Globalement, c'est pas là le bottleneck. Si vraiment long, on peut, mais il y a beaucoup plus à gagner à coté.
         </section>
 

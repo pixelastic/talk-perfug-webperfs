@@ -1,3 +1,20 @@
 .reveal ul {
   margin-bottom:20px;
 }
+
+.reveal .sprite-container {
+  margin-bottom:20px;
+}
+.reveal .sprite-container img {
+  background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAJUlEQVQYV2M8e/bsfwY0YGxszIguxjgUFKI7GsTH5m4M3w1ChQDoUiUJ8LDK3QAAAABJRU5ErkJggg==') repeat white;
+  border:none;
+  display:block;
+  margin:0 auto;
+}
+
+.reveal .sprite-fun.visible {
+  display:none;
+}
+.reveal .sprite-fun.visible.current-fragment {
+  display:block;
+}

@@ -198,32 +198,94 @@ Cookie: t5aei=1404298241633; pepne2103780757=popin_vue; xtvrn=$475540$; JSESSION
         </section>
 
         <section>
-          Images
-          Souvent le plus lourd sur une page, et de loin. 
-          Utiliser les méthodes de compressions des images. Gif ne se compresse pas, ou très peu. 
-          Jpg bien pour les photos. Compresse bien. Comrpession lossy, 80% reste globalement invisible à l'oeil nu.
-          Lossless, on supprimes les metadata (exiftool). Certains prennent de la place pour rien : thumbnail, type de flash, exposure, etc.
-          Attention toutefois, certaines doivent rester : auteur, date, lieu, copyright, etc.
-          png > gif : plusieurs canaux de transparence. Gif peut être plus léger sur de tout petits fichiers, mais
-          comme on le verra plus tard, il vaut mieux cumuler les fichiers en sprite
-          png n'est pas animé mais... wtf gif animé ? "Si vous avez des gifs animés sur votre site, vous avez un problème plus grave"
+          <h1>Images</h1>
+          <ul>
+            <li class="fragment">Souvent le plus lourd sur une page, et de loin.</li>
+            <li class="fragment">Utiliser le bon format pour le bon usage.</li>
+          </ul>
         </section>
 
         <section>
-          Sprites
-          Pour les icones, on peut utiliser des sprites, pour cumuler plusieurs éléments en une seule image et jouer avec
-          le background position. Peut être remplacé par CSS ou icon fonts.
+          <h1>JPG</h1>
+          <ul>
+            <li class="fragment">Pour les photos.</li>
+            <li class="fragment">Compression lossy ~ 80% à l'oeil nu (convert, jpegoptim).</li>
+            <li class="fragment">Compression lossless suppression metadatas (exiftool).</li>
+            <li class="fragment">Problématiques responsive/retina (hors scope).</li>
+          </ul>
+          <aside class="notes">
+            - Les graphistes ont une meilleure perception de la compression que les développeurs.
+            - Certaines metadatas ne doivent pas disparaitre (author, copyright, etc).
+          </aside>
         </section>
 
         <section>
-          Concaténation
-          "Il m'a regardé, je l'ai regardé, il m'a regardé"
-          Indispensable. L'un des plus gros gain. Ne charger qu'un seul fichier CSS ou JS plutot que plusieurs fichiers.
-          On gagne énormément en faisant ainsi. Le gzip fonctionne encore mieux.o
+          <h1>GIF</h1>
+          <ul>
+            <li class="fragment">Palette de 256 couleurs.</li>
+            <li class="fragment">Un seul canal de transparence.</li>
+            <li class="fragment">Se compresse peu.</li>
+            <li class="fragment">...</li>
+            <li class="fragment">Images animées<br /><img src="./img/server-gif.gif" alt="Gif animé" width="250"/> </li>
+          </ul>
+          <aside class="notes">
+            Si vous avez des gifs animés sur votre site, vous avez un problème plus grave qu'un soucis de performances.
+          </aside>
         </section>
 
         <section>
-          Cache
+          <h1>PNG</h1>
+          <ul>
+            <li class="fragment">Filesize plus léger que GIF.</li>
+            <li class="fragment">Plusieurs canaux de transparence.</li>
+            <li class="fragment">256 couleurs pour PNG-8, infinité pour PNG-24.</li>
+            <li class="fragment">tinypng, pngquant, punypng, etc.</li>
+          </ul>
+          <div class="fragment">
+            <h3>Attention</h3>
+            <ul>
+              <li class="fragment">Photoshop gère mal PNG-8.</li>
+              <li class="fragment">Pas supporté par IE8 (attention aux hacks).</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h1>Sprites</h1>
+          <div class="sprite-container">
+            <img src="./img/server-sprite-fun.jpg" alt="Sprite fun" class="fragment sprite-fun" />
+            <img src="./img/server-sprites.png" alt="Google sprite" class="fragment sprite-example"/>
+          </div>
+          <ul>
+            <li class="fragment">Plusieurs images en une.</li>
+            <li class="fragment">Gain sur le nombre de requetes et sur la compression.</li>
+            <li class="fragment">On joue ensuite sur background-position en CSS.</li>
+          </ul>
+          <div class="fragment">
+            <h3>Attention</h3>
+            <ul>
+              <li class="fragment">Nécessite des éléments de taille fixe.</li>
+            </ul>
+          </div>
+          <aside class="notes">
+            Peut être parfois remplacé par CSS (gradients, border-radius).
+            Peut être parfois remplacé par des Icon Fonts.
+            Source des images : http://www.loriskumo.com/des-sprites-css-pour-votre-site/
+          </aside>
+        </section>
+
+        <section>
+          <h1>Concaténation</h1>
+          <img src="./img/server-client-server.png" alt="Il m'a regardé, je l'ai regardé" class="fragment" width="500"/>
+          <ul>
+            <li class="fragment">Limite énormément le nombre de requêtes.</li>
+            <li class="fragment">Améliore le Gzip.</li>
+            <li class="fragment">1 (ou 2) fichiers Javascript et CSS.</li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>Cache</h1>
           Une fois téléchargé, inutile de le télécharger à nouveau.
           HTTP propose des mécanismes puissants pour gérer le cache, à deux niveaux.
           Au niveau du browser (ne lance la requete que si la date est expirée), ou au

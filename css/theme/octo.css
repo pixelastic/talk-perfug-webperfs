@@ -71,13 +71,21 @@ body {
 }
 
 /* Lists */
-.reveal ul {
+.reveal ul, 
+.reveal ol {
   min-width:600px;
   margin:0 auto 20px auto;
+}
+.reveal ul ul,
+.reveal ul ol,
+.reveal ol ol,
+.reveal ol ul {
+  font-size:0.8em;
 }
 
 .reveal blockquote {
   margin-bottom:20px;
+  padding:20px;
 }
 
 .reveal strong {
@@ -87,6 +95,11 @@ body {
   font-size:0.9em;
   font-style:normal;
   color:#a3adb2;
+}
+
+.reveal pre {
+  background:#000000;
+  color:#FFFFFF;
 }
 /* Progress bar */
 

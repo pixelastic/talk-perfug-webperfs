@@ -13,7 +13,6 @@
   <link rel="stylesheet" href="css/theme/octo.css" id="theme">
   <link rel="stylesheet" href="css/custom.css">
   <link rel="stylesheet" href="lib/css/zenburn.css">
-  <!-- If the query includes 'print-pdf', include the PDF print sheet -->
   <script>
     if (window.location.search.match(/print-pdf/gi)) {
       var link = document.createElement('link');
@@ -50,24 +49,25 @@
           <h1>Pourquoi ?</h1>
         </section>
         <section>
-          <blockquote>Amazon perd 1% de ventes pour chaque tranche de 100ms de chargement.</blockquote>
+          <h3>Impact direct sur le business et l'image</h3>
           <ul>
-            <li>Temps d'attente moyen en baisse, habitude de l'instantané</li>
-            <li>Avantage concurrentiel</li>
-            <li>Impacte directement la marque</li>
+            <li>
+              <p>Utilisateurs de moins en moins patients</p>
+              <ul>
+                <li>Site lent au bout de 4s en 2008, 3s en 2014</li>
+                <li>Nouvelle génération habituée à l'instantané</li>
+                <li>Explosion du nombre de terminaux mobiles</li>
+              </ul>
+            </li>
+            <li>
+              <p>Relation à l'image de marque</p>
+              <ul>
+                <li>Avantage concurrentiel si rapide</li>
+                <li>Frustration reportée sur la marque si lent</li>
+              </ul>
+            </li>
           </ul>
-          <aside class="notes">
-            - Site considéré lent au bout de 4s en 2008, 3s aujourd'hui.
-            - Si le site du concurrent est plus rapide, cela lui donne un avantage sur vous
-            - La performance du site est directement affectée à la marque dans l'esprit des utilisateurs
-          </aside>
-        </section>
-        <section>
-          <h2>Pas nouveau</h2>
-          <ul>
-            <li><a href="http://www.dailymotion.com/video/x7op91_eric-daspet-nicole-sullivan-perform_tech">ParisWeb 2008</a></li>
-            <li><a href="http://www.slideshare.net/jpvincent/performances-web-quoi-de-neuf">KiwiParty 2014</a></li>
-          </ul>
+          <blockquote>Amazon perd 1% de ventes pour chaque tranche de 100ms de chargement</blockquote>
         </section>
       </section>
 
@@ -77,44 +77,13 @@
         </section>
 
         <section>
-          <!-- <p>// TODO : Image WPT de Waterfall</p> -->
-          <h2>3 phases principales à optimiser</h2>
+          <h3>Tirer profit de la requête HTTP</h3>
           <ul>
-            <li><em>DNS Lookup</em></li>
-            <li><strong>HTTP Request</strong></li>
-            <li><em>Server-side processing</em></li>
-            <li><strong>HTTP Response</strong></li>
-            <li><strong>Download</strong></li>
+            <li>Limiter les cookies</li>
+            <li>Concaténer les éléments</li>
+            <li>Compresser les assets</li>
+            <li>Mettre en cache</li>
           </ul>
-        </section>
-
-
-        <section>
-          <h1>HTTP Request</h1>
-          <pre><code>
-GET /candidat/assets/142.0.14-C14/tap-composant-ihm/statics/js/commun.js HTTP/1.1
-Host: candidat.pole-emploi.fr
-Connection: keep-alive
-Cache-Control: no-cache
-Pragma: no-cache
-Accept: */*
-User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Ubuntu Chromium/34.0.1847.116 Chrome/34.0.1847.116 Safari/537.36
-Referer: https://candidat.pole-emploi.fr/candidat/espacepersonnel/regroupements
-Accept-Encoding: gzip,deflate,sdch
-Accept-Language: en-US,en;q=0.8
-Cookie: t5aei=1404298241633; pepne2103780757=popin_vue; xtvrn=$475540$; JSESSIONID_CANDIDAT=GblcTzjFp1zqkB1T2QBDxxWc21YSsbXTmQnxLLBQMCrDHhl4kSYS!-849660442; a_TapestryDE_pt28a=xZZyKWcoJcyXZFpA/RByPw==; CANDIDAT_COOKIE=16619098; xtan475540=2-2103780757; xtant475540=1; PE_SELECT=1392748736.16420.0000
-          </code></pre>
-          <ul>
-            <li>Utiliser sous-domaines pour assets statiques</li>
-            <li>Enfin, ça dépends (cf. <a href="http://www.jonathanklein.net/2014/02/revisiting-cookieless-domain.html">Etsy</a>)</li>
-            <li>On ne peut <a href="http://webaim.org/blog/user-agent-string-history/">rien faire</a> pour le User-Agent</li>
-            <li>To be continued...</li>
-          </ul>
-        </section>
-
-        <section>
-          <h1>Server-side processing</h1>
-          <p>Out of scope</p>
         </section>
 
         <section>
@@ -422,6 +391,13 @@ Cookie: t5aei=1404298241633; pepne2103780757=popin_vue; xtvrn=$475540$; JSESSION
           <h1>Annexes</h1>
         </section>
         <section>
+          <h2>Des ressources existent depuis longtemps</h2>
+          <ul>
+            <li><a href="http://www.dailymotion.com/video/x7op91_eric-daspet-nicole-sullivan-perform_tech">ParisWeb 2008</a></li>
+            <li><a href="http://www.slideshare.net/jpvincent/performances-web-quoi-de-neuf">KiwiParty 2014</a></li>
+          </ul>
+        </section>
+        <section>
           <h3>Des outils matures</h3>
           <ul>
             <li><a href="http://www.webpagetest.org/">WebPageTest</a></li>
@@ -453,6 +429,11 @@ Cookie: t5aei=1404298241633; pepne2103780757=popin_vue; xtvrn=$475540$; JSESSION
           </ul>
         </section>
 
+        <section>
+          <h3>Adaptez à votre cas de figure</h3>
+          <ul>
+            <li><a href="http://www.jonathanklein.net/2014/02/revisiting-cookieless-domain.html">Etsy</a> charge ses assets statiques depuis le même domaine que le site principal</li>
+          </ul>
       </section>
 
 

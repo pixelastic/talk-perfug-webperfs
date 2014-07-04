@@ -33,15 +33,14 @@
     <div class="slides">
 
       <section>
-        <h1>Les webperfs pour les nuls</h1>
+        <h1>Les webperfs<br />pour les nuls</h1>
       </section>
 
       <section>
-        <h2>Qui suis-je ?</h2>
-        <h3>Timothée Carry</h3>
+        <h2>Timothée Carry</h2>
         <ul>
-          <li>Consultant @ Octo Technology</li>
-          <li>Spécialisé en Web Front</li>
+          <li>Consultant Octo Technology</li>
+          <li>Spécialiste en Web Front</li>
           <li><a href="https://twitter.com/pixelastic/">@pixelastic</a> à l'extérieur</li>
         </ul>
       </section>
@@ -51,13 +50,11 @@
           <h1>Pourquoi ?</h1>
         </section>
         <section>
-          <blockquote>Amazon perds 1% de ventes pour chaque tranche de 100ms de chargement.</blockquote>
-        </section>
-        <section>
+          <blockquote>Amazon perd 1% de ventes pour chaque tranche de 100ms de chargement.</blockquote>
           <ul>
             <li>Temps d'attente moyen en baisse, habitude de l'instantané</li>
-            <li class="fragment">Avantage concurrentiel</li>
-            <li class="fragment">Impacte directement la marque</li>
+            <li>Avantage concurrentiel</li>
+            <li>Impacte directement la marque</li>
           </ul>
           <aside class="notes">
             - Site considéré lent au bout de 4s en 2008, 3s aujourd'hui.
@@ -67,36 +64,9 @@
         </section>
         <section>
           <h2>Pas nouveau</h2>
-          <a href="http://www.dailymotion.com/video/x7op91_eric-daspet-nicole-sullivan-perform_tech" class="fragment">ParisWeb 2008</a>
-        </section>
-      </section>
-
-      <section>
-        <section data-background="/img/anatomy-background.jpg">
-          <h1>Anatomie d'une requête</h1>
-        </section>
-        <section>
-          <p>// TODO : Image WPT de Waterfall</p>
           <ul>
-            <li class="fragment">DNS Lookup</li>
-            <li class="fragment">TCP connection to IP</li>
-            <li class="fragment">HTTP Request</li>
-            <li class="fragment">Server-side processing</li>
-            <li class="fragment">HTTP Response</li>
-            <li class="fragment">Download</li>
-            <li class="fragment">Close</li>
-            <li class="fragment">...</li>
-            <li class="fragment">Client-side processing</li>
-          </ul>
-        </section>
-
-        <section>
-          <h3>Outils</h3>
-          <p>// Image d'une plus grande waterfall</p>
-          <ul>
-            <li><a href="http://www.webpagetest.org/">WebPageTest</a></li>
-            <li><a href="http://newrelic.com/">NewRelic</a></li>
-            <li><a href="http://appurify.com/">Appurify</a></li>
+            <li><a href="http://www.dailymotion.com/video/x7op91_eric-daspet-nicole-sullivan-perform_tech">ParisWeb 2008</a></li>
+            <li><a href="http://www.slideshare.net/jpvincent/performances-web-quoi-de-neuf">KiwiParty 2014</a></li>
           </ul>
         </section>
       </section>
@@ -107,39 +77,17 @@
         </section>
 
         <section>
-          <h1>DNS</h1>
-          <div class="fragment">
-            <h3>Problèmes</h3>
-            <ul>
-              <li class="fragment">Passage obligatoire</li>
-              <li class="fragment">Pas controlable</li>
-              <li class="fragment">Limite physique (vitesse du signal)</li>
-              <li class="fragment">Limite de connections simultanées coté client</li>
-            </ul>
-          </div>
-          <div class="fragment">
-            <h3>Solution<span class="fragment fade-out">s</span></h3>
-            <ul>
-              <li class="fragment">Limiter le nombre de (sous) domaines</li>
-            </ul>
-          </div>
+          <!-- <p>// TODO : Image WPT de Waterfall</p> -->
+          <h2>3 phases principales à optimiser</h2>
+          <ul>
+            <li><em>DNS Lookup</em></li>
+            <li><strong>HTTP Request</strong></li>
+            <li><em>Server-side processing</em></li>
+            <li><strong>HTTP Response</strong></li>
+            <li><strong>Download</strong></li>
+          </ul>
         </section>
 
-        <section>
-          <h1>TCP connection</h1>
-          <div class="fragment" data-fragment-index="1">
-            <h3>Problème</h3>
-            <ul class="fragment" data-fragment-index="2">
-              <li>Limite physique (vitesse du signal)</li>
-            </ul>
-          </div>
-          <div class="fragment" data-fragment-index="3">
-            <h3>Solution<span class="fragment" data-fragment-index="5"> ?</span></h3>
-            <ul class="fragment" data-fragment-index="4">
-              <li>CDN</li>
-            </ul>
-          </div>
-        </section>
 
         <section>
           <h1>HTTP Request</h1>
@@ -157,36 +105,36 @@ Accept-Language: en-US,en;q=0.8
 Cookie: t5aei=1404298241633; pepne2103780757=popin_vue; xtvrn=$475540$; JSESSIONID_CANDIDAT=GblcTzjFp1zqkB1T2QBDxxWc21YSsbXTmQnxLLBQMCrDHhl4kSYS!-849660442; a_TapestryDE_pt28a=xZZyKWcoJcyXZFpA/RByPw==; CANDIDAT_COOKIE=16619098; xtan475540=2-2103780757; xtant475540=1; PE_SELECT=1392748736.16420.0000
           </code></pre>
           <ul>
-            <li class="fragment">Utiliser sous-domaines pour assets statiques</li>
-            <li class="fragment">Enfin, ça dépends (cf. <a href="http://www.jonathanklein.net/2014/02/revisiting-cookieless-domain.html">Etsy</a>)</li>
-            <li class="fragment">On ne peut <a href="http://webaim.org/blog/user-agent-string-history/">rien faire</a> pour le User-Agent</li>
-            <li class="fragment">To be continued...</li>
+            <li>Utiliser sous-domaines pour assets statiques</li>
+            <li>Enfin, ça dépends (cf. <a href="http://www.jonathanklein.net/2014/02/revisiting-cookieless-domain.html">Etsy</a>)</li>
+            <li>On ne peut <a href="http://webaim.org/blog/user-agent-string-history/">rien faire</a> pour le User-Agent</li>
+            <li>To be continued...</li>
           </ul>
         </section>
 
         <section>
           <h1>Server-side processing</h1>
-          <p class="fragment">Out of scope</p>
+          <p>Out of scope</p>
         </section>
 
         <section>
           <h1>Filesize</h1>
-          <img src="./img/server-gzip.jpg" alt="GZIP all the things!" class="fragment" />
+          <img src="./img/server-gzip.jpg" alt="GZIP all the things!" />
         </section>
 
         <section>
           <p>Divise la taille des assets texte par 3 en moyenne.</p>
           <ul>
-            <li class="fragment">CSS</li>
-            <li class="fragment">Javascript / Json</li>
-            <li class="fragment">HTML / XML / SVG / WOFF</li>
+            <li>CSS</li>
+            <li>Javascript / Json</li>
+            <li>HTML / XML / SVG / WOFF</li>
           </ul>
-          <div class="fragment">
+          <div>
             <h3>Attention</h3>
             <ul>
-              <li class="fragment">Proxies peuvent supprimer le Accept-Encoding</li>
-              <li class="fragment">Ne pas gzipper les images !</li>
-              <li class="fragment">Micro-optim en gardant une convention d'ordre d'attributs</li>
+              <li>Proxies peuvent supprimer le Accept-Encoding</li>
+              <li>Ne pas gzipper les images !</li>
+              <li>Micro-optim en gardant une convention d'ordre d'attributs</li>
             </ul>
           </div>
           <aside class="notes">
@@ -200,18 +148,18 @@ Cookie: t5aei=1404298241633; pepne2103780757=popin_vue; xtvrn=$475540$; JSESSION
         <section>
           <h1>Images</h1>
           <ul>
-            <li class="fragment">Souvent le plus lourd sur une page, et de loin.</li>
-            <li class="fragment">Utiliser le bon format pour le bon usage.</li>
+            <li>Souvent le plus lourd sur une page, et de loin.</li>
+            <li>Utiliser le bon format pour le bon usage.</li>
           </ul>
         </section>
 
         <section>
           <h1>JPG</h1>
           <ul>
-            <li class="fragment">Pour les photos.</li>
-            <li class="fragment">Compression lossy ~ 80% à l'oeil nu (convert, jpegoptim).</li>
-            <li class="fragment">Compression lossless suppression metadatas (exiftool).</li>
-            <li class="fragment">Problématiques responsive/retina (hors scope).</li>
+            <li>Pour les photos.</li>
+            <li>Compression lossy ~ 80% à l'oeil nu (convert, jpegoptim).</li>
+            <li>Compression lossless suppression metadatas (exiftool).</li>
+            <li>Problématiques responsive/retina (hors scope).</li>
           </ul>
           <aside class="notes">
             - Les graphistes ont une meilleure perception de la compression que les développeurs.
@@ -222,11 +170,11 @@ Cookie: t5aei=1404298241633; pepne2103780757=popin_vue; xtvrn=$475540$; JSESSION
         <section>
           <h1>GIF</h1>
           <ul>
-            <li class="fragment">Palette de 256 couleurs.</li>
-            <li class="fragment">Un seul canal de transparence.</li>
-            <li class="fragment">Se compresse peu.</li>
-            <li class="fragment">...</li>
-            <li class="fragment">Images animées<br /><img src="./img/server-gif.gif" alt="Gif animé" width="250"/> </li>
+            <li>Palette de 256 couleurs.</li>
+            <li>Un seul canal de transparence.</li>
+            <li>Se compresse peu.</li>
+            <li>...</li>
+            <li>Images animées<br /><img src="./img/server-gif.gif" alt="Gif animé" width="250"/> </li>
           </ul>
           <aside class="notes">
             Si vous avez des gifs animés sur votre site, vous avez un problème plus grave qu'un soucis de performances.
@@ -236,16 +184,16 @@ Cookie: t5aei=1404298241633; pepne2103780757=popin_vue; xtvrn=$475540$; JSESSION
         <section>
           <h1>PNG</h1>
           <ul>
-            <li class="fragment">Filesize plus léger que GIF.</li>
-            <li class="fragment">Plusieurs canaux de transparence.</li>
-            <li class="fragment">256 couleurs pour PNG-8, infinité pour PNG-24.</li>
-            <li class="fragment">tinypng, pngquant, punypng, etc.</li>
+            <li>Filesize plus léger que GIF.</li>
+            <li>Plusieurs canaux de transparence.</li>
+            <li>256 couleurs pour PNG-8, infinité pour PNG-24.</li>
+            <li>tinypng, pngquant, punypng, etc.</li>
           </ul>
-          <div class="fragment">
+          <div>
             <h3>Attention</h3>
             <ul>
-              <li class="fragment">Photoshop gère mal PNG-8.</li>
-              <li class="fragment">Pas supporté par IE8 (attention aux hacks).</li>
+              <li>Photoshop gère mal PNG-8.</li>
+              <li>Pas supporté par IE8 (attention aux hacks).</li>
             </ul>
           </div>
         </section>
@@ -257,14 +205,14 @@ Cookie: t5aei=1404298241633; pepne2103780757=popin_vue; xtvrn=$475540$; JSESSION
             <img src="./img/server-sprites.png" alt="Google sprite" class="fragment sprite-example"/>
           </div>
           <ul>
-            <li class="fragment">Plusieurs images en une.</li>
-            <li class="fragment">Gain sur le nombre de requetes et sur la compression.</li>
-            <li class="fragment">On joue ensuite sur background-position en CSS.</li>
+            <li>Plusieurs images en une.</li>
+            <li>Gain sur le nombre de requetes et sur la compression.</li>
+            <li>On joue ensuite sur background-position en CSS.</li>
           </ul>
-          <div class="fragment">
+          <div>
             <h3>Attention</h3>
             <ul>
-              <li class="fragment">Nécessite des éléments de taille fixe.</li>
+              <li>Nécessite des éléments de taille fixe.</li>
             </ul>
           </div>
           <aside class="notes">
@@ -276,11 +224,11 @@ Cookie: t5aei=1404298241633; pepne2103780757=popin_vue; xtvrn=$475540$; JSESSION
 
         <section>
           <h1>Concaténation</h1>
-          <img src="./img/server-client-server.png" alt="Il m'a regardé, je l'ai regardé" class="fragment" width="500"/>
+          <img src="./img/server-client-server.png" alt="Il m'a regardé, je l'ai regardé" width="500"/>
           <ul>
-            <li class="fragment">Limite énormément le nombre de requêtes.</li>
-            <li class="fragment">Améliore le Gzip.</li>
-            <li class="fragment">1 (ou 2) fichiers Javascript et CSS.</li>
+            <li>Limite énormément le nombre de requêtes.</li>
+            <li>Améliore le Gzip.</li>
+            <li>1 (ou 2) fichiers Javascript et CSS.</li>
           </ul>
         </section>
 
@@ -315,7 +263,6 @@ Cookie: t5aei=1404298241633; pepne2103780757=popin_vue; xtvrn=$475540$; JSESSION
         </section>
 
       </section>
-
 
       <section>
         <section data-background="/img/client-background.jpg">
@@ -467,6 +414,45 @@ Cookie: t5aei=1404298241633; pepne2103780757=popin_vue; xtvrn=$475540$; JSESSION
 
       <section data-background="/img/questions-background.jpg">
         <h1>Questions ?</h1>
+      </section>
+
+
+      <section>
+        <section>
+          <h1>Annexes</h1>
+        </section>
+        <section>
+          <h3>Des outils matures</h3>
+          <ul>
+            <li><a href="http://www.webpagetest.org/">WebPageTest</a></li>
+            <li><a href="http://newrelic.com/">NewRelic</a></li>
+            <li><a href="http://appurify.com/">Appurify</a></li>
+          </ul>
+        </section>
+
+        <section>
+          <h1>Serveur</h1>
+        </section>
+
+        <section>
+          <h3>DNS, le goulet d'étranglement</h3>
+            <ul>
+              <li>Passage obligatoire de toute requête</li>
+              <li>Zone grise entre le client et le serveur</li>
+              <li>Limite de connections simultanées coté client</li>
+              <li>Peu de solutions (limiter le nombre de domaines)</li>
+            </ul>
+        </section>
+
+        <section>
+          <h3>Le CDN est la dernière étape, pas la première</h3>
+          <ul>
+            <li>Souvent utilisé comme solution de facilité</li>
+            <li>Gains plus importants sur les autres points</li>
+            <li>À utiliser
+          </ul>
+        </section>
+
       </section>
 
 

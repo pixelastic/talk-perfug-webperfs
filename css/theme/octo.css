@@ -55,16 +55,16 @@ body {
 
 /* Links */
 
-.reveal a:not(.image) {
-  color: #00a2d8;
+.reveal a {
+  color: #FFFFFF;
   text-decoration: none;
-  -webkit-transition: color .15s ease;
-  -moz-transition: color .15s ease;
-  -ms-transition: color .15s ease;
-  -o-transition: color .15s ease;
-  transition: color .15s ease;
+  -webkit-transition: none;
+  -moz-transition: none;
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
 }
-.reveal a:not(.image):hover {
+.reveal a:hover {
   color: #b01f16;
   text-shadow: none;
   border: none;
@@ -72,7 +72,21 @@ body {
 
 /* Lists */
 .reveal ul {
+  min-width:600px;
+  margin:0 auto 20px auto;
+}
+
+.reveal blockquote {
   margin-bottom:20px;
+}
+
+.reveal strong {
+  color:#87C868;
+}
+.reveal em {
+  font-size:0.9em;
+  font-style:normal;
+  color:#a3adb2;
 }
 /* Progress bar */
 

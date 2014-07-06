@@ -1,7 +1,3 @@
-/* @import url(https://fonts.googleapis.com/css?family=Montserrat:700); */
-
-/* @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,700,400italic,700italic); */
-
 /**
  * Octo theme for reveal.js.
  */
@@ -58,6 +54,7 @@ body {
 .reveal a {
   color: #FFFFFF;
   text-decoration: none;
+  font-weight:bold;
   -webkit-transition: none;
   -moz-transition: none;
   -ms-transition: none;

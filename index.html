@@ -49,7 +49,7 @@
           <h1>Pourquoi ?</h1>
         </section>
         <section>
-          <h3>Impact direct sur le business et l'image</h3>
+          <h3>Impact sur la marque</h3>
           <ul>
             <li>
               <p>Utilisateurs de moins en moins patients</p>
@@ -76,42 +76,66 @@
           <h1>Serveur</h1>
         </section>
 
+        <!-- <section> -->
+        <!--   <h3>Tirer profit de la requête HTTP</h3> -->
+        <!--   <ul> -->
+        <!--     <li>Limiter les cookies</li> -->
+        <!--     <li>Concaténer les éléments</li> -->
+        <!--     <li>Compresser les assets</li> -->
+        <!--     <li>Mettre en cache</li> -->
+        <!--   </ul> -->
+        <!-- </section> -->
+
         <section>
-          <h3>Tirer profit de la requête HTTP</h3>
+          <h3>Régime sans cookies</h3>
           <ul>
-            <li>Limiter les cookies</li>
-            <li>Concaténer les éléments</li>
-            <li>Compresser les assets</li>
-            <li>Mettre en cache</li>
+            <li>Envoyé sur chaque requête</li>
+            <li>Inutile pour les assets statiques</li>
+          </ul>
+          <ul>
+            <li>Utiliser des sous-domaines cookieless</li>
+            <li>Passer le tracking sur son propre sous-domaine</li>
           </ul>
         </section>
 
         <section>
-          <h1>Filesize</h1>
-          <img src="./img/server-gzip.jpg" alt="GZIP all the things!" />
+          <h3>Un pour tous et tous pour un</h3>
+          <!-- <img src="./img/server-client-server.png" alt="Il m'a regardé, je l'ai regardé" width="500"/> -->
+          <ul>
+            <li>Concatener les assets de même type en un seul fichier</li>
+            <li>1 (ou 2) fichiers Javascript et CSS</li>
+            <!-- <li>Amélioration du Gzip</li> -->
+          </ul>
+          <!--// Todo: Image d'une connection à X fichiers, ou un seul.-->
+          <blockquote>Comment réduire la taille des requêtes ? Faites moins de requêtes.</blockquote>
         </section>
 
         <section>
-          <p>Divise la taille des assets texte par 3 en moyenne.</p>
+          <h3>Gzip all the things!</h3>
           <ul>
-            <li>CSS</li>
-            <li>Javascript / Json</li>
-            <li>HTML / XML / SVG / WOFF</li>
+            <li>
+              <p>Gain de 66% en moyenne</p>
+              <ul>
+                <li>Gains plus importants sur des gros fichiers</li>
+                <li>Compression favorisée par les conventions (attributs HTML, propriétés CSS)</li>
+              </ul>
+            </li>
+            <li>
+              <p>Large spectre</p>
+              <ul>
+                <li>HTML / CSS / Javascript</li>
+                <li>XML / JSON</li>
+                <li>SVG / WOFF</li>
+              </ul>
+            </li>
           </ul>
-          <div>
-            <h3>Attention</h3>
-            <ul>
-              <li>Proxies peuvent supprimer le Accept-Encoding</li>
-              <li>Ne pas gzipper les images !</li>
-              <li>Micro-optim en gardant une convention d'ordre d'attributs</li>
-            </ul>
+          <div class="warning fragment">
+            <p>Toujours permettre une version sans Gzip (proxies, vieux navigateurs)</p>
           </div>
           <aside class="notes">
-            - Proxy peuvent supprimer le Request Header, il est donc impossible d'utiliser une version statique
-            gzippée par défaut, il faut alors faire la compression on the fly coté serveur, ce qui implique plus de CPU.
+            <p>Presque tous les browsers supportent gzip, mais les proxies peuvent modifier les Request/Response header et donc
+              empecher un asset gzip d'etre considéré comme tel.</p>
           </aside>
-
-
         </section>
 
         <section>
@@ -191,15 +215,6 @@
           </aside>
         </section>
 
-        <section>
-          <h1>Concaténation</h1>
-          <img src="./img/server-client-server.png" alt="Il m'a regardé, je l'ai regardé" width="500"/>
-          <ul>
-            <li>Limite énormément le nombre de requêtes.</li>
-            <li>Améliore le Gzip.</li>
-            <li>1 (ou 2) fichiers Javascript et CSS.</li>
-          </ul>
-        </section>
 
         <section>
           <h1>Cache</h1>

@@ -1,3 +1,21 @@
+@font-face {
+  font-family: "Lubalin";
+  src: url("/fonts/lubalin_regular.eot");
+  src: url("/fonts/lubalin_regular.eot?#iefix") format("embedded-opentype"), 
+       url("/fonts/lubalin_regular.woff") format("woff"), 
+       url("/fonts/lubalin_regular.ttf") format("truetype"), 
+       url("/fonts/lubalin_regular.svg#Lubalin") format("svg");
+  font-weight: normal;
+  font-style: normal
+}
+
+.reveal .slide-bref h3 {
+  font-family: "Lubalin", Arial, sans-serif;
+  text-shadow:none;
+  font-weight:normal;
+}
+
+
 .reveal .sprite-container {
   margin-bottom:20px;
 }

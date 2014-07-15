@@ -76,10 +76,36 @@
           <h1>Serveur</h1>
         </section>
 
-        <section>
-          <h3>Régime sans cookies</h3>
+        <section data-background="#000000" class="slide-bref">
+          <h3>Bref, j'ai optimisé mon site</h3>
         </section>
         <section>
+          <img src="./img/server/client-server.png" alt="Il m'a regardé, je l'ai regardé" width="500" />
+        </section>
+        <section>
+          <h3>france.fr</h3>
+          <img src="img/server/concatenate-france.png" />
+          <h3>github.com</h3>
+          <img src="img/server/concatenate-github.png" />
+        </section>
+        <section>
+          <h3>Arrêter la procrastination</h3>
+          <ul>
+            <li>
+              <p>Blocking : temps perdu à ne rien faire</p>
+              <ul>
+                <li>Entre <code>requestTime</code> et <code>startTime</code>
+                </li>
+                <li>UI, local cache, DNS lookup, limit of max connections</li>
+                <li>Recommence à chaque requête</li>
+              </ul>
+            </li>
+            <li>Garder 1 (ou 2) fichiers CSS et Javascript</li>
+          </ul>
+        </section>
+
+        <section>
+          <h3>Régime sans cookies</h3>
           <img src="img/server/cookies.jpg" />
         </section>
         <section>
@@ -123,31 +149,21 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
           <pre><code>static-france.fr 10800 IN CNAME www.france.fr.</code></pre>
         </section>
         <section>
-          <h3>Garder le www</h3>
+          <h3>www.domain.com > domain.com</h3>
           <ul>
-            <li>Cookies sur <code>sub.domain.com</code> extends <code>domain.com</code></li>
+            <li>Cookies sur <code>domain.com</code> s'étendent sur <code>*.domain.com</code>
+            </li>
             <li><code>_setDomainName</code> pour Google Analytics</li>
           </ul>
-
-          <!--Mettre un exemple d'une requete avec un gros cookie.-->
-          <!--Mettre un exemple d'une requete de tracking vers un sous-domaine de tracking, une requete d'identification-->
-          <!--vers le site correctement avec le bon cookie, et une requete vers un assets sans cookie.-->
         </section>
 
 
-        <section>
-          <h3>Un pour tous et tous pour un</h3>
-          <!-- <img src="./img/server-client-server.png" alt="Il m'a regardé, je l'ai regardé" width="500"/> -->
-          <ul>
-            <li>Concatener les assets de même type en un seul fichier</li>
-            <li>1 (ou 2) fichiers Javascript et CSS</li>
-          </ul>
-          <!--// Todo: Image d'une connection à X fichiers, ou un seul.-->
-          <blockquote>Comment réduire la taille des requêtes ? Faites moins de requêtes.</blockquote>
-        </section>
 
         <section>
           <h3>Gzip all the things!</h3>
+          <img src="img/server/gzip.jpg" alt="GZIP ALL TEH THINGS!" />
+        </section>
+        <section>
           <ul>
             <li>
               <p>Gain de 66% en moyenne</p>
@@ -431,6 +447,9 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
           <ul>
             <li>
               <a href="http://www.ravelrumba.com/blog/static-cookieless-domain/">Serving Static Content from a Cookieless Domain</a>
+            </li>
+            <li>
+              <a href="https://groups.google.com/forum/?fromgroups=#!topic/speedtracer/MlF_gTvMRD8">What exactly does blocking under a network resource refer to ?</a>
             </li>
           </ul>
         </section>

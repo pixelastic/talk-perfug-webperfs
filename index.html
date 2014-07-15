@@ -76,26 +76,59 @@
           <h1>Serveur</h1>
         </section>
 
-        <!-- <section> -->
-        <!--   <h3>Tirer profit de la requête HTTP</h3> -->
-        <!--   <ul> -->
-        <!--     <li>Limiter les cookies</li> -->
-        <!--     <li>Concaténer les éléments</li> -->
-        <!--     <li>Compresser les assets</li> -->
-        <!--     <li>Mettre en cache</li> -->
-        <!--   </ul> -->
-        <!-- </section> -->
-
         <section>
           <h3>Régime sans cookies</h3>
+        </section>
+        <section>
+          <img src="img/server/cookies.jpg" />
+        </section>
+        <section>
           <ul>
-            <li>Envoyé sur chaque requête</li>
+            <li>Envoyé sur chaque requête (300B en moyenne)</li>
             <li>Inutile pour les assets statiques</li>
           </ul>
+        </section>
+        <section>
+          <h2>france.fr</h2>
+          <div class="row col2">
+            <div class="column">
+              <h3>fieldgroup.css</h3>
+              <pre><code>div.fieldgroup {
+margin:.5em 0 1em 0;
+}
+div.fieldgroup .content {
+  padding-left:1em;/*LTR*/
+}</code></pre>
+              <p>454B</p>
+
+            </div>
+            <div class="column">
+              <h3>Cookie header</h3>
+              <pre><code class="cropped">has_js=1;
+xtvrn=$499610$;
+xtan499610=-;
+xtant499610=1;
+__utma=132163929.1854756013.1405454567.1405454567.1405454567.1;
+__utmb=132163929.1.10.1405454567;
+__utmc=132163929;
+__utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</code></pre>
+              <p>249B</p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h3>Simple redirection CNAME</h3>
+          <pre><code>static.france.fr 10800 IN CNAME www.france.fr.</code></pre>
+          <p>ou</p>
+          <pre><code>static-france.fr 10800 IN CNAME www.france.fr.</code></pre>
+        </section>
+        <section>
+          <h3>Garder le www</h3>
           <ul>
-            <li>Utiliser des sous-domaines cookieless</li>
-            <li>Passer le tracking sur son propre sous-domaine</li>
+            <li>Cookies sur <code>sub.domain.com</code> extends <code>domain.com</code></li>
+            <li><code>_setDomainName</code> pour Google Analytics</li>
           </ul>
+
           <!--Mettre un exemple d'une requete avec un gros cookie.-->
           <!--Mettre un exemple d'une requete de tracking vers un sous-domaine de tracking, une requete d'identification-->
           <!--vers le site correctement avec le bon cookie, et une requete vers un assets sans cookie.-->
@@ -136,8 +169,7 @@
             <p>Toujours permettre une version sans Gzip (proxies, vieux navigateurs)</p>
           </div>
           <aside class="notes">
-            <p>Presque tous les browsers supportent gzip, mais les proxies peuvent modifier les Request/Response header et donc
-              empecher un asset gzip d'etre considéré comme tel.</p>
+            <p>Presque tous les browsers supportent gzip, mais les proxies peuvent modifier les Request/Response header et donc empecher un asset gzip d'etre considéré comme tel.</p>
           </aside>
           <!--TODO: Mettre un exemple de X fichiers (garder celui au dessus), normal et gzip. Et concaténé et gzippé.-->
         </section>
@@ -159,8 +191,7 @@
             <li>Problématiques responsive/retina (hors scope).</li>
           </ul>
           <aside class="notes">
-            - Les graphistes ont une meilleure perception de la compression que les développeurs.
-            - Certaines metadatas ne doivent pas disparaitre (author, copyright, etc).
+            - Les graphistes ont une meilleure perception de la compression que les développeurs. - Certaines metadatas ne doivent pas disparaitre (author, copyright, etc).
           </aside>
         </section>
 
@@ -171,7 +202,10 @@
             <li>Un seul canal de transparence.</li>
             <li>Se compresse peu.</li>
             <li>...</li>
-            <li>Images animées<br /><img src="./img/server-gif.gif" alt="Gif animé" width="250"/> </li>
+            <li>Images animées
+              <br />
+              <img src="./img/server-gif.gif" alt="Gif animé" width="250" />
+            </li>
           </ul>
           <aside class="notes">
             Si vous avez des gifs animés sur votre site, vous avez un problème plus grave qu'un soucis de performances.
@@ -199,7 +233,7 @@
           <h1>Sprites</h1>
           <div class="sprite-container">
             <img src="./img/server-sprite-fun.jpg" alt="Sprite fun" class="fragment sprite-fun" />
-            <img src="./img/server-sprites.png" alt="Google sprite" class="fragment sprite-example"/>
+            <img src="./img/server-sprites.png" alt="Google sprite" class="fragment sprite-example" />
           </div>
           <ul>
             <li>Plusieurs images en une.</li>
@@ -213,41 +247,28 @@
             </ul>
           </div>
           <aside class="notes">
-            Peut être parfois remplacé par CSS (gradients, border-radius).
-            Peut être parfois remplacé par des Icon Fonts.
-            Source des images : http://www.loriskumo.com/des-sprites-css-pour-votre-site/
+            Peut être parfois remplacé par CSS (gradients, border-radius). Peut être parfois remplacé par des Icon Fonts. Source des images : http://www.loriskumo.com/des-sprites-css-pour-votre-site/
           </aside>
         </section>
 
 
         <section>
           <h1>Cache</h1>
-          Une fois téléchargé, inutile de le télécharger à nouveau.
-          HTTP propose des mécanismes puissants pour gérer le cache, à deux niveaux.
-          Au niveau du browser (ne lance la requete que si la date est expirée), ou au
-          niveau du server (indique au serveur la dernière date, le serveur réponds avec
-          une nouvelle version ou rien si la version actuelle est ok).
-          Plusieurs mécanismes, je présente ceux que je préfère.
-          Invalidation du cache, l'une des choses les plus difficile. Asset caché potentiellement par des proxies, firewalls,
-          Plus simple de changer l'url. Timestamp de dernière génération dans l'url, md5 dans le nom, etc.
+          Une fois téléchargé, inutile de le télécharger à nouveau. HTTP propose des mécanismes puissants pour gérer le cache, à deux niveaux. Au niveau du browser (ne lance la requete que si la date est expirée), ou au niveau du server (indique au serveur la dernière date, le serveur réponds avec une nouvelle version ou rien si la version actuelle est ok). Plusieurs mécanismes, je présente ceux que je préfère. Invalidation du cache, l'une des choses les plus difficile. Asset caché potentiellement par des proxies, firewalls, Plus simple de changer l'url. Timestamp de dernière génération dans l'url, md5 dans le nom, etc.
         </section>
 
 
         <section>
-          Inutile de charger gros framework si utilise juste quelques parties. Tout ce code est chargé par le client.
-          Plutot faire un build sur mesure (jQuery, Bootstrap), ou utiliser de smicro-librairies
+          Inutile de charger gros framework si utilise juste quelques parties. Tout ce code est chargé par le client. Plutot faire un build sur mesure (jQuery, Bootstrap), ou utiliser de smicro-librairies
         </section>
-          
-          
+
+
         <section>
-          Inutile de charger des fonts complètes. Ne sélectionner que les caractères nécessaires. 
-          On peut virer les versions bols et italiques si pas nécessaires non plus. 
-          Si assez petit, toujours possible de les ajouter en base64 dans le CSS
+          Inutile de charger des fonts complètes. Ne sélectionner que les caractères nécessaires. On peut virer les versions bols et italiques si pas nécessaires non plus. Si assez petit, toujours possible de les ajouter en base64 dans le CSS
         </section>
 
         <section>
-          Limiter le nombre de requetes. 
-          Une ou deux pour CSS et JS (une si petit, sinon deux en primordial et secondaire)
+          Limiter le nombre de requetes. Une ou deux pour CSS et JS (une si petit, sinon deux en primordial et secondaire)
         </section>
 
       </section>
@@ -262,80 +283,45 @@
         </section>
 
         <section>
-          HTML
-          Pas grand chose à dire ici.
-          Limiter le nombre de balises, aide aussi à la maintenabilité
-          Code guide mdo
+          HTML Pas grand chose à dire ici. Limiter le nombre de balises, aide aussi à la maintenabilité Code guide mdo
         </section>
 
         <section>
-          Parsing du CSS
-          Depuis la droite jusque la gauche, sélecteurs plus couteux que d'autres.
-          Contre-intuitif, de dire que si super précis à gauche, alors selecteur optimisé. Inverse.
-          Eviter le selecteur universel *, et les regexp dans les selecteurs d'attributs.
+          Parsing du CSS Depuis la droite jusque la gauche, sélecteurs plus couteux que d'autres. Contre-intuitif, de dire que si super précis à gauche, alors selecteur optimisé. Inverse. Eviter le selecteur universel *, et les regexp dans les selecteurs d'attributs.
         </section>
 
         <section>
-          Start Render Explication reflow/repaint.
-          D'où, mettre CSS en haut pour lui économiser les reflows.
-          Micro optim de mettre le contenu important déjà chargé en inline cf. 
-          Guardian
+          Start Render Explication reflow/repaint. D'où, mettre CSS en haut pour lui économiser les reflows. Micro optim de mettre le contenu important déjà chargé en inline cf. Guardian
         </section>
-          
-          
+
+
         <section>
-          First execution
-          Téléchragment de JS bloquant.
-          A donc mettre en bas de page pour limiter, ou utiliser du async/defer (vérifier le fonctionnement). 
-          Javasript bloquant car document.write peut changer le dom.
-          Attention aux scripts de publicité (js-manners) 
-        </section>
-          
-        <section>
-          Asynchrone. 
-          Prioriser ce qui doit se charger. 
-          Tout ça n'est qu'au premier chargement, avant même que le user n'ai pu faire quoique ce soit. 
-          Important donc de prioriser ce qui doit se charger en premier. 
-          Boutons de sharing arrivent après contenu, idem pour la publicité et le tracking des visites. 
-          Pas toujours facile à négocier avec le service marketing/etc. 
-        </section>
-          
-          
-        <section>
-          Animation/transitions
-          Grande majorité des effets d'animations sont faisable en simple CSS, sans passer par du js. 
-          Tant que le JS s'execute, rien d'autre ne se passe. 
-          Apparté sur la manière dont les boucles d'animations fonctionnent en JS 
-          Une méthode qui se charge aussi souvent que possible (setTimeout) et qui calcule la 
-          durée depuis la dernière fois et sait où elle se trouve dans l'animation, donc modifie les propriétés en fonctions. 
-          Si modifie taille => reflow, sinon repaint. Comme repasse la main au browser, plein de repaint. 
-          Plus performant de faire ces animations en CSS directement, car pluggué tout de suite sur GPU 
+          First execution Téléchragment de JS bloquant. A donc mettre en bas de page pour limiter, ou utiliser du async/defer (vérifier le fonctionnement). Javasript bloquant car document.write peut changer le dom. Attention aux scripts de publicité (js-manners)
         </section>
 
         <section>
-          CPU/GPU
-          + Revoir la présentation de Paul Rouget à la TakeOff sur qui fait quoi, et comment en profiter?
+          Asynchrone. Prioriser ce qui doit se charger. Tout ça n'est qu'au premier chargement, avant même que le user n'ai pu faire quoique ce soit. Important donc de prioriser ce qui doit se charger en premier. Boutons de sharing arrivent après contenu, idem pour la publicité et le tracking des visites. Pas toujours facile à négocier avec le service marketing/etc.
+        </section>
+
+
+        <section>
+          Animation/transitions Grande majorité des effets d'animations sont faisable en simple CSS, sans passer par du js. Tant que le JS s'execute, rien d'autre ne se passe. Apparté sur la manière dont les boucles d'animations fonctionnent en JS Une méthode qui se charge aussi souvent que possible (setTimeout) et qui calcule la durée depuis la dernière fois et sait où elle se trouve dans l'animation, donc modifie les propriétés en fonctions. Si modifie taille => reflow, sinon repaint. Comme repasse la main au browser, plein de repaint. Plus performant de faire ces animations en CSS directement, car pluggué tout de suite sur GPU
         </section>
 
         <section>
-          Usual Suspect #1
-          Evenements qui fire trop régulièrement.
-          Sur mousemove, scroll, etc.
+          CPU/GPU + Revoir la présentation de Paul Rouget à la TakeOff sur qui fait quoi, et comment en profiter?
         </section>
 
         <section>
-          Usual Suspect #2
-          Fuite mémoire avec des éléments supprimés du DOM qui ont toujours un
-          event bindé, et donc pas supprimé
-          Généralement moins couteux de mettre un seul événement sur un événement parent
-          et profiter du bubbling.
+          Usual Suspect #1 Evenements qui fire trop régulièrement. Sur mousemove, scroll, etc.
         </section>
 
         <section>
-          Usual suspect #3
-          Ajouter plein d'éléments dans le DOM à le suite, force des reflow
-          Les faire en batch
-          Exemple d'une boucle qui ajoute plein d'éléments
+          Usual Suspect #2 Fuite mémoire avec des éléments supprimés du DOM qui ont toujours un event bindé, et donc pas supprimé Généralement moins couteux de mettre un seul événement sur un événement parent et profiter du bubbling.
+        </section>
+
+        <section>
+          Usual suspect #3 Ajouter plein d'éléments dans le DOM à le suite, force des reflow Les faire en batch Exemple d'une boucle qui ajoute plein d'éléments
         </section>
 
 
@@ -347,55 +333,36 @@
         </section>
 
         <section>
-          http://calendar.perfplanet.com/2012/why-bother-with-performance-metrics-when-you-can-cheat/
-          Mozilla make the throbber faster
-          Tricher sur le easing, slow, puis de plus en plus fast
-          Avoir des bandes qui bougent dans le sens inverse, augmente perception de vitesse
+          http://calendar.perfplanet.com/2012/why-bother-with-performance-metrics-when-you-can-cheat/ Mozilla make the throbber faster Tricher sur le easing, slow, puis de plus en plus fast Avoir des bandes qui bougent dans le sens inverse, augmente perception de vitesse
         </section>
 
         <section>
-          Les utilsiateurs ne se disent pas "oh, ce site est lent, c'est dommage", mais "cette marque est pas très performante".
-          Même site, même ergo, testée en ajoutant simplement un délai de 500ms est passé de "simple, facile à utiliser", à "lent, basique, dur à utiliser".
-          http://calendar.perfplanet.com/2013/slow-pages-damage-perception/
+          Les utilsiateurs ne se disent pas "oh, ce site est lent, c'est dommage", mais "cette marque est pas très performante". Même site, même ergo, testée en ajoutant simplement un délai de 500ms est passé de "simple, facile à utiliser", à "lent, basique, dur à utiliser". http://calendar.perfplanet.com/2013/slow-pages-damage-perception/
         </section>
 
 
         <section>
-          Finalement on optimise le chargement de nso pages pour que l'utilisateur final
-          voit un site qui se charge vite. En plus d'influer sur la technique, on peut aussi influer sur
-          le cerveau
+          Finalement on optimise le chargement de nso pages pour que l'utilisateur final voit un site qui se charge vite. En plus d'influer sur la technique, on peut aussi influer sur le cerveau
         </section>
 
         <section>
-          Placeholder
-          Il est mieux de commencer à afficher quelque chose (même un bandeau de couleur)
-          pour le header, ou des éléments non-utilisables plutot qu'un spinner qui tourne indéfiniment
+          Placeholder Il est mieux de commencer à afficher quelque chose (même un bandeau de couleur) pour le header, ou des éléments non-utilisables plutot qu'un spinner qui tourne indéfiniment
         </section>
 
         <section>
-          Spinner infini
-          Rien de plus frustrant qu'une barre de progression qui n'évolue pas, ou qui continue plusieurs fois
-          Eviter les spinner qui donnent une sensation de complétude si on ne peut pas la garantir
+          Spinner infini Rien de plus frustrant qu'une barre de progression qui n'évolue pas, ou qui continue plusieurs fois Eviter les spinner qui donnent une sensation de complétude si on ne peut pas la garantir
         </section>
 
         <section>
-          L'oeil humain ne percoit rien en dessous de 100ms. Si une action prends moins de 300ms, elle
-          est percu comme instanée. Inutile donc de mettre un spinner pour moins de 300ms.
-          Au contraire, ca va lui donner la sensation que les choses sont lentes.
+          L'oeil humain ne percoit rien en dessous de 100ms. Si une action prends moins de 300ms, elle est percu comme instanée. Inutile donc de mettre un spinner pour moins de 300ms. Au contraire, ca va lui donner la sensation que les choses sont lentes.
         </section>
 
         <section>
-          Il peut arriver que les choses plantent, ou prennent plus de temps que prévu.
-          Dans ce cas, il ne faut pas que l'utilisateur soit obligé de quitter la page.
-          Il doit toujours pouvoir naviguer et aller autre part.
-          Pas de backdrop qui prends tout et qui empeche de naviguer
+          Il peut arriver que les choses plantent, ou prennent plus de temps que prévu. Dans ce cas, il ne faut pas que l'utilisateur soit obligé de quitter la page. Il doit toujours pouvoir naviguer et aller autre part. Pas de backdrop qui prends tout et qui empeche de naviguer
         </section>
 
         <section>
-          Enfin, comme disent les Animaniacs "If at first you don't suceed, blame it on your parents".
-          Si c'est lent, essayer de faire en sorte que ce ne soit pas vous qu'on accuse.
-          Facebook a fait le test sur son appli mobile, s'ils utilisent le spinner facebook, on pense que leur 
-          appli est lente, s'ils utilisent le spinner iOs, on pense que l'iPhone est lent.
+          Enfin, comme disent les Animaniacs "If at first you don't suceed, blame it on your parents". Si c'est lent, essayer de faire en sorte que ce ne soit pas vous qu'on accuse. Facebook a fait le test sur son appli mobile, s'ils utilisent le spinner facebook, on pense que leur appli est lente, s'ils utilisent le spinner iOs, on pense que l'iPhone est lent.
         </section>
 
       </section>
@@ -412,16 +379,21 @@
         <section>
           <h2>Des ressources existent depuis longtemps</h2>
           <ul>
-            <li><a href="http://www.dailymotion.com/video/x7op91_eric-daspet-nicole-sullivan-perform_tech">ParisWeb 2008</a></li>
-            <li><a href="http://www.slideshare.net/jpvincent/performances-web-quoi-de-neuf">KiwiParty 2014</a></li>
+            <li><a href="http://www.dailymotion.com/video/x7op91_eric-daspet-nicole-sullivan-perform_tech">ParisWeb 2008</a>
+            </li>
+            <li><a href="http://www.slideshare.net/jpvincent/performances-web-quoi-de-neuf">KiwiParty 2014</a>
+            </li>
           </ul>
         </section>
         <section>
           <h3>Des outils matures</h3>
           <ul>
-            <li><a href="http://www.webpagetest.org/">WebPageTest</a></li>
-            <li><a href="http://newrelic.com/">NewRelic</a></li>
-            <li><a href="http://appurify.com/">Appurify</a></li>
+            <li><a href="http://www.webpagetest.org/">WebPageTest</a>
+            </li>
+            <li><a href="http://newrelic.com/">NewRelic</a>
+            </li>
+            <li><a href="http://appurify.com/">Appurify</a>
+            </li>
           </ul>
         </section>
 
@@ -431,12 +403,12 @@
 
         <section>
           <h3>DNS, le goulet d'étranglement</h3>
-            <ul>
-              <li>Passage obligatoire de toute requête</li>
-              <li>Zone grise entre le client et le serveur</li>
-              <li>Limite de connections simultanées coté client</li>
-              <li>Peu de solutions (limiter le nombre de domaines)</li>
-            </ul>
+          <ul>
+            <li>Passage obligatoire de toute requête</li>
+            <li>Zone grise entre le client et le serveur</li>
+            <li>Limite de connections simultanées coté client</li>
+            <li>Peu de solutions (limiter le nombre de domaines)</li>
+          </ul>
         </section>
 
         <section>
@@ -444,7 +416,6 @@
           <ul>
             <li>Souvent utilisé comme solution de facilité</li>
             <li>Gains plus importants sur les autres points</li>
-            <li>À utiliser
           </ul>
         </section>
 
@@ -453,10 +424,17 @@
           <ul>
             <li><a href="http://www.jonathanklein.net/2014/02/revisiting-cookieless-domain.html">Etsy</a> charge ses assets statiques depuis le même domaine que le site principal</li>
           </ul>
+        </section>
+
+        <section>
+          <h1>Sources</h1>
+          <ul>
+            <li>
+              <a href="http://www.ravelrumba.com/blog/static-cookieless-domain/">Serving Static Content from a Cookieless Domain</a>
+            </li>
+          </ul>
+        </section>
       </section>
-
-
-
     </div>
 
   </div>

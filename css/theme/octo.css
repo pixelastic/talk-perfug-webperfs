@@ -98,6 +98,20 @@ body {
   background:#000000;
   color:#FFFFFF;
 }
+.reveal code {
+  background:#3F3F3F;
+  color:#DCDCDC;
+  padding:0.2em 0.5em;
+  font-size:0.8em;
+}
+.reveal pre code {
+  font-size:inherit;
+}
+.reveal .cropped {
+  text-overflow:ellipsis;
+  overflow:hidden;
+  word-wrap:normal;
+}
 /* Progress bar */
 
 .reveal .progress {
@@ -139,4 +153,16 @@ body {
 }
 .reveal .controls div.navigate-down.enabled:hover {
   border-top-color: #00A2D8;
+}
+
+
+/* Grid */
+.reveal .row {
+  overflow:hidden;
+}
+.reveal .row .column {
+  float:left;
+}
+.reveal .col2 .column {
+  width:50%;
 }

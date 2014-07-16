@@ -31,10 +31,12 @@
   <div class="reveal">
     <div class="slides">
 
+      <!--HOME-->
       <section>
         <h1>Les webperfs<br />pour les nuls</h1>
       </section>
 
+      <!--WHO AM I ?-->
       <section>
         <h2>Timothée Carry</h2>
         <ul>
@@ -44,6 +46,7 @@
         </ul>
       </section>
 
+      <!--WHY ?-->
       <section>
         <section data-background="/img/why-background.jpg">
           <h1>Pourquoi ?</h1>
@@ -71,13 +74,15 @@
         </section>
       </section>
 
+      <!--SERVER-->
       <section>
         <section data-background="/img/server-background.jpg">
           <h1>Serveur</h1>
         </section>
 
+        <!--CONCATENATE-->
         <section data-background="#000000" class="slide-bref">
-          <h3>Bref, j'ai optimisé mon site</h3>
+          <h3>Bref, j'ai limité mes requêtes</h3>
         </section>
         <section>
           <img src="./img/server/client-server.png" alt="Il m'a regardé, je l'ai regardé" width="500" />
@@ -104,9 +109,152 @@
           </ul>
         </section>
 
+        <!--COMPRESSION-->
         <section>
-          <h3>Régime sans cookies</h3>
-          <img src="img/server/cookies.jpg" />
+          <h3>Gzip all teh things</h3>
+          <img src="img/server/gzip.jpg" alt="GZIP ALL TEH THINGS!" />
+        </section>
+        <section>
+          <ul>
+            <li>
+              <p>Gain de 66% en moyenne</p>
+              <ul>
+                <li>Gain plus importants sur des gros fichiers</li>
+                <li>Très facile à mettre en place</li>
+                <li>Très bon support navigateur (IE5.5+)</li>
+              </ul>
+            </li>
+            <li>
+              <p>Large spectre</p>
+              <ul>
+                <li>HTML / CSS / Javascript</li>
+                <li>XML / JSON</li>
+                <li>SVG / WOFF</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h3>france.fr</h3>
+          <div class="row col3">
+            <div class="column">
+              <h4>18 fichiers</h4>
+              <pre><code>apachesolr_autocomplete.css
+base.css
+content-module.css
+content_multigroup.css
+ctools.css
+date.css
+defaults.css
+extlink.css
+fieldgroup.css
+filefield.css
+fw.css
+global.css
+jquery.timeentry.css
+node.css
+system.css
+tagadelic.css
+user.css
+views.css</code></pre>
+              <p>154K</p>
+            </div>
+            <div class="column">
+              <h4>18 fichiers gzippés</h4>
+              <pre><code>apachesolr_autocomplete.gz
+base.gz
+content-module.gz
+content_multigroup.gz
+ctools.gz
+date.gz
+defaults.gz
+extlink.gz
+fieldgroup.gz
+filefield.gz
+fw.gz
+global.gz
+jquery.timeentry.gz
+node.gz
+system.gz
+tagadelic.gz
+user.gz
+views.gz </code></pre>
+              <p>33K</p>
+            </div>
+            <div class="column">
+              <h4>1 fichier gzippé</h4>
+              <pre><code>all-in-one.gz</code></pre>
+              <p>28K</p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h4>Apache</h4>
+          <pre><code>&lt;IfModule mod_deflate.c&gt;
+  &lt;IfModule mod_filter.c&gt;
+    AddOutputFilterByType DEFLATE "application/javascript" "application/json" \
+"text/css" "text/html" "text/xml" [...]
+  &lt;/IfModule&gt;
+&lt;/IfModule&gt;</code></pre>
+          <h4>Lighttpd</h4>
+          <pre><code>server.modules += ( "mod_compress" )
+compress.filetype  = ("application/javascript", "application/json", \
+"text/css", "text/html", "text/xml", [...] )</code></pre>
+          <h4>nginx</h4>
+          <pre><code>gzip on;
+gzip_types application/javascript application/json text/css text/html text/xml [...]; </code></pre>
+        </section>
+        <section>
+          <h3>Attention aux proxies</h3>
+          <ul>
+            <li>Décompression</li>
+            <li>Modification du <code>Accept-Encoding</code> de la requête
+            </li>
+            <li>Modification du <code>Content-Encoding</code> de la réponse
+            </li>
+          </ul>
+        </section>
+
+        <!--MINIFICATION-->
+        <section data-background="/img/server/minification.jpg">
+          <h1>Minification</h1>
+        </section>
+        <section>
+          <div class="row col3">
+            <div class="column">
+              <h3>clean-css</h3>
+              <p><code>main.css</code>
+              </p>
+              <p>154K ⇒ 111K</p>
+              <p>-27%</p>
+            </div>
+            <div class="column">
+              <h3>uglify-js</h3>
+              <p><code>main.js</code>
+              </p>
+              <p>428K ⇒ 331K</p>
+              <p>-22%</p>
+            </div>
+            <div class="column">
+              <h3>html-minifier</h3>
+              <p><code>index.html</code>
+              </p>
+              <p>50K ⇒ 39K</p>
+              <p>-22%</p>
+            </div>
+          </div>
+          <div class="fragment">
+            <img src="/img/server/grunt.png" alt="Grunt" width="150" />
+            <p>grunt usemin</p>
+          </div>
+        </section>
+
+        <!--COOKIELESS-->
+        <section data-background="/img/server/cookies-background.jpg">
+          <h2>Régime sans cookies</h2>
+        </section>
+        <section>
+          <img src="img/server/cookies.jpg" alt="U eated my cookie ?" />
         </section>
         <section>
           <ul>
@@ -157,39 +305,7 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
           </ul>
         </section>
 
-
-
-        <section>
-          <h3>Gzip all the things!</h3>
-          <img src="img/server/gzip.jpg" alt="GZIP ALL TEH THINGS!" />
-        </section>
-        <section>
-          <ul>
-            <li>
-              <p>Gain de 66% en moyenne</p>
-              <ul>
-                <li>Gains plus importants sur des gros fichiers</li>
-                <li>Compression favorisée par les conventions (attributs HTML, propriétés CSS)</li>
-              </ul>
-            </li>
-            <li>
-              <p>Large spectre</p>
-              <ul>
-                <li>HTML / CSS / Javascript</li>
-                <li>XML / JSON</li>
-                <li>SVG / WOFF</li>
-              </ul>
-            </li>
-          </ul>
-          <div class="warning fragment">
-            <p>Toujours permettre une version sans Gzip (proxies, vieux navigateurs)</p>
-          </div>
-          <aside class="notes">
-            <p>Presque tous les browsers supportent gzip, mais les proxies peuvent modifier les Request/Response header et donc empecher un asset gzip d'etre considéré comme tel.</p>
-          </aside>
-          <!--TODO: Mettre un exemple de X fichiers (garder celui au dessus), normal et gzip. Et concaténé et gzippé.-->
-        </section>
-
+        <!--IMAGES-->
         <section>
           <h1>Images</h1>
           <ul>
@@ -197,7 +313,6 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
             <li>Utiliser le bon format pour le bon usage.</li>
           </ul>
         </section>
-
         <section>
           <h1>JPG</h1>
           <ul>
@@ -210,7 +325,6 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
             - Les graphistes ont une meilleure perception de la compression que les développeurs. - Certaines metadatas ne doivent pas disparaitre (author, copyright, etc).
           </aside>
         </section>
-
         <section>
           <h1>GIF</h1>
           <ul>
@@ -227,7 +341,6 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
             Si vous avez des gifs animés sur votre site, vous avez un problème plus grave qu'un soucis de performances.
           </aside>
         </section>
-
         <section>
           <h1>PNG</h1>
           <ul>
@@ -244,7 +357,6 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
             </ul>
           </div>
         </section>
-
         <section>
           <h1>Sprites</h1>
           <div class="sprite-container">
@@ -267,24 +379,18 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
           </aside>
         </section>
 
-
+        <!--CACHE-->
         <section>
           <h1>Cache</h1>
           Une fois téléchargé, inutile de le télécharger à nouveau. HTTP propose des mécanismes puissants pour gérer le cache, à deux niveaux. Au niveau du browser (ne lance la requete que si la date est expirée), ou au niveau du server (indique au serveur la dernière date, le serveur réponds avec une nouvelle version ou rien si la version actuelle est ok). Plusieurs mécanismes, je présente ceux que je préfère. Invalidation du cache, l'une des choses les plus difficile. Asset caché potentiellement par des proxies, firewalls, Plus simple de changer l'url. Timestamp de dernière génération dans l'url, md5 dans le nom, etc.
         </section>
 
-
+        <!--CONSERVATIVE-->
         <section>
           Inutile de charger gros framework si utilise juste quelques parties. Tout ce code est chargé par le client. Plutot faire un build sur mesure (jQuery, Bootstrap), ou utiliser de smicro-librairies
         </section>
-
-
         <section>
           Inutile de charger des fonts complètes. Ne sélectionner que les caractères nécessaires. On peut virer les versions bols et italiques si pas nécessaires non plus. Si assez petit, toujours possible de les ajouter en base64 dans le CSS
-        </section>
-
-        <section>
-          Limiter le nombre de requetes. Une ou deux pour CSS et JS (une si petit, sinon deux en primordial et secondaire)
         </section>
 
       </section>
@@ -294,53 +400,48 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
           <h1>Client</h1>
         </section>
 
+        <!--BREAKPOINTS-->
         <section>
           Expliquer le startRender, startExecution, etc
+          Les moment importants à optimiser
+          premier affichage rapide, puis progressif, début utilisation, et finalement la fin du chargement pas si intéressant
+          attention si font, pas de texte si pas la font
         </section>
-
-        <section>
-          HTML Pas grand chose à dire ici. Limiter le nombre de balises, aide aussi à la maintenabilité Code guide mdo
-        </section>
-
-        <section>
-          Parsing du CSS Depuis la droite jusque la gauche, sélecteurs plus couteux que d'autres. Contre-intuitif, de dire que si super précis à gauche, alors selecteur optimisé. Inverse. Eviter le selecteur universel *, et les regexp dans les selecteurs d'attributs.
-        </section>
-
-        <section>
-          Start Render Explication reflow/repaint. D'où, mettre CSS en haut pour lui économiser les reflows. Micro optim de mettre le contenu important déjà chargé en inline cf. Guardian
-        </section>
-
-
         <section>
           First execution Téléchragment de JS bloquant. A donc mettre en bas de page pour limiter, ou utiliser du async/defer (vérifier le fonctionnement). Javasript bloquant car document.write peut changer le dom. Attention aux scripts de publicité (js-manners)
         </section>
-
         <section>
           Asynchrone. Prioriser ce qui doit se charger. Tout ça n'est qu'au premier chargement, avant même que le user n'ai pu faire quoique ce soit. Important donc de prioriser ce qui doit se charger en premier. Boutons de sharing arrivent après contenu, idem pour la publicité et le tracking des visites. Pas toujours facile à négocier avec le service marketing/etc.
         </section>
 
-
+        <!--CSS-->
+        <section>
+          Start Render Explication reflow/repaint. D'où, mettre CSS en haut pour lui économiser les reflows. Micro optim de mettre le contenu important déjà chargé en inline cf. Guardian
+          expliquer le FOUC si css en bas
+        </section>
+        <section>
+          Pas primordial. Parsing du CSS Depuis la droite jusque la gauche, sélecteurs plus couteux que d'autres. Contre-intuitif, de dire que si super précis à gauche, alors selecteur optimisé. Inverse. Eviter le selecteur universel *, et les regexp dans les selecteurs d'attributs.
+          limiter à trois niveau d'imbrication, pas de selecteurs d'attributs
+        </section>
         <section>
           Animation/transitions Grande majorité des effets d'animations sont faisable en simple CSS, sans passer par du js. Tant que le JS s'execute, rien d'autre ne se passe. Apparté sur la manière dont les boucles d'animations fonctionnent en JS Une méthode qui se charge aussi souvent que possible (setTimeout) et qui calcule la durée depuis la dernière fois et sait où elle se trouve dans l'animation, donc modifie les propriétés en fonctions. Si modifie taille => reflow, sinon repaint. Comme repasse la main au browser, plein de repaint. Plus performant de faire ces animations en CSS directement, car pluggué tout de suite sur GPU
+          y a encore des gens qui font du hover en js.
         </section>
-
         <section>
           CPU/GPU + Revoir la présentation de Paul Rouget à la TakeOff sur qui fait quoi, et comment en profiter?
         </section>
 
+        <!--JAVASCRIPT-->
         <section>
           Usual Suspect #1 Evenements qui fire trop régulièrement. Sur mousemove, scroll, etc.
+          debounce ?
         </section>
-
         <section>
           Usual Suspect #2 Fuite mémoire avec des éléments supprimés du DOM qui ont toujours un event bindé, et donc pas supprimé Généralement moins couteux de mettre un seul événement sur un événement parent et profiter du bubbling.
         </section>
-
         <section>
           Usual suspect #3 Ajouter plein d'éléments dans le DOM à le suite, force des reflow Les faire en batch Exemple d'une boucle qui ajoute plein d'éléments
         </section>
-
-
       </section>
 
       <section>
@@ -348,39 +449,41 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
           <h1>Humain</h1>
         </section>
 
-        <section>
-          http://calendar.perfplanet.com/2012/why-bother-with-performance-metrics-when-you-can-cheat/ Mozilla make the throbber faster Tricher sur le easing, slow, puis de plus en plus fast Avoir des bandes qui bougent dans le sens inverse, augmente perception de vitesse
-        </section>
-
+        <!--NO FRUSTRATION-->
         <section>
           Les utilsiateurs ne se disent pas "oh, ce site est lent, c'est dommage", mais "cette marque est pas très performante". Même site, même ergo, testée en ajoutant simplement un délai de 500ms est passé de "simple, facile à utiliser", à "lent, basique, dur à utiliser". http://calendar.perfplanet.com/2013/slow-pages-damage-perception/
+          Les gens ne vont pas se dire "c'est super ça va vite", mais "ça marche bien, c'est clair". on ne voit pas quand c'est rapide, mais on voit quand c'est lent.
         </section>
-
-
-        <section>
-          Finalement on optimise le chargement de nso pages pour que l'utilisateur final voit un site qui se charge vite. En plus d'influer sur la technique, on peut aussi influer sur le cerveau
-        </section>
-
-        <section>
-          Placeholder Il est mieux de commencer à afficher quelque chose (même un bandeau de couleur) pour le header, ou des éléments non-utilisables plutot qu'un spinner qui tourne indéfiniment
-        </section>
-
         <section>
           Spinner infini Rien de plus frustrant qu'une barre de progression qui n'évolue pas, ou qui continue plusieurs fois Eviter les spinner qui donnent une sensation de complétude si on ne peut pas la garantir
+          exemples de barres qui se remplit : bad. spinner better.
+          arreter le spinner si trop long
         </section>
-
+        <section>
+          barre qui défile pour faire croire plus rapide
+        </section>
         <section>
           L'oeil humain ne percoit rien en dessous de 100ms. Si une action prends moins de 300ms, elle est percu comme instanée. Inutile donc de mettre un spinner pour moins de 300ms. Au contraire, ca va lui donner la sensation que les choses sont lentes.
         </section>
-
         <section>
           Il peut arriver que les choses plantent, ou prennent plus de temps que prévu. Dans ce cas, il ne faut pas que l'utilisateur soit obligé de quitter la page. Il doit toujours pouvoir naviguer et aller autre part. Pas de backdrop qui prends tout et qui empeche de naviguer
         </section>
 
+        <!--PROGRESSIVE-->
+        <section>
+          Finalement on optimise le chargement de nso pages pour que l'utilisateur final voit un site qui se charge vite. En plus d'influer sur la technique, on peut aussi influer sur le cerveau
+        </section>
+        <section>
+          Placeholder Il est mieux de commencer à afficher quelque chose (même un bandeau de couleur) pour le header, ou des éléments non-utilisables plutot qu'un spinner qui tourne indéfiniment
+        </section>
+
+        <!--CHEAT-->
+        <section>
+          http://calendar.perfplanet.com/2012/why-bother-with-performance-metrics-when-you-can-cheat/ Mozilla make the throbber faster Tricher sur le easing, slow, puis de plus en plus fast Avoir des bandes qui bougent dans le sens inverse, augmente perception de vitesse
+        </section>
         <section>
           Enfin, comme disent les Animaniacs "If at first you don't suceed, blame it on your parents". Si c'est lent, essayer de faire en sorte que ce ne soit pas vous qu'on accuse. Facebook a fait le test sur son appli mobile, s'ils utilisent le spinner facebook, on pense que leur appli est lente, s'ils utilisent le spinner iOs, on pense que l'iPhone est lent.
         </section>
-
       </section>
 
       <section data-background="/img/questions-background.jpg">

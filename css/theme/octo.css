@@ -166,3 +166,6 @@ body {
 .reveal .col2 .column {
   width:50%;
 }
+.reveal .col3 .column {
+  width:33%;
+}

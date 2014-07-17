@@ -339,55 +339,130 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
 
       <!--IMAGES-->
       <section>
-        <h1>Images</h1>
-        <ul>
-          <li>Souvent le plus lourd sur une page, et de loin.</li>
-          <li>Utiliser le bon format pour le bon usage.</li>
-        </ul>
-      </section>
-      <section>
-        <h1>JPG</h1>
-        <ul>
-          <li>Pour les photos.</li>
-          <li>Compression lossy ~ 80% à l'oeil nu (convert, jpegoptim).</li>
-          <li>Compression lossless suppression metadatas (exiftool).</li>
-          <li>Problématiques responsive/retina (hors scope).</li>
-        </ul>
-        <aside class="notes">
-          - Les graphistes ont une meilleure perception de la compression que les développeurs. - Certaines metadatas ne doivent pas disparaitre (author, copyright, etc).
-        </aside>
-      </section>
-      <section>
-        <h1>GIF</h1>
-        <ul>
-          <li>Palette de 256 couleurs.</li>
-          <li>Un seul canal de transparence.</li>
-          <li>Se compresse peu.</li>
-          <li>...</li>
-          <li>Images animées
-            <br />
-            <img src="./img/server-gif.gif" alt="Gif animé" width="250" />
-          </li>
-        </ul>
-        <aside class="notes">
-          Si vous avez des gifs animés sur votre site, vous avez un problème plus grave qu'un soucis de performances.
-        </aside>
-      </section>
-      <section>
-        <h1>PNG</h1>
-        <ul>
-          <li>Filesize plus léger que GIF.</li>
-          <li>Plusieurs canaux de transparence.</li>
-          <li>256 couleurs pour PNG-8, infinité pour PNG-24.</li>
-          <li>tinypng, pngquant, punypng, etc.</li>
-        </ul>
-        <div>
-          <h3>Attention</h3>
+        <section>
+          <h2>Les images, le poids lourd</h2>
+        </section>
+        <section>
           <ul>
-            <li>Photoshop gère mal PNG-8.</li>
-            <li>Pas supporté par IE8 (attention aux hacks).</li>
+            <li>
+              <p>Un poids lourd sur la page</p>
+              <ul>
+                <li>58 fichiers</li>
+                <li>total 2.4Mo</li>
+                <li>max 330Ko</li>
+              </ul>
+            </li>
+            <li>
+              <p>Différents formats, différents usages</p>
+              <ul>
+                <li>jpg : photos</li>
+                <li>png : transparence</li>
+                <li>svg : vectoriel</li>
+                <li>gif : lolcats</li>
+              </ul>
+            </li>
           </ul>
-        </div>
+        </section>
+        <!--JPG-->
+        <section>
+          <h2>JPG</h2>
+          <p>
+            <img src="/img/server/jpg-original.jpg" width="328" />
+          </p>
+          <p><code>117Ko</code>
+          </p>
+          <ul>
+            <li>
+              <p>Deux types de compression</p>
+              <ul>
+                <li>Lossless : Suppression des metadatas</li>
+                <li>Lossy : Suppression d'informations visuelles</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h2>Lossless</h2>
+          <code>exiftool</code>
+          <pre><code>Global Angle             : 30
+Global Altitude          : 30
+Photoshop Quality        : 8
+Photoshop Format         : Standard
+Progressive Scans        : 3 Scans
+Creator Tool             : Adobe Photoshop CS5 Windows
+Metadata Date            : 2012:03:07 14:30:01+01:00
+Document ID              : xmp.did:95857168571111E19FCB8718798C7280
+Original Document ID     : xmp.did:95857168571111E19FCB8718798C7280
+Color Mode               : RGB
+History Action           : saved
+History Instance ID      : xmp.iid:2D7184A45968E1119E06F8EC5C23B74C
+History When             : 2012:03:07 14:30:01+01:00
+History Software Agent   : Adobe Photoshop CS5 Windows
+History Changed          : /
+Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
+          <p><code>jpegtran</code>
+          </p>
+          <p>31Ko ⇒ 3.9Ko</p>
+        </section>
+        <section>
+          <h2>Lossy</h2>
+          <div class="row col2">
+            <div class="column">
+              <img src="/img/server/jpg-original.jpg" width="328" />
+              <p><code>117Ko</code>
+              </p>
+            </div>
+            <div class="column">
+              <img src="/img/server/jpg-lossy.jpg" width="328" />
+              <p><code>41Ko</code>
+              </p>
+            </div>
+          </div>
+          <p>
+            <code>jpegoptim</code>
+          </p>
+        </section>
+        <!--PNG-->
+        <section>
+          <h2>PNG, l'oublié</h2>
+          <div class="row col2">
+            <div class="column">
+              <p><img src="/img/server/png-france.png" alt="original"/></p>
+              <p><code>5.7Ko</code></p>
+            </div>
+            <div class="column">
+              <p><img src="/img/server/png-pngquant.png" alt="après pngquant"/></p>
+              <p><code>4.4Ko</code></p>
+            </div>
+          </div>
+              <p><code>pngquant</code></p>
+          <ul>
+            <li>
+              <p>Format polyvalent</p>
+              <ul>
+                <li>Transparence alpha</li>
+                <li>Palette 256 couleurs (PNG8) ou infinité (PNG24)</li>
+              </ul>
+            </li>
+          </ul>
+        </section>
+        <!--GIF-->
+        <section>
+          <h1>GIF</h1>
+          <ul>
+            <li>Palette de 256 couleurs.</li>
+            <li>Un seul canal de transparence.</li>
+            <li>Se compresse peu.</li>
+            <li>...</li>
+            <li>Images animées
+              <br />
+              <img src="./img/server-gif.gif" alt="Gif animé" width="250" />
+            </li>
+          </ul>
+          <aside class="notes">
+            Si vous avez des gifs animés sur votre site, vous avez un problème plus grave qu'un soucis de performances.
+          </aside>
+        </section>
       </section>
       <section>
         <h1>Sprites</h1>
@@ -409,6 +484,7 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
         <aside class="notes">
           Peut être parfois remplacé par CSS (gradients, border-radius). Peut être parfois remplacé par des Icon Fonts. Source des images : http://www.loriskumo.com/des-sprites-css-pour-votre-site/
         </aside>
+      </section>
       </section>
 
       <!--CACHE-->

@@ -257,7 +257,6 @@ gzip_types application/javascript application/json text/css text/html text/xml [
               </p>
               <pre><code class="expanded">apachesolr_autocomplete.message{font-size:80%;color:#888}.apachesolr_autocomplete.count{float:right}div.apachesolr_autocomplete.suggestion{display:inline;float:left}div.ac_results li{list-style:none;background-image:none!important}</code></pre>
               <p>154K ⇒ 111K</p>
-              <p>-27%</p>
             </div>
             <div class="column">
               <h3>uglify-js</h3>
@@ -265,7 +264,6 @@ gzip_types application/javascript application/json text/css text/html text/xml [
               </p>
               <pre><code class="expanded">apachesolr_ajax={};apachesolr_ajax.finalize=function(settings){pm.maps();$("#tooltip").hide();pm.tooltips();pm.jScrollPane();pm.carousels();pm.datepicker();pm.chooseLanguage();pm.popins();$("#filters-nav li").find(".indicator").hide();$("#overlay").hide();$("#filters-nav li").removeClass("active");$(".item a").hover(function(){$(this).find(".short").addClass("accessibility")},function(){$(this).find(".short").removeClass("accessibility")})};</code></pre>
               <p>428K ⇒ 331K</p>
-              <p>-22%</p>
             </div>
             <div class="column">
               <h3>html-minifier</h3>
@@ -273,7 +271,6 @@ gzip_types application/javascript application/json text/css text/html text/xml [
               </p>
               <pre><code class="expanded">&lt;body class=layout-home&gt;&lt;div class=apachesolr_ajax&gt;&lt;/div&gt;&lt;div id=content class=gradient-1&gt;&lt;p id=access-keys&gt;&lt;a href=#page&gt;Allez au contenu&lt;/a&gt; &lt;a href=#nav&gt;Allez à la navigation&lt;/a&gt; &lt;a href=#search&gt;Allez à la recherche&lt;/a&gt; &lt;a href=#lang lang=en&gt;Change language&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;/body&gt; </code></pre>
               <p>50K ⇒ 39K</p>
-              <p>-22%</p>
             </div>
           </div>
         </section>
@@ -421,21 +418,11 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
           <p>
             <code>jpegoptim</code>
           </p>
+          <p>Invisible à l'œil nu pour compression ~80%</p>
         </section>
         <!--PNG-->
         <section>
           <h2>PNG, l'oublié</h2>
-          <div class="row col2">
-            <div class="column">
-              <p><img src="/img/server/png-france.png" alt="original"/></p>
-              <p><code>5.7Ko</code></p>
-            </div>
-            <div class="column">
-              <p><img src="/img/server/png-pngquant.png" alt="après pngquant"/></p>
-              <p><code>4.4Ko</code></p>
-            </div>
-          </div>
-              <p><code>pngquant</code></p>
           <ul>
             <li>
               <p>Format polyvalent</p>
@@ -445,6 +432,25 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
               </ul>
             </li>
           </ul>
+          <div class="row col2">
+            <div class="column">
+              <p>
+                <img src="/img/server/png-france.png" alt="original" />
+              </p>
+              <p><code>5.7Ko</code>
+              </p>
+            </div>
+            <div class="column">
+              <p>
+                <img src="/img/server/png-pngquant.png" alt="après pngquant" />
+              </p>
+              <p><code>4.4Ko</code>
+              </p>
+            </div>
+          </div>
+          <p>
+            <code>pngquant</code>
+          </p>
         </section>
         <!--GIF-->
         <section>

@@ -75,12 +75,12 @@
       </section>
 
       <!--SERVER-->
-      <section>
-        <section data-background="/img/server-background.jpg">
-          <h1>Serveur</h1>
-        </section>
+      <section data-background="/img/server-background.jpg">
+        <h1>Serveur</h1>
+      </section>
 
-        <!--CONCATENATE-->
+      <!--CONCATENATE-->
+      <section>
         <section data-background="#000000" class="slide-bref">
           <h3>Bref, j'ai limité mes requêtes</h3>
         </section>
@@ -108,8 +108,10 @@
             <li>Garder 1 (ou 2) fichiers CSS et Javascript</li>
           </ul>
         </section>
+      </section>
 
-        <!--COMPRESSION-->
+      <!--COMPRESSION-->
+      <section>
         <section>
           <h3>Gzip all teh things</h3>
           <img src="img/server/gzip.jpg" alt="GZIP ALL TEH THINGS!" />
@@ -214,10 +216,38 @@ gzip_types application/javascript application/json text/css text/html text/xml [
             </li>
           </ul>
         </section>
+      </section>
 
-        <!--MINIFICATION-->
+      <!--MINIFICATION-->
+      <section>
         <section data-background="/img/server/minification.jpg">
           <h1>Minification</h1>
+        </section>
+        <section>
+          <div class="row col2">
+            <div class="column">
+              <ul>
+                <li>
+                  <p>Suppression de l'inutile</p>
+                  <ul>
+                    <li>Commentaires</li>
+                    <li>Whitespace</li>
+                  </ul>
+                </li>
+                <li>
+                  <p>Réécriture plus légère</p>
+                  <ul>
+                    <li>Valeurs par défaut</li>
+                    <li>Noms de variables</li>
+                    <li>Mutualisation</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="column">
+              <img src="/img/server/grunt.png" alt="Grunt" />
+            </div>
+          </div>
         </section>
         <section>
           <div class="row col3">
@@ -225,6 +255,7 @@ gzip_types application/javascript application/json text/css text/html text/xml [
               <h3>clean-css</h3>
               <p><code>main.css</code>
               </p>
+              <pre><code class="expanded">apachesolr_autocomplete.message{font-size:80%;color:#888}.apachesolr_autocomplete.count{float:right}div.apachesolr_autocomplete.suggestion{display:inline;float:left}div.ac_results li{list-style:none;background-image:none!important}</code></pre>
               <p>154K ⇒ 111K</p>
               <p>-27%</p>
             </div>
@@ -232,6 +263,7 @@ gzip_types application/javascript application/json text/css text/html text/xml [
               <h3>uglify-js</h3>
               <p><code>main.js</code>
               </p>
+              <pre><code class="expanded">apachesolr_ajax={};apachesolr_ajax.finalize=function(settings){pm.maps();$("#tooltip").hide();pm.tooltips();pm.jScrollPane();pm.carousels();pm.datepicker();pm.chooseLanguage();pm.popins();$("#filters-nav li").find(".indicator").hide();$("#overlay").hide();$("#filters-nav li").removeClass("active");$(".item a").hover(function(){$(this).find(".short").addClass("accessibility")},function(){$(this).find(".short").removeClass("accessibility")})};</code></pre>
               <p>428K ⇒ 331K</p>
               <p>-22%</p>
             </div>
@@ -239,17 +271,16 @@ gzip_types application/javascript application/json text/css text/html text/xml [
               <h3>html-minifier</h3>
               <p><code>index.html</code>
               </p>
+              <pre><code class="expanded">&lt;body class=layout-home&gt;&lt;div class=apachesolr_ajax&gt;&lt;/div&gt;&lt;div id=content class=gradient-1&gt;&lt;p id=access-keys&gt;&lt;a href=#page&gt;Allez au contenu&lt;/a&gt; &lt;a href=#nav&gt;Allez à la navigation&lt;/a&gt; &lt;a href=#search&gt;Allez à la recherche&lt;/a&gt; &lt;a href=#lang lang=en&gt;Change language&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;/body&gt; </code></pre>
               <p>50K ⇒ 39K</p>
               <p>-22%</p>
             </div>
           </div>
-          <div class="fragment">
-            <img src="/img/server/grunt.png" alt="Grunt" width="150" />
-            <p>grunt usemin</p>
-          </div>
         </section>
+      </section>
 
-        <!--COOKIELESS-->
+      <!--COOKIELESS-->
+      <section>
         <section data-background="/img/server/cookies-background.jpg">
           <h2>Régime sans cookies</h2>
         </section>
@@ -304,94 +335,95 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
             <li><code>_setDomainName</code> pour Google Analytics</li>
           </ul>
         </section>
+      </section>
 
-        <!--IMAGES-->
-        <section>
-          <h1>Images</h1>
+      <!--IMAGES-->
+      <section>
+        <h1>Images</h1>
+        <ul>
+          <li>Souvent le plus lourd sur une page, et de loin.</li>
+          <li>Utiliser le bon format pour le bon usage.</li>
+        </ul>
+      </section>
+      <section>
+        <h1>JPG</h1>
+        <ul>
+          <li>Pour les photos.</li>
+          <li>Compression lossy ~ 80% à l'oeil nu (convert, jpegoptim).</li>
+          <li>Compression lossless suppression metadatas (exiftool).</li>
+          <li>Problématiques responsive/retina (hors scope).</li>
+        </ul>
+        <aside class="notes">
+          - Les graphistes ont une meilleure perception de la compression que les développeurs. - Certaines metadatas ne doivent pas disparaitre (author, copyright, etc).
+        </aside>
+      </section>
+      <section>
+        <h1>GIF</h1>
+        <ul>
+          <li>Palette de 256 couleurs.</li>
+          <li>Un seul canal de transparence.</li>
+          <li>Se compresse peu.</li>
+          <li>...</li>
+          <li>Images animées
+            <br />
+            <img src="./img/server-gif.gif" alt="Gif animé" width="250" />
+          </li>
+        </ul>
+        <aside class="notes">
+          Si vous avez des gifs animés sur votre site, vous avez un problème plus grave qu'un soucis de performances.
+        </aside>
+      </section>
+      <section>
+        <h1>PNG</h1>
+        <ul>
+          <li>Filesize plus léger que GIF.</li>
+          <li>Plusieurs canaux de transparence.</li>
+          <li>256 couleurs pour PNG-8, infinité pour PNG-24.</li>
+          <li>tinypng, pngquant, punypng, etc.</li>
+        </ul>
+        <div>
+          <h3>Attention</h3>
           <ul>
-            <li>Souvent le plus lourd sur une page, et de loin.</li>
-            <li>Utiliser le bon format pour le bon usage.</li>
+            <li>Photoshop gère mal PNG-8.</li>
+            <li>Pas supporté par IE8 (attention aux hacks).</li>
           </ul>
-        </section>
-        <section>
-          <h1>JPG</h1>
+        </div>
+      </section>
+      <section>
+        <h1>Sprites</h1>
+        <div class="sprite-container">
+          <img src="./img/server-sprite-fun.jpg" alt="Sprite fun" class="fragment sprite-fun" />
+          <img src="./img/server-sprites.png" alt="Google sprite" class="fragment sprite-example" />
+        </div>
+        <ul>
+          <li>Plusieurs images en une.</li>
+          <li>Gain sur le nombre de requetes et sur la compression.</li>
+          <li>On joue ensuite sur background-position en CSS.</li>
+        </ul>
+        <div>
+          <h3>Attention</h3>
           <ul>
-            <li>Pour les photos.</li>
-            <li>Compression lossy ~ 80% à l'oeil nu (convert, jpegoptim).</li>
-            <li>Compression lossless suppression metadatas (exiftool).</li>
-            <li>Problématiques responsive/retina (hors scope).</li>
+            <li>Nécessite des éléments de taille fixe.</li>
           </ul>
-          <aside class="notes">
-            - Les graphistes ont une meilleure perception de la compression que les développeurs. - Certaines metadatas ne doivent pas disparaitre (author, copyright, etc).
-          </aside>
-        </section>
-        <section>
-          <h1>GIF</h1>
-          <ul>
-            <li>Palette de 256 couleurs.</li>
-            <li>Un seul canal de transparence.</li>
-            <li>Se compresse peu.</li>
-            <li>...</li>
-            <li>Images animées
-              <br />
-              <img src="./img/server-gif.gif" alt="Gif animé" width="250" />
-            </li>
-          </ul>
-          <aside class="notes">
-            Si vous avez des gifs animés sur votre site, vous avez un problème plus grave qu'un soucis de performances.
-          </aside>
-        </section>
-        <section>
-          <h1>PNG</h1>
-          <ul>
-            <li>Filesize plus léger que GIF.</li>
-            <li>Plusieurs canaux de transparence.</li>
-            <li>256 couleurs pour PNG-8, infinité pour PNG-24.</li>
-            <li>tinypng, pngquant, punypng, etc.</li>
-          </ul>
-          <div>
-            <h3>Attention</h3>
-            <ul>
-              <li>Photoshop gère mal PNG-8.</li>
-              <li>Pas supporté par IE8 (attention aux hacks).</li>
-            </ul>
-          </div>
-        </section>
-        <section>
-          <h1>Sprites</h1>
-          <div class="sprite-container">
-            <img src="./img/server-sprite-fun.jpg" alt="Sprite fun" class="fragment sprite-fun" />
-            <img src="./img/server-sprites.png" alt="Google sprite" class="fragment sprite-example" />
-          </div>
-          <ul>
-            <li>Plusieurs images en une.</li>
-            <li>Gain sur le nombre de requetes et sur la compression.</li>
-            <li>On joue ensuite sur background-position en CSS.</li>
-          </ul>
-          <div>
-            <h3>Attention</h3>
-            <ul>
-              <li>Nécessite des éléments de taille fixe.</li>
-            </ul>
-          </div>
-          <aside class="notes">
-            Peut être parfois remplacé par CSS (gradients, border-radius). Peut être parfois remplacé par des Icon Fonts. Source des images : http://www.loriskumo.com/des-sprites-css-pour-votre-site/
-          </aside>
-        </section>
+        </div>
+        <aside class="notes">
+          Peut être parfois remplacé par CSS (gradients, border-radius). Peut être parfois remplacé par des Icon Fonts. Source des images : http://www.loriskumo.com/des-sprites-css-pour-votre-site/
+        </aside>
+      </section>
 
-        <!--CACHE-->
-        <section>
-          <h1>Cache</h1>
-          Une fois téléchargé, inutile de le télécharger à nouveau. HTTP propose des mécanismes puissants pour gérer le cache, à deux niveaux. Au niveau du browser (ne lance la requete que si la date est expirée), ou au niveau du server (indique au serveur la dernière date, le serveur réponds avec une nouvelle version ou rien si la version actuelle est ok). Plusieurs mécanismes, je présente ceux que je préfère. Invalidation du cache, l'une des choses les plus difficile. Asset caché potentiellement par des proxies, firewalls, Plus simple de changer l'url. Timestamp de dernière génération dans l'url, md5 dans le nom, etc.
-        </section>
+      <!--CACHE-->
+      <section>
+        <h1>Cache</h1>
+        Une fois téléchargé, inutile de le télécharger à nouveau. HTTP propose des mécanismes puissants pour gérer le cache, à deux niveaux. Au niveau du browser (ne lance la requete que si la date est expirée), ou au niveau du server (indique au serveur la dernière date, le serveur réponds avec une nouvelle version ou rien si la version actuelle est ok). Plusieurs mécanismes, je présente ceux que je préfère. Invalidation du cache, l'une des choses les plus difficile. Asset caché potentiellement par des proxies, firewalls, Plus simple de changer l'url. Timestamp de dernière génération dans l'url, md5 dans le nom, etc.
+      </section>
 
-        <!--CONSERVATIVE-->
-        <section>
-          Inutile de charger gros framework si utilise juste quelques parties. Tout ce code est chargé par le client. Plutot faire un build sur mesure (jQuery, Bootstrap), ou utiliser de smicro-librairies
-        </section>
-        <section>
-          Inutile de charger des fonts complètes. Ne sélectionner que les caractères nécessaires. On peut virer les versions bols et italiques si pas nécessaires non plus. Si assez petit, toujours possible de les ajouter en base64 dans le CSS
-        </section>
+      <!--CONSERVATIVE-->
+      <section>
+        Inutile de charger gros framework si utilise juste quelques parties. Tout ce code est chargé par le client. Plutot faire un build sur mesure (jQuery, Bootstrap), ou utiliser de smicro-librairies
+      </section>
+      <section>
+        Inutile de charger des fonts complètes. Ne sélectionner que les caractères nécessaires. On peut virer les versions bols et italiques si pas nécessaires non plus. Si assez petit, toujours possible de les ajouter en base64 dans le CSS
+      </section>
 
       </section>
 
@@ -402,10 +434,7 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
 
         <!--BREAKPOINTS-->
         <section>
-          Expliquer le startRender, startExecution, etc
-          Les moment importants à optimiser
-          premier affichage rapide, puis progressif, début utilisation, et finalement la fin du chargement pas si intéressant
-          attention si font, pas de texte si pas la font
+          Expliquer le startRender, startExecution, etc Les moment importants à optimiser premier affichage rapide, puis progressif, début utilisation, et finalement la fin du chargement pas si intéressant attention si font, pas de texte si pas la font
         </section>
         <section>
           First execution Téléchragment de JS bloquant. A donc mettre en bas de page pour limiter, ou utiliser du async/defer (vérifier le fonctionnement). Javasript bloquant car document.write peut changer le dom. Attention aux scripts de publicité (js-manners)
@@ -416,16 +445,13 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
 
         <!--CSS-->
         <section>
-          Start Render Explication reflow/repaint. D'où, mettre CSS en haut pour lui économiser les reflows. Micro optim de mettre le contenu important déjà chargé en inline cf. Guardian
-          expliquer le FOUC si css en bas
+          Start Render Explication reflow/repaint. D'où, mettre CSS en haut pour lui économiser les reflows. Micro optim de mettre le contenu important déjà chargé en inline cf. Guardian expliquer le FOUC si css en bas
         </section>
         <section>
-          Pas primordial. Parsing du CSS Depuis la droite jusque la gauche, sélecteurs plus couteux que d'autres. Contre-intuitif, de dire que si super précis à gauche, alors selecteur optimisé. Inverse. Eviter le selecteur universel *, et les regexp dans les selecteurs d'attributs.
-          limiter à trois niveau d'imbrication, pas de selecteurs d'attributs
+          Pas primordial. Parsing du CSS Depuis la droite jusque la gauche, sélecteurs plus couteux que d'autres. Contre-intuitif, de dire que si super précis à gauche, alors selecteur optimisé. Inverse. Eviter le selecteur universel *, et les regexp dans les selecteurs d'attributs. limiter à trois niveau d'imbrication, pas de selecteurs d'attributs
         </section>
         <section>
-          Animation/transitions Grande majorité des effets d'animations sont faisable en simple CSS, sans passer par du js. Tant que le JS s'execute, rien d'autre ne se passe. Apparté sur la manière dont les boucles d'animations fonctionnent en JS Une méthode qui se charge aussi souvent que possible (setTimeout) et qui calcule la durée depuis la dernière fois et sait où elle se trouve dans l'animation, donc modifie les propriétés en fonctions. Si modifie taille => reflow, sinon repaint. Comme repasse la main au browser, plein de repaint. Plus performant de faire ces animations en CSS directement, car pluggué tout de suite sur GPU
-          y a encore des gens qui font du hover en js.
+          Animation/transitions Grande majorité des effets d'animations sont faisable en simple CSS, sans passer par du js. Tant que le JS s'execute, rien d'autre ne se passe. Apparté sur la manière dont les boucles d'animations fonctionnent en JS Une méthode qui se charge aussi souvent que possible (setTimeout) et qui calcule la durée depuis la dernière fois et sait où elle se trouve dans l'animation, donc modifie les propriétés en fonctions. Si modifie taille => reflow, sinon repaint. Comme repasse la main au browser, plein de repaint. Plus performant de faire ces animations en CSS directement, car pluggué tout de suite sur GPU y a encore des gens qui font du hover en js.
         </section>
         <section>
           CPU/GPU + Revoir la présentation de Paul Rouget à la TakeOff sur qui fait quoi, et comment en profiter?
@@ -433,8 +459,7 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
 
         <!--JAVASCRIPT-->
         <section>
-          Usual Suspect #1 Evenements qui fire trop régulièrement. Sur mousemove, scroll, etc.
-          debounce ?
+          Usual Suspect #1 Evenements qui fire trop régulièrement. Sur mousemove, scroll, etc. debounce ?
         </section>
         <section>
           Usual Suspect #2 Fuite mémoire avec des éléments supprimés du DOM qui ont toujours un event bindé, et donc pas supprimé Généralement moins couteux de mettre un seul événement sur un événement parent et profiter du bubbling.
@@ -451,13 +476,10 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
 
         <!--NO FRUSTRATION-->
         <section>
-          Les utilsiateurs ne se disent pas "oh, ce site est lent, c'est dommage", mais "cette marque est pas très performante". Même site, même ergo, testée en ajoutant simplement un délai de 500ms est passé de "simple, facile à utiliser", à "lent, basique, dur à utiliser". http://calendar.perfplanet.com/2013/slow-pages-damage-perception/
-          Les gens ne vont pas se dire "c'est super ça va vite", mais "ça marche bien, c'est clair". on ne voit pas quand c'est rapide, mais on voit quand c'est lent.
+          Les utilsiateurs ne se disent pas "oh, ce site est lent, c'est dommage", mais "cette marque est pas très performante". Même site, même ergo, testée en ajoutant simplement un délai de 500ms est passé de "simple, facile à utiliser", à "lent, basique, dur à utiliser". http://calendar.perfplanet.com/2013/slow-pages-damage-perception/ Les gens ne vont pas se dire "c'est super ça va vite", mais "ça marche bien, c'est clair". on ne voit pas quand c'est rapide, mais on voit quand c'est lent.
         </section>
         <section>
-          Spinner infini Rien de plus frustrant qu'une barre de progression qui n'évolue pas, ou qui continue plusieurs fois Eviter les spinner qui donnent une sensation de complétude si on ne peut pas la garantir
-          exemples de barres qui se remplit : bad. spinner better.
-          arreter le spinner si trop long
+          Spinner infini Rien de plus frustrant qu'une barre de progression qui n'évolue pas, ou qui continue plusieurs fois Eviter les spinner qui donnent une sensation de complétude si on ne peut pas la garantir exemples de barres qui se remplit : bad. spinner better. arreter le spinner si trop long
         </section>
         <section>
           barre qui défile pour faire croire plus rapide

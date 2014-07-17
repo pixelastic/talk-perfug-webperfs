@@ -107,10 +107,13 @@ body {
 .reveal pre code {
   font-size:inherit;
 }
-.reveal .cropped {
+.reveal code.cropped {
   text-overflow:ellipsis;
   overflow:hidden;
   word-wrap:normal;
+}
+.reveal code.expanded {
+  word-wrap:break-word;
 }
 /* Progress bar */
 

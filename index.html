@@ -362,7 +362,7 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
         </section>
         <!--JPG-->
         <section>
-          <h2>JPG</h2>
+          <h2>JPG, pour les photos</h2>
           <p>
             <img src="/img/server/jpg-original.jpg" width="328" />
           </p>
@@ -379,7 +379,7 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
           </ul>
         </section>
         <section>
-          <h2>Lossless</h2>
+          <h3>Lossless</h3>
           <code>exiftool</code>
           <pre><code>Global Angle             : 30
 Global Altitude          : 30
@@ -402,7 +402,7 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
           <p>31Ko ⇒ 3.9Ko</p>
         </section>
         <section>
-          <h2>Lossy</h2>
+          <h3>Lossy</h3>
           <div class="row col2">
             <div class="column">
               <img src="/img/server/jpg-original.jpg" width="328" />
@@ -422,7 +422,7 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
         </section>
         <!--PNG-->
         <section>
-          <h2>PNG, l'oublié</h2>
+          <h2>PNG, multitaches</h2>
           <ul>
             <li>
               <p>Format polyvalent</p>
@@ -452,35 +452,74 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
             <code>pngquant</code>
           </p>
         </section>
+        <!--SVG-->
+        <section>
+          <h2>SVG, l'image en XML</h2>
+          <img src="/img/server/starbucks.svg" alt="logo Starbucks en SVG" />
+          <pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"&gt;
+&lt;svg  version="1.1" xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" width="200" height="200.395" viewBox="274.62 554.459 200 200.395"
+	 overflow="visible" enable-background="new 274.62 554.459 200 200.395" xml:space="preserve"&gt;
+&lt;path id="R_mark" fill="#010101" d="M439.469,737.486c3.126,0,5.808,2.431,5.808,5.73c0,3.33-2.679,5.759-5.808,5.759
+	C444.159,740.476,442.102,738.415,439.469,738.415z M438.243,746.547h-1.021v-6.629h2.538c1.58,0,2.354,0.588,2.354,1.888
+	c0,1.194-0.744,1.704-1.735,1.827l1.89,2.913h-1.114l-1.766-2.881h-1.147L438.243,746.547L438.243,746.547L438.243,746.547z
+   M438.243,742.83h1.21c1.238,0,1.641-0.357,1.641-1.086c0-0.634-0.31-0.991-1.472-0.991h-1.379V742.83L438.243,742.83z"/&gt;</code></pre>
+          <p>SVG : <code>18Ko</code>, <code>7.9Ko</code> gzippé</p>
+          <p>PNG : <code>14Ko</code>
+          </p>
+        </section>
+        <section>
+          <ul>
+            <li>
+              <p>Vectoriel</p>
+              <ul>
+                <li>Scalable à toutes les résolutions</li>
+              </ul>
+            </li>
+            <li>
+              <p>XML dans le DOM</p>
+              <ul>
+                <li>Stylable en CSS</li>
+                <li>Versionnable</li>
+                <li>Gzippable</li>
+              </ul>
+            </li>
+            <li>IE9+</li>
+          </ul>
+        </section>
         <!--GIF-->
         <section>
-          <h1>GIF</h1>
+          <h2>GIF, à oublier</h2>
           <ul>
-            <li>Palette de 256 couleurs.</li>
-            <li>Un seul canal de transparence.</li>
-            <li>Se compresse peu.</li>
-            <li>...</li>
-            <li>Images animées
-              <br />
-              <img src="./img/server-gif.gif" alt="Gif animé" width="250" />
-            </li>
+            <li>256 couleurs max</li>
+            <li>Transparence simple</li>
+            <li>Pas de compression</li>
+            <li>Animation en boucle</li>
+            <li>Filesize plus faible uniquement sur petits fichiers</li>
           </ul>
-          <aside class="notes">
-            Si vous avez des gifs animés sur votre site, vous avez un problème plus grave qu'un soucis de performances.
-          </aside>
+        </section>
+        <section data-background="/img/server-gif.gif">
         </section>
       </section>
+      <!--SPRITES-->
       <section>
-        <h1>Sprites</h1>
-        <div class="sprite-container">
-          <img src="./img/server-sprite-fun.jpg" alt="Sprite fun" class="fragment sprite-fun" />
-          <img src="./img/server-sprites.png" alt="Google sprite" class="fragment sprite-example" />
-        </div>
+        <section data-background="/img/server/sprite-background.jpg">
+        </section>
+        <section>
+          <h2>Concatener les images</h2>
+          <p><img src="/img/server/sprite-secret-of-mana.png" /></p>
+          <p><img src="./img/server/sprite-france.png" alt="Google sprite" /></p>
+        </section>
+      <section>
         <ul>
           <li>Plusieurs images en une.</li>
           <li>Gain sur le nombre de requetes et sur la compression.</li>
           <li>On joue ensuite sur background-position en CSS.</li>
         </ul>
+      </section>
+      </section>
+      <section>
         <div>
           <h3>Attention</h3>
           <ul>

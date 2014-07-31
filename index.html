@@ -499,25 +499,28 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
             <li>Filesize plus faible uniquement sur petits fichiers</li>
           </ul>
         </section>
-        <section data-background="/img/server-gif.gif">
-        </section>
+        <section data-background="/img/server-gif.gif"></section>
       </section>
+
       <!--SPRITES-->
       <section>
-        <section data-background="/img/server/sprite-background.jpg">
-        </section>
+        <section data-background="/img/server/sprite-background.jpg"></section>
         <section>
           <h2>Concatener les images</h2>
-          <p><img src="/img/server/sprite-secret-of-mana.png" /></p>
-          <p><img src="./img/server/sprite-france.png" alt="Google sprite" /></p>
+          <p>
+            <img src="/img/server/sprite-secret-of-mana.png" />
+          </p>
+          <p>
+            <img src="./img/server/sprite-france.png" alt="Google sprite" />
+          </p>
         </section>
-      <section>
-        <ul>
-          <li>Plusieurs images en une.</li>
-          <li>Gain sur le nombre de requetes et sur la compression.</li>
-          <li>On joue ensuite sur background-position en CSS.</li>
-        </ul>
-      </section>
+        <section>
+          <ul>
+            <li>Plusieurs images en une.</li>
+            <li>Gain sur le nombre de requetes et sur la compression.</li>
+            <li>On joue ensuite sur background-position en CSS.</li>
+          </ul>
+        </section>
       </section>
       <section>
         <div>
@@ -530,7 +533,6 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
           Peut être parfois remplacé par CSS (gradients, border-radius). Peut être parfois remplacé par des Icon Fonts. Source des images : http://www.loriskumo.com/des-sprites-css-pour-votre-site/
         </aside>
       </section>
-      </section>
 
       <!--CACHE-->
       <section>
@@ -540,93 +542,154 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
 
       <!--CONSERVATIVE-->
       <section>
-        Inutile de charger gros framework si utilise juste quelques parties. Tout ce code est chargé par le client. Plutot faire un build sur mesure (jQuery, Bootstrap), ou utiliser de smicro-librairies
+        <h1>Keep only what you need</h1>
+        <ul>
+          <li>Tout code écrit est du code téléchargé et interprété. Pas de compilation</li>
+          <li>Build sur mesure jQuery, Bootstrap, etc</li>
+          <li>Microframework. http://microjs.com/#</li>
+          <li>Lazy loading. Ne charge que si visible</li>
+        </ul>
+      </section>
+
+      <section data-background="/img/client-background.jpg">
+        <h1>Client</h1>
+      </section>
+
+      <!--BREAKPOINTS-->
+      <section>
+        <ul>
+          <li>firstByte. Réponse du serveur</li>
+          <li>startRender. Quelque chose s'affiche</li>
+          <li>startExecution ? Site devient utilisable (clic, javascript, etc)</li>
+          <li>documentComplete. fin du rendering</li>
+        </ul>
+        <p>Clé est un affichage rapide sur startRender, puis progressif. documentComplete, on s'en moque.</p>
       </section>
       <section>
-        Inutile de charger des fonts complètes. Ne sélectionner que les caractères nécessaires. On peut virer les versions bols et italiques si pas nécessaires non plus. Si assez petit, toujours possible de les ajouter en base64 dans le CSS
+        <h3>JS bloquant</h3>
+        <ul>
+          <li>Bloquant quand télécharge. Rien d'autre ne dl (css, image). Pas de parsing DOM. Possible document.write. mettre en bas</li>
+          <li>defer, fait charger automatiquement en fin de page. IE9- charge scripts désordre</li>
+          <li>async, charge scripts en parallele, mais execute dès que recu. IE10+</li>
+          <li>defer = mettre en bas de page, mais buggué IE9-. Donc mettre en bas mieux</li>
+          <li>Peut utiliser async sur scripts qui sont indépendants. Pubs, sharing, etc</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Prioriser</h3>
+        <ul>
+          <li>Facile. On coupe en deux. Le gros du site, et à coté les pubs, sharings, tracking. Chargés ensuite</li>
+        </ul>
       </section>
 
+      <!--CSS-->
+      <section>
+        <h3>Reflow/Repaint</h3>
+        <ul>
+          <li>Repaint : Changement de couleur des pixels. Cheap.</li>
+          <li>Reflow / Layout : Réorganisation des éléments. Expensive.</li>
+          <li>Composite : Géré par le GPU, sans passer par CPU, super bien animé. Mostly very cheap.</li>
+          <li>http://csstriggers.com/</li>
+          <li>D'ou CSS en haut pour que reflow minimum, donner dimensions au maximum.</li>
+          <li>Eviter FOUC et parsing double</li>
+          <li>taille des images dans html</li>
+          <li>Limiter les reflows, utiliser des border 0px transparent pour seulement faire un repaint.</li>
+          <li>Si possible faire des animations sur scale, translate, opacity</li>
+      </section>
+      <section>
+        <h3>Optimisation CSS</h3>
+        <ul>
+          <li>Pas primordial, peu de gains à micro-optimiser</li>
+          <li>Quelques petits trucs à ne PAS faire</li>
+          <li>Parsing de droite vers gauche. Contre-intuitif. #toto .myClass a.active pas précis. .active-link plus précis</li>
+          <li>Moins de hiérarchie, plus c'est rapide</li>
+          <li>Limiter à trois niveaux. Préférer les classes que les tag</li>
+          <li>Pas de selecteurs d'attributs avec regexp</li>
+          <li>Selecteur universel seulement si top level. Couteux si div .class *</li>
+          <li>On tombe très vite dans le pas pratique si on veut optimiser les CSS</li>
+          <li>Tous les selecteurs CSS3 sont couteux</li>
+        </ul>
+      </section>
+      <section>
+        <h3>Animations</h3>
+        <ul>
+          <li>Les faire en CSS et pas en JS</li>
+          <li>Explication animations js (timeout pour execute régulièrement et savoir où dans l'anim)</li>
+          <li>Relance un reflow à chaque boucle</li>
+          <li>Si CSS, déclaratif, donc browser peut optimiser</li>
+          <li>jamais de mouseover pour changer une classe. :hover</li>
+        </ul>
+      </section>
+
+      <!--JAVASCRIPT-->
+      <section>
+        <h3>Usual suspects</h3>
+        <ul>
+          <li>Events sur onscroll, onmouse move. Solution debounce</li>
+          <li>Ajouter des events dans le DOM un par un. Trop de reflow. Need batch</li>
+          <li>Plein d'éléments, plein d'events. Mettre un event master sur le parent</li>
+          <li>http://javascript.crockford.com/memory/leak.html. Selectionner element du DOM avec JS, lui ajouter un attribut qui le réference lui-même.</li>
+        </ul>
+      </section>
+
+      <section data-background="/img/human-background.jpg">
+        <h1>Humain</h1>
       </section>
 
       <section>
-        <section data-background="/img/client-background.jpg">
-          <h1>Client</h1>
-        </section>
+        <h1>No frustration</h1>
+      </section>
 
-        <!--BREAKPOINTS-->
-        <section>
-          Expliquer le startRender, startExecution, etc Les moment importants à optimiser premier affichage rapide, puis progressif, début utilisation, et finalement la fin du chargement pas si intéressant attention si font, pas de texte si pas la font
-        </section>
-        <section>
-          First execution Téléchragment de JS bloquant. A donc mettre en bas de page pour limiter, ou utiliser du async/defer (vérifier le fonctionnement). Javasript bloquant car document.write peut changer le dom. Attention aux scripts de publicité (js-manners)
-        </section>
-        <section>
-          Asynchrone. Prioriser ce qui doit se charger. Tout ça n'est qu'au premier chargement, avant même que le user n'ai pu faire quoique ce soit. Important donc de prioriser ce qui doit se charger en premier. Boutons de sharing arrivent après contenu, idem pour la publicité et le tracking des visites. Pas toujours facile à négocier avec le service marketing/etc.
-        </section>
-
-        <!--CSS-->
-        <section>
-          Start Render Explication reflow/repaint. D'où, mettre CSS en haut pour lui économiser les reflows. Micro optim de mettre le contenu important déjà chargé en inline cf. Guardian expliquer le FOUC si css en bas
-        </section>
-        <section>
-          Pas primordial. Parsing du CSS Depuis la droite jusque la gauche, sélecteurs plus couteux que d'autres. Contre-intuitif, de dire que si super précis à gauche, alors selecteur optimisé. Inverse. Eviter le selecteur universel *, et les regexp dans les selecteurs d'attributs. limiter à trois niveau d'imbrication, pas de selecteurs d'attributs
-        </section>
-        <section>
-          Animation/transitions Grande majorité des effets d'animations sont faisable en simple CSS, sans passer par du js. Tant que le JS s'execute, rien d'autre ne se passe. Apparté sur la manière dont les boucles d'animations fonctionnent en JS Une méthode qui se charge aussi souvent que possible (setTimeout) et qui calcule la durée depuis la dernière fois et sait où elle se trouve dans l'animation, donc modifie les propriétés en fonctions. Si modifie taille => reflow, sinon repaint. Comme repasse la main au browser, plein de repaint. Plus performant de faire ces animations en CSS directement, car pluggué tout de suite sur GPU y a encore des gens qui font du hover en js.
-        </section>
-        <section>
-          CPU/GPU + Revoir la présentation de Paul Rouget à la TakeOff sur qui fait quoi, et comment en profiter?
-        </section>
-
-        <!--JAVASCRIPT-->
-        <section>
-          Usual Suspect #1 Evenements qui fire trop régulièrement. Sur mousemove, scroll, etc. debounce ?
-        </section>
-        <section>
-          Usual Suspect #2 Fuite mémoire avec des éléments supprimés du DOM qui ont toujours un event bindé, et donc pas supprimé Généralement moins couteux de mettre un seul événement sur un événement parent et profiter du bubbling.
-        </section>
-        <section>
-          Usual suspect #3 Ajouter plein d'éléments dans le DOM à le suite, force des reflow Les faire en batch Exemple d'une boucle qui ajoute plein d'éléments
-        </section>
+      <!--PERCEPTION LENTEUR-->
+      <section>
+        <h3>Réalité != Perception</h3>
+        <ul>
+          <li>"Oh, ce site est lent, quel dommage. Par contre je suis sur que la marque est très performante". No one. Ever</li>
+          <li>Site plus lent de 500ms, passe de "Simple, facile à utiliser" à "Basique, dur à utiliser"</li>
+          <li>"Oh, ce site est trés rapide", "Oh, ce site marche très bien".</li>
+          <li>On ne voit pas quand ça va vite, mais on ressent quand c'est lent</li>
+        </ul>
       </section>
 
       <section>
-        <section data-background="/img/human-background.jpg">
-          <h1>Humain</h1>
-        </section>
+        <h3>Différents spinners</h3>
+        <img src="/img/human/windows-progress-bar-infinite.gif" alt="" />
+        <ul>
+          <li>barre de progression qui se remplit, plusieurs fois. very bad</li>
+          <li>spinner infini mieux, fait pas de promesse</li>
+          <li>Must est la barre qui se remplit avec % qui avance. Attention à pas rester trop longtemps à 100%</li>
+          <li>Barre qui défile semble plus rapide</li>
+          <li>&lt;100 ms, pas perceptible. 100-300 à peine. Mettre spinner que si plus de 300</li>
+          <li>Cheat pour avoir un début lent et une acceleration vers la fin.</li>
+        </ul>
+      </section>
 
-        <!--NO FRUSTRATION-->
-        <section>
-          Les utilsiateurs ne se disent pas "oh, ce site est lent, c'est dommage", mais "cette marque est pas très performante". Même site, même ergo, testée en ajoutant simplement un délai de 500ms est passé de "simple, facile à utiliser", à "lent, basique, dur à utiliser". http://calendar.perfplanet.com/2013/slow-pages-damage-perception/ Les gens ne vont pas se dire "c'est super ça va vite", mais "ça marche bien, c'est clair". on ne voit pas quand c'est rapide, mais on voit quand c'est lent.
-        </section>
-        <section>
-          Spinner infini Rien de plus frustrant qu'une barre de progression qui n'évolue pas, ou qui continue plusieurs fois Eviter les spinner qui donnent une sensation de complétude si on ne peut pas la garantir exemples de barres qui se remplit : bad. spinner better. arreter le spinner si trop long
-        </section>
-        <section>
-          barre qui défile pour faire croire plus rapide
-        </section>
-        <section>
-          L'oeil humain ne percoit rien en dessous de 100ms. Si une action prends moins de 300ms, elle est percu comme instanée. Inutile donc de mettre un spinner pour moins de 300ms. Au contraire, ca va lui donner la sensation que les choses sont lentes.
-        </section>
-        <section>
-          Il peut arriver que les choses plantent, ou prennent plus de temps que prévu. Dans ce cas, il ne faut pas que l'utilisateur soit obligé de quitter la page. Il doit toujours pouvoir naviguer et aller autre part. Pas de backdrop qui prends tout et qui empeche de naviguer
-        </section>
 
-        <!--PROGRESSIVE-->
-        <section>
-          Finalement on optimise le chargement de nso pages pour que l'utilisateur final voit un site qui se charge vite. En plus d'influer sur la technique, on peut aussi influer sur le cerveau
-        </section>
-        <section>
-          Placeholder Il est mieux de commencer à afficher quelque chose (même un bandeau de couleur) pour le header, ou des éléments non-utilisables plutot qu'un spinner qui tourne indéfiniment
-        </section>
+      <section>
+        <h3>Annoncer échec</h3>
+        <ul>
+          <li>Si plante, ou prends trop de temps, annoncer que problème</li>
+          <li>Si vraiment planté, s'assurer que le user puisse quand même naviguer. Pas d'overlay sur toute l'appli</li>
+        </ul>
+      </section>
 
-        <!--CHEAT-->
-        <section>
-          http://calendar.perfplanet.com/2012/why-bother-with-performance-metrics-when-you-can-cheat/ Mozilla make the throbber faster Tricher sur le easing, slow, puis de plus en plus fast Avoir des bandes qui bougent dans le sens inverse, augmente perception de vitesse
-        </section>
-        <section>
-          Enfin, comme disent les Animaniacs "If at first you don't suceed, blame it on your parents". Si c'est lent, essayer de faire en sorte que ce ne soit pas vous qu'on accuse. Facebook a fait le test sur son appli mobile, s'ils utilisent le spinner facebook, on pense que leur appli est lente, s'ils utilisent le spinner iOs, on pense que l'iPhone est lent.
-        </section>
+
+      <!--PROGRESSIVE-->
+      <section>
+        <h1>Progressive</h1>
+        <ul>
+          <li>Images jpg en progressif</li>
+          <li>Afficher quelque chose le plus vite possible. Ex. facebook mets des placeholders</li>
+        </ul>
+      </section>
+
+
+      <!--CHEAT-->
+      <section>
+        <h3>If at first you don't succeed, blame it on your parents</h3>
+        <ul>
+          <li>Si lent, accuser l'OS et pas l'appli. Ce que fait Facebook.</li>
+        </ul>
       </section>
 
       <section data-background="/img/questions-background.jpg">
@@ -697,6 +760,11 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
             <li>
               <a href="https://groups.google.com/forum/?fromgroups=#!topic/speedtracer/MlF_gTvMRD8">What exactly does blocking under a network resource refer to ?</a>
             </li>
+            <li><a href="http://calendar.perfplanet.com/2013/slow-pages-damage-perception/">Slow Pages Damage How Users Perceive Your Content, Design, and Navigation</a>
+            </li>
+            <li><a href="https://www.youtube.com/watch?v=enKJMUArlV4">Frontend at the Engineering Level</a></li>
+            <li><a href="https://www.youtube.com/watch?v=-W0FBNbMLs0">CSS And The Critical Path</a></li>
+            <li><a href="http://www.html5rocks.com/en/tutorials/speed/script-loading/">Async & Defer</a></li>
           </ul>
         </section>
       </section>

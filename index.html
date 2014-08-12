@@ -337,7 +337,7 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
       <!--IMAGES-->
       <section>
         <section>
-          <h2>Les images, le poids lourd</h2>
+          <h2>Les images</h2>
         </section>
         <section>
           <ul>
@@ -504,34 +504,32 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
 
       <!--SPRITES-->
       <section>
-        <section data-background="/img/server/sprite-background.jpg"></section>
         <section>
-          <h2>Concatener les images</h2>
+          <h3>CSS Sprites</h3>
+          <img src="/img/server-sprite-fun.jpg" alt="CSS Sprites" />
+        </section>
+        <section>
+          <p>Concaténation appliquée aux images</p>
           <p>
             <img src="/img/server/sprite-secret-of-mana.png" />
           </p>
           <p>
-            <img src="./img/server/sprite-france.png" alt="Google sprite" />
+            <img src="./img/server/sprite-google.png" alt="Google sprite" style="background:white"/>
           </p>
         </section>
         <section>
-          <ul>
-            <li>Plusieurs images en une.</li>
-            <li>Gain sur le nombre de requetes et sur la compression.</li>
-            <li>On joue ensuite sur background-position en CSS.</li>
-          </ul>
+          <p>On joue sur background-position en CSS</p>
+          <pre><code>a {
+  display:block;
+  width:15px;
+  height:15px;
+  background:url(image.png) 0px 0px no-repeat;
+}
+a:hover {
+  background-position:0px -15px;
+}</code></pre>
+          <p><code>grunt spritesmith</code>, Compass, www.spritecow.com</p>
         </section>
-      </section>
-      <section>
-        <div>
-          <h3>Attention</h3>
-          <ul>
-            <li>Nécessite des éléments de taille fixe.</li>
-          </ul>
-        </div>
-        <aside class="notes">
-          Peut être parfois remplacé par CSS (gradients, border-radius). Peut être parfois remplacé par des Icon Fonts. Source des images : http://www.loriskumo.com/des-sprites-css-pour-votre-site/
-        </aside>
       </section>
 
       <!--CACHE-->

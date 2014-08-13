@@ -86,6 +86,9 @@
         </section>
         <section>
           <img src="./img/server/client-server.png" alt="Il m'a regardé, je l'ai regardé" width="500" />
+          <aside class="notes">
+            Échanges ressemblent souvent à ça avant qu'il ne se passe quoi que ce soit
+          </aside>
         </section>
         <section>
           <h3>france.fr</h3>
@@ -94,19 +97,24 @@
           <img src="img/server/concatenate-github.png" />
         </section>
         <section>
-          <h3>Arrêter la procrastination</h3>
           <ul>
             <li>
               <p>Blocking : temps perdu à ne rien faire</p>
               <ul>
                 <li>Entre <code>requestTime</code> et <code>startTime</code>
                 </li>
-                <li>UI, local cache, DNS lookup, limit of max connections</li>
+                <li>UI, local cache, DNS lookup, <strong>limit of max connections</strong></li>
                 <li>Recommence à chaque requête</li>
               </ul>
             </li>
-            <li>Garder 1 (ou 2) fichiers CSS et Javascript</li>
+            <li>Seulement 1 (ou 2) fichiers CSS et Javascript</li>
           </ul>
+          <aside class="notes">
+            <code>requestTime</code> est le moment où le browser sait qu'il doit faire une requete<br />
+            <code>startTime</code> est le moment où il le fait<br />
+            Blocking est temps passé par le browser. Dépends de la vitesse du client. Généralement négligeable, sauf si attente de connection ouverte<br />
+            Limite de connection est de 2 dans la spec, browsers vont de 2 à 8
+           </aside>
         </section>
       </section>
 
@@ -215,6 +223,11 @@ gzip_types application/javascript application/json text/css text/html text/xml [
             <li>Modification du <code>Content-Encoding</code> de la réponse
             </li>
           </ul>
+          <aside class="notes">
+            Peuvent forcer la décompression et retourner du contenu normal (aucun interet)<br />
+            Peuvent manger la request et donc requete qui dit qu'elle ne comprends pas le gzip<br />
+            Peut, pire, manger la réponse et retourner du gzip sans l'annoncer
+          </aside>
         </section>
       </section>
 
@@ -281,9 +294,9 @@ gzip_types application/javascript application/json text/css text/html text/xml [
         <section data-background="/img/server/cookies-background.jpg">
           <h2>Régime sans cookies</h2>
         </section>
-        <section>
-          <img src="img/server/cookies.jpg" alt="U eated my cookie ?" />
-        </section>
+        <!-- <section> -->
+        <!--   <img src="img/server/cookies.jpg" alt="U eated my cookie ?" /> -->
+        <!-- </section> -->
         <section>
           <ul>
             <li>Envoyé sur chaque requête (300B en moyenne)</li>
@@ -323,6 +336,10 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
           <pre><code>static.france.fr 10800 IN CNAME www.france.fr.</code></pre>
           <p>ou</p>
           <pre><code>static-france.fr 10800 IN CNAME www.france.fr.</code></pre>
+          <aside class="notes">
+            Faire pointer sous-domaine, ou domaine externe vers même site<br />
+            Rien de spécial à faire
+          </aside>
         </section>
         <section>
           <h3>www.domain.com > domain.com</h3>
@@ -331,6 +348,10 @@ __utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</c
             </li>
             <li><code>_setDomainName</code> pour Google Analytics</li>
           </ul>
+          <aside class="notes">
+            Les cookies d'un domain parent s'étendent à tous les domaines enfants<br />
+            D'où, utiliser un www pour le site, pour pas que cookies envoyés sur assets
+          </aside>
         </section>
       </section>
 
@@ -400,6 +421,9 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
           <p><code>jpegtran</code>
           </p>
           <p>31Ko ⇒ 3.9Ko</p>
+          <aside class="notes">
+            Attention au copyright, etc.<br />
+          </aside>
         </section>
         <section>
           <h3>Lossy</h3>
@@ -419,6 +443,9 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
             <code>jpegoptim</code>
           </p>
           <p>Invisible à l'œil nu pour compression ~80%</p>
+          <aside class="notes">
+            Les graphistes ont un oeil plus aiguisé que le notre là dessus
+          </aside>
         </section>
         <!--PNG-->
         <section>
@@ -451,6 +478,9 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
           <p>
             <code>pngquant</code>
           </p>
+          <aside class="notes">
+            Format de référence. A privilégier.
+          </aside>
         </section>
         <!--SVG-->
         <section>
@@ -468,6 +498,9 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
           <p>SVG : <code>18Ko</code>, <code>7.9Ko</code> gzippé</p>
           <p>PNG : <code>14Ko</code>
           </p>
+          <aside class="notes">
+            Peut servir de format source, éditable, et versionnable.<br />
+          </aside>
         </section>
         <section>
           <ul>
@@ -516,6 +549,9 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
           <p>
             <img src="./img/server/sprite-google.png" alt="Google sprite" style="background:white"/>
           </p>
+          <aside class="notes">
+            Initialement utilisé dans les jeux vidéos
+          </aside>
         </section>
         <section>
           <p>On joue sur background-position en CSS</p>
@@ -529,38 +565,83 @@ a:hover {
   background-position:0px -15px;
 }</code></pre>
           <p><code>grunt spritesmith</code>, Compass, www.spritecow.com</p>
+          <aside class="notes">
+            Attention aux dimensions, marche sur dimensions fixes.<br />
+            Possible de faire des repeat-x ou repeat-y, mais sprite spécial<br />
+            Possible aussi d'utiliser une icon-font dans certains cas
+          </aside>
         </section>
       </section>
 
       <!--CACHE-->
       <section>
-        <h1>Cache</h1>
-      </section>
-      <section>
-        If U have it, Y U fetch it ?
-      </section>
-      <section>
-        Fraicheur du cache
-        Indique au browser la date de péremption de la ressource. Si frais, ne lance même pas la requete, plus rapide possible.
-        Deux headers : Expires et Cache-Control
-        Expires indique une date (GWT) comme date limite
-        Cache-Control permet de mettre une date relative en secondes, de préciser ce qui est public/privé (en rapport à une BasicAuth), de dire que ne 
-        doit pas etre caché.
-        Cache-Control à utiliser
-      </section>
-      <section>
-        Validation
-        J'ai la ressource, mais je ne sais pas si j'ai la dernière version. Je demande au serveur. Si ok, 304, si nouveau 200.
-        Last-Modified / If-Modified-Since : Date de dernière modif
-        ETag / If-None-Match : Uuid de la ressource
-        Last-Modified à utiliser. ETag trop fragile (inode, collision)
-      </section>
-      <section>
-        Pragma: no-cache en response. Ne marche pas. Jamais. C'est un header de request.
-      </section>
-      <section>
-        Il y a deux choses difficiles en informatique, invalidation du cache.
-        Tellement dur qu'on ne va pas le faire. On va simplement changer l'url de nos ressources : md5, timestamp, etc.
+        <section>
+          <h1>Cache</h1>
+          If U have it, Y U NO use cache ?
+        </section>
+        <section>
+          <h3>Fraicheur</h3>
+          <ul>
+            <li>Date limite de consommation</li>
+            <li>Rapide, pas de requete si encore frais</li>
+            <li>
+              <p>Deux headers</p>
+              <ul>
+                <li><code>Expires: Thu, 04 May 2014 20:00:00 GMT</code> ✘</li>
+                <li><code>Cache-Control: max-age=3600, must-revalidate</code> ✔</li>
+              </ul>
+            </li>
+          </ul>
+          <aside class="notes">
+            Expires accepte une date absolue, GMT<br />
+            Cache-Control accepte une date relative, forcer avec no-cache, ou public/private si derrière une BasicAuth
+          </aside>
+        </section>
+        <section>
+          <h3>Validation</h3>
+          <ul>
+            <li>
+              <p>Vérification que le client possède la dernière version</p>
+              <ul>
+                <li>Oui : 304 - Not Modified</li>
+                <li>Non: 200 - OK</li>
+              </ul>
+            </li>
+            <li>Évite téléchargement inutile</li>
+            <li>
+              <p>Deux couples de headers</p>
+              <ul>
+                <li><code>Last-Modified: Mon, 04 May 2014 02:28:12 GMT</code> / <code>If-Modified-Since</code> ✔</li>
+                <li><code>ETag: "3e86-410-3596fbbc"</code> / <code>If-None-Match</code> ✘</li>
+              </ul>
+            </li>
+          </ul>
+          <aside class="notes">
+            Browser renvoit If-Modified-Sinced/If-None-Match sur les mêmes urls.<br />
+            Attention ETag : collisions, génération en fonction inode, donc différent si shardé.
+          </aside>
+        </section>
+        <section>
+          <h3>Pragma ?</h3>
+          <p><code>Pragma: no-cache</code> n'est pas un header de response</p>
+          <aside class="notes">
+            C'est un header de request, pour dire au serveur qu'on veut une version fresh
+          </aside>
+        </section>
+        <section>
+          <h3>Invalidation</h3>
+          <blockquote>There are only two hard things in Computer Science: cache invalidation and naming things.</blockquote>
+          <ul>
+            <li>
+              <p>Nouvelles urls (timestamp, hash, etc)</p>
+              <ul>
+                <li>github2-c9b5fd6520f5ab77dd823b1b2c81ff9c461b1374.css</li>
+                <li>github-14e2a44e296739b8ec8d7763e88ed307a6d424e0.js</li>
+              </ul>
+            </li>
+            <li><code>grunt filerev</code></li>
+          </ul>
+        </section>
       </section>
 
 
@@ -621,6 +702,7 @@ a:hover {
           <li>Selecteur universel seulement si top level. Couteux si div .class *</li>
           <li>On tombe très vite dans le pas pratique si on veut optimiser les CSS</li>
           <li>Tous les selecteurs CSS3 sont couteux</li>
+          <li>uncss, criticalpath</li>
         </ul>
       </section>
       <section>

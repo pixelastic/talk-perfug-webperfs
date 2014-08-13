@@ -535,19 +535,34 @@ a:hover {
       <!--CACHE-->
       <section>
         <h1>Cache</h1>
-        Une fois téléchargé, inutile de le télécharger à nouveau. HTTP propose des mécanismes puissants pour gérer le cache, à deux niveaux. Au niveau du browser (ne lance la requete que si la date est expirée), ou au niveau du server (indique au serveur la dernière date, le serveur réponds avec une nouvelle version ou rien si la version actuelle est ok). Plusieurs mécanismes, je présente ceux que je préfère. Invalidation du cache, l'une des choses les plus difficile. Asset caché potentiellement par des proxies, firewalls, Plus simple de changer l'url. Timestamp de dernière génération dans l'url, md5 dans le nom, etc.
+      </section>
+      <section>
+        If U have it, Y U fetch it ?
+      </section>
+      <section>
+        Fraicheur du cache
+        Indique au browser la date de péremption de la ressource. Si frais, ne lance même pas la requete, plus rapide possible.
+        Deux headers : Expires et Cache-Control
+        Expires indique une date (GWT) comme date limite
+        Cache-Control permet de mettre une date relative en secondes, de préciser ce qui est public/privé (en rapport à une BasicAuth), de dire que ne 
+        doit pas etre caché.
+        Cache-Control à utiliser
+      </section>
+      <section>
+        Validation
+        J'ai la ressource, mais je ne sais pas si j'ai la dernière version. Je demande au serveur. Si ok, 304, si nouveau 200.
+        Last-Modified / If-Modified-Since : Date de dernière modif
+        ETag / If-None-Match : Uuid de la ressource
+        Last-Modified à utiliser. ETag trop fragile (inode, collision)
+      </section>
+      <section>
+        Pragma: no-cache en response. Ne marche pas. Jamais. C'est un header de request.
+      </section>
+      <section>
+        Il y a deux choses difficiles en informatique, invalidation du cache.
+        Tellement dur qu'on ne va pas le faire. On va simplement changer l'url de nos ressources : md5, timestamp, etc.
       </section>
 
-      <!--CONSERVATIVE-->
-      <section>
-        <h1>Keep only what you need</h1>
-        <ul>
-          <li>Tout code écrit est du code téléchargé et interprété. Pas de compilation</li>
-          <li>Build sur mesure jQuery, Bootstrap, etc</li>
-          <li>Microframework. http://microjs.com/#</li>
-          <li>Lazy loading. Ne charge que si visible</li>
-        </ul>
-      </section>
 
       <section data-background="/img/client-background.jpg">
         <h1>Client</h1>
@@ -627,6 +642,17 @@ a:hover {
           <li>Ajouter des events dans le DOM un par un. Trop de reflow. Need batch</li>
           <li>Plein d'éléments, plein d'events. Mettre un event master sur le parent</li>
           <li>http://javascript.crockford.com/memory/leak.html. Selectionner element du DOM avec JS, lui ajouter un attribut qui le réference lui-même.</li>
+        </ul>
+      </section>
+
+      <!--CONSERVATIVE-->
+      <section>
+        <h1>Keep only what you need</h1>
+        <ul>
+          <li>Tout code écrit est du code téléchargé et interprété. Pas de compilation</li>
+          <li>Build sur mesure jQuery, Bootstrap, etc</li>
+          <li>Microframework. http://microjs.com/#</li>
+          <li>Lazy loading. Ne charge que si visible</li>
         </ul>
       </section>
 

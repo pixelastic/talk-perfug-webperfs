@@ -651,92 +651,122 @@ a:hover {
 
       <!--BREAKPOINTS-->
       <section>
+        <h3>Plusieurs breakpoints</h3>
         <ul>
-          <li>firstByte. Réponse du serveur</li>
-          <li>startRender. Quelque chose s'affiche</li>
-          <li>startExecution ? Site devient utilisable (clic, javascript, etc)</li>
-          <li>documentComplete. fin du rendering</li>
+          <li><code>firstByte</code></li>
+          <li><code>startRender</code></li>
+          <li><code>documentComplete</code></li>
         </ul>
-        <p>Clé est un affichage rapide sur startRender, puis progressif. documentComplete, on s'en moque.</p>
-      </section>
-      <section>
-        <h3>JS bloquant</h3>
-        <ul>
-          <li>Bloquant quand télécharge. Rien d'autre ne dl (css, image). Pas de parsing DOM. Possible document.write. mettre en bas</li>
-          <li>defer, fait charger automatiquement en fin de page. IE9- charge scripts désordre</li>
-          <li>async, charge scripts en parallele, mais execute dès que recu. IE10+</li>
-          <li>defer = mettre en bas de page, mais buggué IE9-. Donc mettre en bas mieux</li>
-          <li>Peut utiliser async sur scripts qui sont indépendants. Pubs, sharing, etc</li>
-        </ul>
-      </section>
-      <section>
-        <h3>Prioriser</h3>
-        <ul>
-          <li>Facile. On coupe en deux. Le gros du site, et à coté les pubs, sharings, tracking. Chargés ensuite</li>
-        </ul>
-      </section>
-
-      <!--CSS-->
-      <section>
-        <h3>Reflow/Repaint</h3>
-        <ul>
-          <li>Repaint : Changement de couleur des pixels. Cheap.</li>
-          <li>Reflow / Layout : Réorganisation des éléments. Expensive.</li>
-          <li>Composite : Géré par le GPU, sans passer par CPU, super bien animé. Mostly very cheap.</li>
-          <li>http://csstriggers.com/</li>
-          <li>D'ou CSS en haut pour que reflow minimum, donner dimensions au maximum.</li>
-          <li>Eviter FOUC et parsing double</li>
-          <li>taille des images dans html</li>
-          <li>Limiter les reflows, utiliser des border 0px transparent pour seulement faire un repaint.</li>
-          <li>Si possible faire des animations sur scale, translate, opacity</li>
-      </section>
-      <section>
-        <h3>Optimisation CSS</h3>
-        <ul>
-          <li>Pas primordial, peu de gains à micro-optimiser</li>
-          <li>Quelques petits trucs à ne PAS faire</li>
-          <li>Parsing de droite vers gauche. Contre-intuitif. #toto .myClass a.active pas précis. .active-link plus précis</li>
-          <li>Moins de hiérarchie, plus c'est rapide</li>
-          <li>Limiter à trois niveaux. Préférer les classes que les tag</li>
-          <li>Pas de selecteurs d'attributs avec regexp</li>
-          <li>Selecteur universel seulement si top level. Couteux si div .class *</li>
-          <li>On tombe très vite dans le pas pratique si on veut optimiser les CSS</li>
-          <li>Tous les selecteurs CSS3 sont couteux</li>
-          <li>uncss, criticalpath</li>
-        </ul>
-      </section>
-      <section>
-        <h3>Animations</h3>
-        <ul>
-          <li>Les faire en CSS et pas en JS</li>
-          <li>Explication animations js (timeout pour execute régulièrement et savoir où dans l'anim)</li>
-          <li>Relance un reflow à chaque boucle</li>
-          <li>Si CSS, déclaratif, donc browser peut optimiser</li>
-          <li>jamais de mouseover pour changer une classe. :hover</li>
-        </ul>
+        <p>Viser un <code>startRender</code> rapide, puis affichage progressif</p>
+        <aside class="notes">
+          firstByte on l'a avec minification/gzip<br />
+          startRender c'est notre premier but, puis affichage progressif<br />
+          documentComplete on s'en moque<br />
+        </aside>
       </section>
 
       <!--JAVASCRIPT-->
       <section>
-        <h3>Usual suspects</h3>
-        <ul>
-          <li>Events sur onscroll, onmouse move. Solution debounce</li>
-          <li>Ajouter des events dans le DOM un par un. Trop de reflow. Need batch</li>
-          <li>Plein d'éléments, plein d'events. Mettre un event master sur le parent</li>
-          <li>http://javascript.crockford.com/memory/leak.html. Selectionner element du DOM avec JS, lui ajouter un attribut qui le réference lui-même.</li>
-        </ul>
+        <section>
+          <h3>Javascript</h3>
+          <p><img src="/img/client/js-logo.png" alt="JS logo"></p>
+        </section>
+
+        <!--LOADING JAVASCRIPT-->
+        <section>
+          <h3>Chargement</h3>
+          <ul>
+            <li>Téléchargement bloquant</li>
+            <li>Mettre en bas de page, avant <code>&lt;/body&gt;</code></li>
+            <li><code>async</code> sur scripts indépendants</li>
+            <li>Charger scripts secondaires (pub, tracking, sharing) plus tard</li>
+          </ul>
+          <aside class="notes">
+            Javascript est bloquant car il peut potentiellement contenir un <code>document.write</code> qui va modifier le DOM
+            <code>defer</code> doit mettre en bas de page, mais buggué sous IE9 (charge dans le désordre)<br />
+            <code>async</code> laisse le browser charger quand il peut et executé une fois retourné
+          </aside>
+        </section>
+
+        <!--SKINNY JAVASCRIPT-->
+        <section>
+          <h3>Garder le minimum</h3>
+          <ul>
+            <li>Pas de compilation</li>
+            <li>Code écrit = code téléchargé = code exécuté</li>
+            <li>Utiliser les builds sur mesure (jQuery, Bootstrap, etc)</li>
+            <li>Microframeworks : <a href="http://microjs.com/">microjs.com</a></li>
+          </ul>
+          <aside class="notes">
+            Ne pas mettre de "mode debug" en prod. Code executé
+          </aside>
+        </section>
+
+        <!--JAVASCRIPT BOTTLENECKS-->
+        <section>
+          <h3>Usual suspects</h3>
+          <ul>
+            <li><code>onscroll</code>, <code>onmousemove</code>, <code>onkeydown</code> =&gt; <strong>debounce</strong></li>
+            <li>boucle d'insertion dans le DOM =&gt; <strong>batch</strong></li>
+            <li>trop de <code>onclick</code> =&gt; <strong>bubble</strong></li>
+            <li>memory leak sur éléments du DOM =&gt; <strong>supprimer liaison js/dom</strong></li>
+          </ul>
+          <aside class="notes">
+            <code>onscroll</code> : Mettre un debounce, qui n'execute qu'une fois<br />
+            loop d'insertion dans le DOM : construire hors du DOM et insérer en batch<br />
+            plutot que de mettre un <code>onclick</code> sur chaque élément, n'en mettre que un sur le parent<br />
+            DOM et JS utilisent deux garbage collectors différents. Si élément du DOM fait référence à obj js, qui lui fait référence à objet du DOM alors GC peut pas fonctionner
+          </aside>
+        </section>
+
       </section>
 
-      <!--CONSERVATIVE-->
+      <!--CSS-->
       <section>
-        <h1>Keep only what you need</h1>
-        <ul>
-          <li>Tout code écrit est du code téléchargé et interprété. Pas de compilation</li>
-          <li>Build sur mesure jQuery, Bootstrap, etc</li>
-          <li>Microframework. http://microjs.com/#</li>
-          <li>Lazy loading. Ne charge que si visible</li>
-        </ul>
+        <section data-background="/img/client/css-background.jpg">
+          <h1>CSS</h1>
+        </section>
+        <section>
+          <h3>Reflow/Repaint</h3>
+          <ul>
+            <li>Repaint : Changement de couleur des pixels. Cheap.</li>
+            <li>Reflow / Layout : Réorganisation des éléments. Expensive.</li>
+            <li>Composite : Géré par le GPU, sans passer par CPU, super bien animé. Mostly very cheap.</li>
+            <li>http://csstriggers.com/</li>
+            <li>D'ou CSS en haut pour que reflow minimum, donner dimensions au maximum.</li>
+            <li>Eviter FOUC et parsing double</li>
+            <li>taille des images dans html</li>
+            <li>Limiter les reflows, utiliser des border 0px transparent pour seulement faire un repaint.</li>
+            <li>Si possible faire des animations sur scale, translate, opacity</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Optimisation CSS</h3>
+          <ul>
+            <li>Pas primordial, peu de gains à micro-optimiser</li>
+            <li>Quelques petits trucs à ne PAS faire</li>
+            <li>Parsing de droite vers gauche. Contre-intuitif. #toto .myClass a.active pas précis. .active-link plus précis</li>
+            <li>Moins de hiérarchie, plus c'est rapide</li>
+            <li>Limiter à trois niveaux. Préférer les classes que les tag</li>
+            <li>Pas de selecteurs d'attributs avec regexp</li>
+            <li>Selecteur universel seulement si top level. Couteux si div .class *</li>
+            <li>On tombe très vite dans le pas pratique si on veut optimiser les CSS</li>
+            <li>Tous les selecteurs CSS3 sont couteux</li>
+            <li>uncss, criticalpath</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Animations</h3>
+          <ul>
+            <li>Les faire en CSS et pas en JS</li>
+            <li>Explication animations js (timeout pour execute régulièrement et savoir où dans l'anim)</li>
+            <li>Relance un reflow à chaque boucle</li>
+            <li>Si CSS, déclaratif, donc browser peut optimiser</li>
+            <li>jamais de mouseover pour changer une classe. :hover</li>
+          </ul>
+        </section>
       </section>
+
 
       <section data-background="/img/human-background.jpg">
         <h1>Humain</h1>

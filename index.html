@@ -727,42 +727,83 @@ a:hover {
           <h1>CSS</h1>
         </section>
         <section>
-          <h3>Reflow/Repaint</h3>
+          <h3>Repaints et reflows</h3>
           <ul>
-            <li>Repaint : Changement de couleur des pixels. Cheap.</li>
-            <li>Reflow / Layout : Réorganisation des éléments. Expensive.</li>
-            <li>Composite : Géré par le GPU, sans passer par CPU, super bien animé. Mostly very cheap.</li>
-            <li>http://csstriggers.com/</li>
-            <li>D'ou CSS en haut pour que reflow minimum, donner dimensions au maximum.</li>
-            <li>Eviter FOUC et parsing double</li>
-            <li>taille des images dans html</li>
-            <li>Limiter les reflows, utiliser des border 0px transparent pour seulement faire un repaint.</li>
-            <li>Si possible faire des animations sur scale, translate, opacity</li>
+            <li>Repaint : Changer la couleur des pixels</li>
+            <li>Reflow : Changer les dimensions des éléments</li>
+            <li><a href="http://csstriggers.com/">csstriggers.com</a></li>
           </ul>
         </section>
         <section>
-          <h3>Optimisation CSS</h3>
+          <h3>Limiter les reflows</h3>
           <ul>
-            <li>Pas primordial, peu de gains à micro-optimiser</li>
-            <li>Quelques petits trucs à ne PAS faire</li>
-            <li>Parsing de droite vers gauche. Contre-intuitif. #toto .myClass a.active pas précis. .active-link plus précis</li>
-            <li>Moins de hiérarchie, plus c'est rapide</li>
-            <li>Limiter à trois niveaux. Préférer les classes que les tag</li>
-            <li>Pas de selecteurs d'attributs avec regexp</li>
-            <li>Selecteur universel seulement si top level. Couteux si div .class *</li>
-            <li>On tombe très vite dans le pas pratique si on veut optimiser les CSS</li>
-            <li>Tous les selecteurs CSS3 sont couteux</li>
-            <li>uncss, criticalpath</li>
+            <li>CSS en haut de page</li>
+            <li>Insérer dans le DOM en batch</li>
+            <li>Taille des images dans le HTML</li>
+            <li><code>border: 1px solid transparent</code></li>
           </ul>
+          <aside class="notes">
+            Avec un border transparent, lui ajouter une couleur ne coute qu'un repaint plutot qu'un reflow si le border n'était pas là.
+          </aside>
         </section>
         <section>
           <h3>Animations</h3>
           <ul>
-            <li>Les faire en CSS et pas en JS</li>
-            <li>Explication animations js (timeout pour execute régulièrement et savoir où dans l'anim)</li>
-            <li>Relance un reflow à chaque boucle</li>
-            <li>Si CSS, déclaratif, donc browser peut optimiser</li>
-            <li>jamais de mouseover pour changer une classe. :hover</li>
+            <li>
+              <p>Javascript ☹</p>
+              <ul>
+                <li><code>setTimeout(0)</code></li>
+                <li>Reflows continus</li>
+                <li>Pas d'optimisation matérielle</li>
+              </ul>
+            </li>
+            <li>
+              <p>CSS</p>
+              <ul>
+                <li>Déclaratif = optimisation</li>
+                <li>GPU : <code>opacity</code>, <code>translate</code>, <code>rotate</code>, <code>scale</code></li>
+                <li>hack <code>translateZ()</code></li>
+                <li><code>will-change</code></li>
+              </ul>
+            </li>
+          </ul>
+          <aside class="notes">
+            Boucle JS dès que reprends la main pour savoir où est dans l'animation et modifier les propriétées.<br />
+            Déclenche des reflows à chaque boucle.<br />
+            Si déclératif, le browser sait ce qu'il va se passer, peut optmiser. <code>will-change</code> rends cette informations encore plus précise.<br />
+            GPU très bon pour certains calculs (scale, rotate, translate, opacity). Animation là dessus très rapides.<br />
+            Forcer GPU avec hack <code>translateZ()</code>. Ne pas en abuser.
+          </aside>
+        </section>
+        <section>
+          <h3>Sélecteurs</h3>
+          <ul>
+            <li>Boucle sur tous les éléments</li>
+            <li>Lecture de droite à gauche des sélecteurs</li>
+            <li>Sélecteur clé (à droite) doit être le plus précis</li>
+            <li><code>.active-link</code> plus rapide que <code>#header .menu a.active</code></li>
+          </ul>
+        </section>
+        <section>
+          <h3>Bonnes pratiques</h3>
+          <ul>
+            <li>Pas de sélecteur universel <code>.menu *</code></li>
+            <li>Pas de regexp d'attribut <code>a[href^="http://"]</code></li>
+            <li>Pas plus de trois niveaux</li>
+            <li>Utiliser des classes plutôt que des tags</li>
+          </ul>
+          <aside class="notes">
+            On peut optimiser encore plus (en mettant des classes sur tout par exemple), mais il faut trouver le juste milieu entre la perf
+            et la facilité d'utilisation.<br />
+            Si on ne devait faire attention qu'à la performance, on ne pourrait rien utiliser de CSS3.
+          </aside>
+        </section>
+        <section>
+          <h3>Quelques outils</h3>
+          <ul>
+            <li>Linters : <a href="http://twitter.github.io/recess/">Recess</a>, <a href="https://github.com/CSSLint/csslint">CSSLint</a></li>
+            <li>Code mort : <a href="https://github.com/addyosmani/grunt-uncss">UnCSS</a></li>
+            <li>Chemin critique : <a href="https://github.com/filamentgroup/criticalcss">CriticalCSS</a></li>
           </ul>
         </section>
       </section>

@@ -46,158 +46,94 @@
         </ul>
       </section>
 
-      <!--WHY ?-->
+      <!--POURQUOI-->
       <section>
-        <section data-background="/img/why-background.jpg">
-          <h1>Pourquoi ?</h1>
-        </section>
-        <section>
-          <h3>Impact sur la marque</h3>
-          <ul>
-            <li>
-              <p>Utilisateurs de moins en moins patients</p>
-              <ul>
-                <li>Site lent au bout de 4s en 2008, 3s en 2014</li>
-                <li>Nouvelle génération habituée à l'instantané</li>
-                <li>Explosion du nombre de terminaux mobiles</li>
-              </ul>
-            </li>
-            <li>
-              <p>Relation à l'image de marque</p>
-              <ul>
-                <li>Avantage concurrentiel si rapide</li>
-                <li>Frustration reportée sur la marque si lent</li>
-              </ul>
-            </li>
-          </ul>
-          <blockquote>Amazon perd 1% de ventes pour chaque tranche de 100ms de chargement</blockquote>
-        </section>
+        <h3>Pourquoi ?</h3>
+        <p><blockquote>On ne remarque pas quand c'est rapide,<br>
+            mais on ressent quand c'est lent.</blockquote></p>
+        <ul>
+          <li>Lenteur ressentie au bout de 4s en 2008, 3s en 2014</li>
+          <li>Nouvelle génération habituée à l'instantané</li>
+          <li>Explosion du nombre de terminaux mobiles</li>
+        </ul>
+        <aside class="notes">
+          <p>Expérience en ajoutant 500ms sur un site de démo, les feedbacks utilisateurs passent de "Simple, facile à utiliser" à "Basique, complexe"</p>
+        </aside>
       </section>
 
-      <!--SERVER-->
+      <!--SOMMAIRE-->
+      <section>
+        <h2>Sommaire</h2>
+        <ol>
+          <li><h4>Serveur</h4></li>
+          <li><h4>Images</h4></li>
+          <li><h4>Javascript</h4></li>
+          <li><h4>CSS</h4></li>
+          <li><h4>Perception</h4></li>
+        </ol>
+      </section>
+
+
+
+      <!--SERVEUR-->
       <section data-background="/img/server-background.jpg">
         <h1>Serveur</h1>
+      </section>
+      <section>
+        <h2>Concatenate</h2>
+        <h2>Compress</h2>
+        <h2>Cache</h2>
       </section>
 
       <!--CONCATENATE-->
       <section>
-        <section data-background="#000000" class="slide-bref">
-          <h3>Bref, j'ai limité mes requêtes</h3>
-        </section>
         <section>
-          <img src="./img/server/client-server.png" alt="Il m'a regardé, je l'ai regardé" width="500" />
-          <aside class="notes">
-            Échanges ressemblent souvent à ça avant qu'il ne se passe quoi que ce soit
-          </aside>
+          <h1>Concatenate</h1>
+          <h3>Télécharger moins de fichiers</h3>
         </section>
+
         <section>
           <h3>france.fr</h3>
-          <img src="img/server/concatenate-france.png" />
+          <p><img src="img/server/concatenate-france.png" alt="Waterfall france.fr" /></p>
           <h3>github.com</h3>
-          <img src="img/server/concatenate-github.png" />
+          <p><img src="img/server/concatenate-github.png" alt="Waterfall github.com" /></p>
         </section>
+
         <section>
+          <h3>Goulot d'étranglement</h3>
           <ul>
-            <li>
-              <p>Blocking : temps perdu à ne rien faire</p>
-              <ul>
-                <li>Entre <code>requestTime</code> et <code>startTime</code>
-                </li>
-                <li>UI, local cache, DNS lookup, <strong>limit of max connections</strong></li>
-                <li>Recommence à chaque requête</li>
-              </ul>
-            </li>
-            <li>Seulement 1 (ou 2) fichiers CSS et Javascript</li>
+            <li>Maximum de connections parallèlles</li>
+            <li>Latence DNS</li>
+            <li>TCP Slow-start</li>
           </ul>
-          <aside class="notes">
-            <code>requestTime</code> est le moment où le browser sait qu'il doit faire une requete<br />
-            <code>startTime</code> est le moment où il le fait<br />
-            Blocking est temps passé par le browser. Dépends de la vitesse du client. Généralement négligeable, sauf si attente de connection ouverte<br />
-            Limite de connection est de 2 dans la spec, browsers vont de 2 à 8
-           </aside>
         </section>
       </section>
 
-      <!--COMPRESSION-->
+      <!--COMPRESS-->
       <section>
         <section>
-          <h3>Gzip all teh things</h3>
+          <h1>Compress</h1>
+          <h3>Télécharger des fichiers plus légers</h3>
+        </section>
+
+        <section>
           <img src="img/server/gzip.jpg" alt="GZIP ALL TEH THINGS!" />
         </section>
+
         <section>
+          <h3>GZIP : La formule magique</h3>
           <ul>
-            <li>
-              <p>Gain de 66% en moyenne</p>
-              <ul>
-                <li>Gain plus importants sur des gros fichiers</li>
-                <li>Très facile à mettre en place</li>
-                <li>Très bon support navigateur (IE5.5+)</li>
-              </ul>
-            </li>
-            <li>
-              <p>Large spectre</p>
-              <ul>
-                <li>HTML / CSS / Javascript</li>
-                <li>XML / JSON</li>
-                <li>SVG / WOFF</li>
-              </ul>
-            </li>
+            <li>Gain de 66% en moyenne (france.fr : 81%)</li>
+            <li>Assets textuels : HTML, CSS, Javascript, XML, JSON</li>
+            <li>Serveur : Apache, Lighttpd, Nginx, IIS</li>
+            <li>Browser : IE5.5+</li>
           </ul>
+          <aside class="notes">
+            <p>Attention aux proxies.</p>
+            <p>Peuvent décompresser à la volée ou supprimer <code>Accept-Encoding</code> requête, ou <code>Content-Encoding</code> réponse</p>
+          </aside>
         </section>
-        <section>
-          <h3>france.fr</h3>
-          <div class="row col3">
-            <div class="column">
-              <h4>18 fichiers</h4>
-              <pre><code>apachesolr_autocomplete.css
-base.css
-content-module.css
-content_multigroup.css
-ctools.css
-date.css
-defaults.css
-extlink.css
-fieldgroup.css
-filefield.css
-fw.css
-global.css
-jquery.timeentry.css
-node.css
-system.css
-tagadelic.css
-user.css
-views.css</code></pre>
-              <p>154K</p>
-            </div>
-            <div class="column">
-              <h4>18 fichiers gzippés</h4>
-              <pre><code>apachesolr_autocomplete.gz
-base.gz
-content-module.gz
-content_multigroup.gz
-ctools.gz
-date.gz
-defaults.gz
-extlink.gz
-fieldgroup.gz
-filefield.gz
-fw.gz
-global.gz
-jquery.timeentry.gz
-node.gz
-system.gz
-tagadelic.gz
-user.gz
-views.gz </code></pre>
-              <p>33K</p>
-            </div>
-            <div class="column">
-              <h4>1 fichier gzippé</h4>
-              <pre><code>all-in-one.gz</code></pre>
-              <p>28K</p>
-            </div>
-          </div>
-        </section>
+
         <section>
           <h4>Apache</h4>
           <pre><code>&lt;IfModule mod_deflate.c&gt;
@@ -214,54 +150,27 @@ compress.filetype  = ("application/javascript", "application/json", \
           <pre><code>gzip on;
 gzip_types application/javascript application/json text/css text/html text/xml [...]; </code></pre>
         </section>
-        <section>
-          <h3>Attention aux proxies</h3>
-          <ul>
-            <li>Décompression</li>
-            <li>Modification du <code>Accept-Encoding</code> de la requête
-            </li>
-            <li>Modification du <code>Content-Encoding</code> de la réponse
-            </li>
-          </ul>
-          <aside class="notes">
-            Peuvent forcer la décompression et retourner du contenu normal (aucun interet)<br />
-            Peuvent manger la request et donc requete qui dit qu'elle ne comprends pas le gzip<br />
-            Peut, pire, manger la réponse et retourner du gzip sans l'annoncer
-          </aside>
-        </section>
-      </section>
 
-      <!--MINIFICATION-->
-      <section>
+        <!--MINIFICATION-->
         <section data-background="/img/server/minification.jpg">
           <h1>Minification</h1>
         </section>
+
         <section>
-          <div class="row col2">
-            <div class="column">
-              <ul>
-                <li>
-                  <p>Suppression de l'inutile</p>
-                  <ul>
-                    <li>Commentaires</li>
-                    <li>Whitespace</li>
-                  </ul>
-                </li>
-                <li>
-                  <p>Réécriture plus légère</p>
-                  <ul>
-                    <li>Valeurs par défaut</li>
-                    <li>Noms de variables</li>
-                    <li>Mutualisation</li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-            <div class="column">
-              <img src="/img/server/grunt.png" alt="Grunt" />
-            </div>
-          </div>
+          <h3>Spécifique à chaque langage</h3>
+          <ul>
+            <li>Suppression</li>
+            <li>Mutualisation</li>
+            <li>Obfuscation</li>
+          </ul>
+          <aside class="notes">
+            <p>Suppression des whitespaces et commentaires</p>
+            <p>Mutualisation de règles, sélecteurs CSS</p>
+            <p>Utilisation de valeurs par défaut HTML</p>
+            <p>Réecriture de variables Javascript</p>
+          </aside>
         </section>
+
         <section>
           <div class="row col3">
             <div class="column">
@@ -287,120 +196,118 @@ gzip_types application/javascript application/json text/css text/html text/xml [
             </div>
           </div>
         </section>
+
       </section>
 
-      <!--COOKIELESS-->
+      <!--CACHE-->
       <section>
-        <section data-background="/img/server/cookies-background.jpg">
-          <h2>Régime sans cookies</h2>
-        </section>
-        <!-- <section> -->
-        <!--   <img src="img/server/cookies.jpg" alt="U eated my cookie ?" /> -->
-        <!-- </section> -->
         <section>
-          <ul>
-            <li>Envoyé sur chaque requête (300B en moyenne)</li>
-            <li>Inutile pour les assets statiques</li>
-          </ul>
+          <h1>Cache</h1>
+          <h3>Télécharger moins souvent</h3>
         </section>
-        <section>
-          <h2>france.fr</h2>
-          <div class="row col2">
-            <div class="column">
-              <h3>fieldgroup.css</h3>
-              <pre><code>div.fieldgroup {
-margin:.5em 0 1em 0;
-}
-div.fieldgroup .content {
-  padding-left:1em;/*LTR*/
-}</code></pre>
-              <p>454B</p>
 
-            </div>
-            <div class="column">
-              <h3>Cookie header</h3>
-              <pre><code class="cropped">has_js=1;
-xtvrn=$499610$;
-xtan499610=-;
-xtant499610=1;
-__utma=132163929.1854756013.1405454567.1405454567.1405454567.1;
-__utmb=132163929.1.10.1405454567;
-__utmc=132163929;
-__utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</code></pre>
-              <p>249B</p>
-            </div>
-          </div>
-        </section>
         <section>
-          <h3>Simple redirection CNAME</h3>
-          <pre><code>static.france.fr 10800 IN CNAME www.france.fr.</code></pre>
-          <p>ou</p>
-          <pre><code>static-france.fr 10800 IN CNAME www.france.fr.</code></pre>
-          <aside class="notes">
-            Faire pointer sous-domaine, ou domaine externe vers même site<br />
-            Rien de spécial à faire
-          </aside>
-        </section>
-        <section>
-          <h3>www.domain.com > domain.com</h3>
+          <h3>Fraicheur</h3>
           <ul>
-            <li>Cookies sur <code>domain.com</code> s'étendent sur <code>*.domain.com</code>
+            <li>Date limite de consommation</li>
+            <li>Rapide, pas de requete si encore frais</li>
+            <li>
+              <p>Deux headers</p>
+              <ul>
+                <li><code>Expires: Thu, 04 May 2014 20:00:00 GMT</code> ✘</li>
+                <li><code>Cache-Control: max-age=3600, must-revalidate</code> ✔</li>
+              </ul>
             </li>
-            <li><code>_setDomainName</code> pour Google Analytics</li>
           </ul>
           <aside class="notes">
-            Les cookies d'un domain parent s'étendent à tous les domaines enfants<br />
-            D'où, utiliser un www pour le site, pour pas que cookies envoyés sur assets
+            <p>Expires accepte une date absolue, GMT</p>
+            <p>Cache-Control accepte une date relative, forcer avec <code>no-cache</code></p>
+            <p>Toujours mettre <code>must-revalidate</code> pour être sur de ne pas servir du pas frais</p>
           </aside>
+        </section>
+
+        <section>
+          <h3>Validation</h3>
+          <ul>
+            <li>
+              <p>Vérification que le client possède la dernière version</p>
+              <ul>
+                <li>Oui : 304 - Not Modified</li>
+                <li>Non: 200 - OK</li>
+              </ul>
+            </li>
+            <li>Évite téléchargement inutile</li>
+            <li>
+              <p>Deux couples de headers</p>
+              <ul>
+                <li><code>Last-Modified: Mon, 04 May 2014 02:28:12 GMT</code> / <code>If-Modified-Since</code> ✔</li>
+                <li><code>ETag: "3e86-410-3596fbbc"</code> / <code>If-None-Match</code> ✘</li>
+              </ul>
+            </li>
+          </ul>
+          <aside class="notes">
+            <p>Browser recoit <code>Last-Modified</code> en réponse, et renvoie <code>If-Modified-Since</code> en requete</p>
+            <p>Attention <code>ETag : collisions, génération en fonction inode, donc différent si shardé.</code></p>
+            <p><code>Pragma: no-cache</code> n'est pas un header de response</p>
+          </aside>
+        </section>
+
+        <section>
+          <h3>Invalidation</h3>
+          <blockquote>There are only two hard things in Computer Science: cache invalidation and naming things.</blockquote>
+          <ul>
+            <li>
+              <p>Nouvelles urls (timestamp, hash, etc)</p>
+              <ul>
+                <li>github2-c9b5fd6520f5ab77dd823b1b2c81ff9c461b1374.css</li>
+                <li>github-14e2a44e296739b8ec8d7763e88ed307a6d424e0.js</li>
+              </ul>
+            </li>
+          </ul>
         </section>
       </section>
+
+
 
       <!--IMAGES-->
+      <section data-background="/img/images-bg.jpg">
+        <h1>Images</h1>
+      </section>
+      <section>
+        <h3>Poids lourd de la page</h3>
+
+        <ul>
+          <li>+50% du poids des pages (Alexa top 100 2013)</li>
+          <li>800Ko en moyenne (2.4Mo sur france.fr)</li>
+          <li>Différents formats / usages</li>
+        </ul>
+      </section>
+
+      <!--JPG-->
       <section>
         <section>
-          <h2>Les images</h2>
+          <h1>JPG</h1>
+          <h3>Deux compressions</h3>
         </section>
         <section>
-          <ul>
-            <li>
-              <p>Un poids lourd sur la page</p>
-              <ul>
-                <li>58 fichiers</li>
-                <li>total 2.4Mo</li>
-                <li>max 330Ko</li>
-              </ul>
-            </li>
-            <li>
-              <p>Différents formats, différents usages</p>
-              <ul>
-                <li>jpg : photos</li>
-                <li>png : transparence</li>
-                <li>svg : vectoriel</li>
-                <li>gif : lolcats</li>
-              </ul>
-            </li>
-          </ul>
-        </section>
-        <!--JPG-->
-        <section>
-          <h2>JPG, pour les photos</h2>
           <p>
-            <img src="/img/server/jpg-original.jpg" width="328" />
+            <img src="/img/server/jpg-original.jpg" alt="JPG de france.fr" />
           </p>
-          <p><code>117Ko</code>
-          </p>
+          <p><code>117Ko</code></p>
+        </section>
+
+        <!--LOSSLESS-->
+        <section>
+          <h3>Lossless : suppression de metadatas</h3>
           <ul>
-            <li>
-              <p>Deux types de compression</p>
-              <ul>
-                <li>Lossless : Suppression des metadatas</li>
-                <li>Lossy : Suppression d'informations visuelles</li>
-              </ul>
-            </li>
+            <li>Orientation, exposition, flash, focale, etc</li>
+            <li>Date, coordonnées GPS</li>
+            <li>Modèle, marque de l'appareil</li>
+            <li>Aperçu, historique</li>
+            <li>Tags, commentaires</li>
           </ul>
         </section>
         <section>
-          <h3>Lossless</h3>
           <code>exiftool</code>
           <pre><code>Global Angle             : 30
 Global Altitude          : 30
@@ -422,19 +329,32 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
           </p>
           <p>31Ko ⇒ 3.9Ko</p>
           <aside class="notes">
-            Attention au copyright, etc.<br />
+            <p>Contient les données photographiques, coordonnées GPS, date, thumbnail, tags, commentaires</p>
+            <p>Attention à ne pas supprimer le copyright</p>
+          </aside>
+        </section>
+
+        <!--LOSSY-->
+        <section>
+          <h3>Lossy : suppression d'informations</h3>
+          <ul>
+            <li>Moins de détails</li>
+            <li>Limite de la perception humaine</li>
+            <li>80% acceptable en moyenne</li>
+          </ul>
+          <aside class="notes">
+            Les graphistes ont un oeil plus aiguisé que le notre là dessus
           </aside>
         </section>
         <section>
-          <h3>Lossy</h3>
           <div class="row col2">
             <div class="column">
-              <img src="/img/server/jpg-original.jpg" width="328" />
+              <img src="/img/server/jpg-original.jpg" width="328" alt="JPG original" />
               <p><code>117Ko</code>
               </p>
             </div>
             <div class="column">
-              <img src="/img/server/jpg-lossy.jpg" width="328" />
+              <img src="/img/server/jpg-lossy.jpg" width="328" alt="JPG compressé en lossy" />
               <p><code>41Ko</code>
               </p>
             </div>
@@ -442,116 +362,26 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
           <p>
             <code>jpegoptim</code>
           </p>
-          <p>Invisible à l'œil nu pour compression ~80%</p>
-          <aside class="notes">
-            Les graphistes ont un oeil plus aiguisé que le notre là dessus
-          </aside>
         </section>
-        <!--PNG-->
-        <section>
-          <h2>PNG, multitaches</h2>
-          <ul>
-            <li>
-              <p>Format polyvalent</p>
-              <ul>
-                <li>Transparence alpha</li>
-                <li>Palette 256 couleurs (PNG8) ou infinité (PNG24)</li>
-              </ul>
-            </li>
-          </ul>
-          <div class="row col2">
-            <div class="column">
-              <p>
-                <img src="/img/server/png-france.png" alt="original" />
-              </p>
-              <p><code>5.7Ko</code>
-              </p>
-            </div>
-            <div class="column">
-              <p>
-                <img src="/img/server/png-pngquant.png" alt="après pngquant" />
-              </p>
-              <p><code>4.4Ko</code>
-              </p>
-            </div>
-          </div>
-          <p>
-            <code>pngquant</code>
-          </p>
-          <aside class="notes">
-            Format de référence. A privilégier.
-          </aside>
-        </section>
-        <!--SVG-->
-        <section>
-          <h2>SVG, l'image en XML</h2>
-          <img src="/img/server/starbucks.svg" alt="logo Starbucks en SVG" />
-          <pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
- "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"&gt;
-&lt;svg  version="1.1" xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" width="200" height="200.395" viewBox="274.62 554.459 200 200.395"
-	 overflow="visible" enable-background="new 274.62 554.459 200 200.395" xml:space="preserve"&gt;
-&lt;path id="R_mark" fill="#010101" d="M439.469,737.486c3.126,0,5.808,2.431,5.808,5.73c0,3.33-2.679,5.759-5.808,5.759
-	C444.159,740.476,442.102,738.415,439.469,738.415z M438.243,746.547h-1.021v-6.629h2.538c1.58,0,2.354,0.588,2.354,1.888
-	c0,1.194-0.744,1.704-1.735,1.827l1.89,2.913h-1.114l-1.766-2.881h-1.147L438.243,746.547L438.243,746.547L438.243,746.547z
-   M438.243,742.83h1.21c1.238,0,1.641-0.357,1.641-1.086c0-0.634-0.31-0.991-1.472-0.991h-1.379V742.83L438.243,742.83z"/&gt;</code></pre>
-          <p>SVG : <code>18Ko</code>, <code>7.9Ko</code> gzippé</p>
-          <p>PNG : <code>14Ko</code>
-          </p>
-          <aside class="notes">
-            Peut servir de format source, éditable, et versionnable.<br />
-          </aside>
-        </section>
-        <section>
-          <ul>
-            <li>
-              <p>Vectoriel</p>
-              <ul>
-                <li>Scalable à toutes les résolutions</li>
-              </ul>
-            </li>
-            <li>
-              <p>XML dans le DOM</p>
-              <ul>
-                <li>Stylable en CSS</li>
-                <li>Versionnable</li>
-                <li>Gzippable</li>
-              </ul>
-            </li>
-            <li>IE9+</li>
-          </ul>
-        </section>
-        <!--GIF-->
-        <section>
-          <h2>GIF, à oublier</h2>
-          <ul>
-            <li>256 couleurs max</li>
-            <li>Transparence simple</li>
-            <li>Pas de compression</li>
-            <li>Animation en boucle</li>
-            <li>Filesize plus faible uniquement sur petits fichiers</li>
-          </ul>
-        </section>
-        <section data-background="/img/server-gif.gif"></section>
       </section>
 
       <!--SPRITES-->
       <section>
         <section>
-          <h3>CSS Sprites</h3>
-          <img src="/img/server-sprite-fun.jpg" alt="CSS Sprites" />
+          <h1>Sprites</h1>
+          <h3>Concaténation d'images</h3>
         </section>
         <section>
-          <p>Concaténation appliquée aux images</p>
-          <p>
-            <img src="/img/server/sprite-secret-of-mana.png" />
-          </p>
-          <p>
-            <img src="./img/server/sprite-google.png" alt="Google sprite" style="background:white"/>
-          </p>
-          <aside class="notes">
-            Initialement utilisé dans les jeux vidéos
-          </aside>
+          <div class="row col2">
+            <div class="column">
+              <img src="/img/server/sprite-secret-of-mana.png" />
+              <p>Secret of Mana</p>
+            </div>
+            <div class="column">
+              <img src="./img/server/sprite-google.png" alt="Google sprite" style="background:white"/>
+              <p>Google</p>
+            </div>
+          </div>
         </section>
         <section>
           <p>On joue sur background-position en CSS</p>
@@ -573,161 +403,70 @@ a:hover {
         </section>
       </section>
 
-      <!--CACHE-->
-      <section>
-        <section>
-          <h1>Cache</h1>
-          If U have it, Y U NO use cache ?
-        </section>
-        <section>
-          <h3>Fraicheur</h3>
-          <ul>
-            <li>Date limite de consommation</li>
-            <li>Rapide, pas de requete si encore frais</li>
-            <li>
-              <p>Deux headers</p>
-              <ul>
-                <li><code>Expires: Thu, 04 May 2014 20:00:00 GMT</code> ✘</li>
-                <li><code>Cache-Control: max-age=3600, must-revalidate</code> ✔</li>
-              </ul>
-            </li>
-          </ul>
-          <aside class="notes">
-            Expires accepte une date absolue, GMT<br />
-            Cache-Control accepte une date relative, forcer avec no-cache, ou public/private si derrière une BasicAuth
-          </aside>
-        </section>
-        <section>
-          <h3>Validation</h3>
-          <ul>
-            <li>
-              <p>Vérification que le client possède la dernière version</p>
-              <ul>
-                <li>Oui : 304 - Not Modified</li>
-                <li>Non: 200 - OK</li>
-              </ul>
-            </li>
-            <li>Évite téléchargement inutile</li>
-            <li>
-              <p>Deux couples de headers</p>
-              <ul>
-                <li><code>Last-Modified: Mon, 04 May 2014 02:28:12 GMT</code> / <code>If-Modified-Since</code> ✔</li>
-                <li><code>ETag: "3e86-410-3596fbbc"</code> / <code>If-None-Match</code> ✘</li>
-              </ul>
-            </li>
-          </ul>
-          <aside class="notes">
-            Browser renvoit If-Modified-Sinced/If-None-Match sur les mêmes urls.<br />
-            Attention ETag : collisions, génération en fonction inode, donc différent si shardé.
-          </aside>
-        </section>
-        <section>
-          <h3>Pragma ?</h3>
-          <p><code>Pragma: no-cache</code> n'est pas un header de response</p>
-          <aside class="notes">
-            C'est un header de request, pour dire au serveur qu'on veut une version fresh
-          </aside>
-        </section>
-        <section>
-          <h3>Invalidation</h3>
-          <blockquote>There are only two hard things in Computer Science: cache invalidation and naming things.</blockquote>
-          <ul>
-            <li>
-              <p>Nouvelles urls (timestamp, hash, etc)</p>
-              <ul>
-                <li>github2-c9b5fd6520f5ab77dd823b1b2c81ff9c461b1374.css</li>
-                <li>github-14e2a44e296739b8ec8d7763e88ed307a6d424e0.js</li>
-              </ul>
-            </li>
-            <li><code>grunt filerev</code></li>
-          </ul>
-        </section>
-      </section>
 
-
-      <section data-background="/img/client-background.jpg">
-        <h1>Client</h1>
-      </section>
-
-      <!--BREAKPOINTS-->
-      <section>
-        <h3>Plusieurs breakpoints</h3>
-        <ul>
-          <li><code>firstByte</code></li>
-          <li><code>startRender</code></li>
-          <li><code>documentComplete</code></li>
-        </ul>
-        <p>Viser un <code>startRender</code> rapide, puis affichage progressif</p>
-        <aside class="notes">
-          firstByte on l'a avec minification/gzip<br />
-          startRender c'est notre premier but, puis affichage progressif<br />
-          documentComplete on s'en moque<br />
-        </aside>
-      </section>
 
       <!--JAVASCRIPT-->
+      <section data-background="/img/javascript-bg.jpg">
+        <h1>Javascript</h1>
+      </section>
+
+      <!--CHARGEMENT-->
       <section>
         <section>
-          <h3>Javascript</h3>
-          <p><img src="/img/client/js-logo.png" alt="JS logo"></p>
+          <h1>Chargement</h1>
+          <h3>Retarder jusqu'au bout</h3>
         </section>
-
-        <!--LOADING JAVASCRIPT-->
         <section>
-          <h3>Chargement</h3>
+          <h3>Téléchargement bloquant</h3>
           <ul>
-            <li>Téléchargement bloquant</li>
+            <li><code>&lt;script&gt;</code> bloque le parsing</li>
             <li>Mettre en bas de page, avant <code>&lt;/body&gt;</code></li>
             <li><code>async</code> sur scripts indépendants</li>
             <li>Charger scripts secondaires (pub, tracking, sharing) plus tard</li>
           </ul>
           <aside class="notes">
-            Javascript est bloquant car il peut potentiellement contenir un <code>document.write</code> qui va modifier le DOM
-            <code>defer</code> doit mettre en bas de page, mais buggué sous IE9 (charge dans le désordre)<br />
-            <code>async</code> laisse le browser charger quand il peut et executé une fois retourné
+            <p>Javascript est bloquant car il peut potentiellement contenir un <code>document.write</code> qui va modifier le DOM</p>
+            <p><code>defer</code> doit mettre en bas de page, mais buggué sous IE9 (charge dans le désordre)<br /></p>
+            <p><code>async</code> laisse le browser charger quand il peut et executé une fois retourné</p>
           </aside>
         </section>
+      </section>
 
-        <!--SKINNY JAVASCRIPT-->
+      <!--SURPOIDS-->
+      <section>
         <section>
+          <h1>Surpoids</h1>
           <h3>Garder le minimum</h3>
+        </section>
+        <section>
+          <h3>Langage non compilé</h3>
           <ul>
-            <li>Pas de compilation</li>
             <li>Code écrit = code téléchargé = code exécuté</li>
             <li>Utiliser les builds sur mesure (jQuery, Bootstrap, etc)</li>
-            <li>Microframeworks : <a href="http://microjs.com/">microjs.com</a></li>
+            <li><a href="http://microjs.com/">microjs.com</a></li>
           </ul>
           <aside class="notes">
             Ne pas mettre de "mode debug" en prod. Code executé
           </aside>
         </section>
-
-        <!--JAVASCRIPT BOTTLENECKS-->
-        <section>
-          <h3>Usual suspects</h3>
-          <ul>
-            <li><code>onscroll</code>, <code>onmousemove</code>, <code>onkeydown</code> =&gt; <strong>debounce</strong></li>
-            <li>boucle d'insertion dans le DOM =&gt; <strong>batch</strong></li>
-            <li>trop de <code>onclick</code> =&gt; <strong>bubble</strong></li>
-            <li>memory leak sur éléments du DOM =&gt; <strong>supprimer liaison js/dom</strong></li>
-          </ul>
-          <aside class="notes">
-            <code>onscroll</code> : Mettre un debounce, qui n'execute qu'une fois<br />
-            loop d'insertion dans le DOM : construire hors du DOM et insérer en batch<br />
-            plutot que de mettre un <code>onclick</code> sur chaque élément, n'en mettre que un sur le parent<br />
-            DOM et JS utilisent deux garbage collectors différents. Si élément du DOM fait référence à obj js, qui lui fait référence à objet du DOM alors GC peut pas fonctionner
-          </aside>
-        </section>
-
       </section>
 
+
+
+
       <!--CSS-->
+      <section data-background="/img/client/css-background.jpg">
+        <h1>CSS</h1>
+      </section>
+
+      <!-- REPAINTS & REFLOWS -->
       <section>
-        <section data-background="/img/client/css-background.jpg">
-          <h1>CSS</h1>
+        <section>
+          <h1>Affichage</h1>
+          <h3>Les reflows sont lents</h3>
         </section>
         <section>
-          <h3>Repaints et reflows</h3>
+          <h3>Repaints et Reflows</h3>
           <ul>
             <li>Repaint : Changer la couleur des pixels</li>
             <li>Reflow : Changer les dimensions des éléments</li>
@@ -743,45 +482,24 @@ a:hover {
             <li><code>border: 1px solid transparent</code></li>
           </ul>
           <aside class="notes">
-            Avec un border transparent, lui ajouter une couleur ne coute qu'un repaint plutot qu'un reflow si le border n'était pas là.
+            <p>Avec un border transparent, lui ajouter une couleur ne coute qu'un repaint plutot qu'un reflow si le border n'était pas là.</p>
           </aside>
         </section>
+      </section>
+
+      <!--CSS PARSER-->
+      <section>
         <section>
-          <h3>Animations</h3>
-          <ul>
-            <li>
-              <p>Javascript ☹</p>
-              <ul>
-                <li><code>setTimeout(0)</code></li>
-                <li>Reflows continus</li>
-                <li>Pas d'optimisation matérielle</li>
-              </ul>
-            </li>
-            <li>
-              <p>CSS</p>
-              <ul>
-                <li>Déclaratif = optimisation</li>
-                <li>GPU : <code>opacity</code>, <code>translate</code>, <code>rotate</code>, <code>scale</code></li>
-                <li>hack <code>translateZ()</code></li>
-                <li><code>will-change</code></li>
-              </ul>
-            </li>
-          </ul>
-          <aside class="notes">
-            Boucle JS dès que reprends la main pour savoir où est dans l'animation et modifier les propriétées.<br />
-            Déclenche des reflows à chaque boucle.<br />
-            Si déclératif, le browser sait ce qu'il va se passer, peut optmiser. <code>will-change</code> rends cette informations encore plus précise.<br />
-            GPU très bon pour certains calculs (scale, rotate, translate, opacity). Animation là dessus très rapides.<br />
-            Forcer GPU avec hack <code>translateZ()</code>. Ne pas en abuser.
-          </aside>
+          <h1>Parseur</h1>
+          <h3>Comment ça marche ?</h3>
         </section>
         <section>
-          <h3>Sélecteurs</h3>
+          <h3>Mode de fonctionnement</h3>
           <ul>
+            <li>Contre-intuitif</li>
             <li>Boucle sur tous les éléments</li>
             <li>Lecture de droite à gauche des sélecteurs</li>
-            <li>Sélecteur clé (à droite) doit être le plus précis</li>
-            <li><code>.active-link</code> plus rapide que <code>#header .menu a.active</code></li>
+            <li>Sélecteur clé (à droite) doit donc être le plus précis</li>
           </ul>
         </section>
         <section>
@@ -793,160 +511,68 @@ a:hover {
             <li>Utiliser des classes plutôt que des tags</li>
           </ul>
           <aside class="notes">
-            On peut optimiser encore plus (en mettant des classes sur tout par exemple), mais il faut trouver le juste milieu entre la perf
-            et la facilité d'utilisation.<br />
-            Si on ne devait faire attention qu'à la performance, on ne pourrait rien utiliser de CSS3.
+            <p>On peut optimiser encore plus (en mettant des classes sur tout par exemple), mais il faut trouver le juste milieu entre la perf
+              et la facilité d'utilisation.</p>
+            <p>Si on ne devait faire attention qu'à la performance, on ne pourrait rien utiliser de CSS3.</p>
           </aside>
         </section>
-        <section>
-          <h3>Quelques outils</h3>
-          <ul>
-            <li>Linters : <a href="http://twitter.github.io/recess/">Recess</a>, <a href="https://github.com/CSSLint/csslint">CSSLint</a></li>
-            <li>Code mort : <a href="https://github.com/addyosmani/grunt-uncss">UnCSS</a></li>
-            <li>Chemin critique : <a href="https://github.com/filamentgroup/criticalcss">CriticalCSS</a></li>
-          </ul>
-        </section>
       </section>
 
 
-      <section data-background="/img/human-background.jpg">
-        <h1>Humain</h1>
+
+
+
+      <!--PERCEPTION-->
+      <section data-background="/img/perception-bg.jpg">
+        <h1>Perception</h1>
       </section>
-
-      <section>
-        <h1>No frustration</h1>
-      </section>
-
-      <!--PERCEPTION LENTEUR-->
-      <section>
-        <h3>Réalité != Perception</h3>
-        <ul>
-          <li>"Oh, ce site est lent, quel dommage. Par contre je suis sur que la marque est très performante". No one. Ever</li>
-          <li>Site plus lent de 500ms, passe de "Simple, facile à utiliser" à "Basique, dur à utiliser"</li>
-          <li>"Oh, ce site est trés rapide", "Oh, ce site marche très bien".</li>
-          <li>On ne voit pas quand ça va vite, mais on ressent quand c'est lent</li>
-        </ul>
-      </section>
-
-      <section>
-        <h3>Différents spinners</h3>
-        <img src="/img/human/windows-progress-bar-infinite.gif" alt="" />
-        <ul>
-          <li>barre de progression qui se remplit, plusieurs fois. very bad</li>
-          <li>spinner infini mieux, fait pas de promesse</li>
-          <li>Must est la barre qui se remplit avec % qui avance. Attention à pas rester trop longtemps à 100%</li>
-          <li>Barre qui défile semble plus rapide</li>
-          <li>&lt;100 ms, pas perceptible. 100-300 à peine. Mettre spinner que si plus de 300</li>
-          <li>Cheat pour avoir un début lent et une acceleration vers la fin.</li>
-        </ul>
-      </section>
-
-
-      <section>
-        <h3>Annoncer échec</h3>
-        <ul>
-          <li>Si plante, ou prends trop de temps, annoncer que problème</li>
-          <li>Si vraiment planté, s'assurer que le user puisse quand même naviguer. Pas d'overlay sur toute l'appli</li>
-        </ul>
-      </section>
-
 
       <!--PROGRESSIVE-->
       <section>
-        <h1>Progressive</h1>
-        <ul>
-          <li>Images jpg en progressif</li>
-          <li>Afficher quelque chose le plus vite possible. Ex. facebook mets des placeholders</li>
-          <li>Mettre feedback que action réussit, même si requete même pas envoyée (envoyée en background)</li>
-        </ul>
+        <section>
+          <h1>Progression</h1>
+          <h3>Afficher petit à petit</h3>
+        </section>
+        <section>
+          <blockquote>Un tiens vaut mieux que deux tu l'auras.</blockquote>
+          <ul>
+            <li><code>startRender</code> rapide</li>
+            <li>Affichage progressif (jpg, placeholders)</li>
+            <li>Mettre feedback que action réussit, même si requete même pas envoyée (envoyée en background)</li>
+          </ul>
+        </section>
       </section>
-
 
       <!--CHEAT-->
       <section>
-        <h3>If at first you don't succeed, blame it on your parents</h3>
-        <ul>
-          <li>Si lent, accuser l'OS et pas l'appli. Ce que fait Facebook.</li>
-        </ul>
+        <section>
+          <h1>Tricher</h1>
+          <h3>Tout le monde le fait...</h3>
+        </section>
+        <!--CHEAT-->
+        <section>
+          <h3>Faire illusion</h3>
+          <ul>
+            <li>Feedback en avance (Instagram)</li>
+            <li>Illusion d'optique (Gmail)</li>
+            <li>Spinner plus rapide (Firefox)</li>
+            <li>Spinner iOS (Facebook)</li>
+          </ul>
+          <blockquote>If at first you don't succeed, blame it on your parents</blockquote>
+          <aside class="notes">
+            <p>Instagram indique que la photo est envoyée alors qu'elle n'est pas partie, mais il le fait en background.</p>
+            <p>Gmail utilise des barres de progressions qui vont plus vite à la fin qu'au début</p>
+            <p>Possible aussi d'utiliser des progressbar animées qui tournent dans le sens inverse</p>
+            <p>Firefox accélérait la vitesse du spinner à chaque release</p>
+            <p>Quand Facebook utilise le spinner iOS, on crois que c'est le téléphone qui est lent</p>
+          </aside>
+        </section>
       </section>
 
+
+      <!--QUESTIONS-->
       <section data-background="/img/questions-background.jpg">
         <h1>Questions ?</h1>
-      </section>
-
-
-      <section>
-        <section>
-          <h1>Annexes</h1>
-        </section>
-        <section>
-          <h2>Des ressources existent depuis longtemps</h2>
-          <ul>
-            <li><a href="http://www.dailymotion.com/video/x7op91_eric-daspet-nicole-sullivan-perform_tech">ParisWeb 2008</a>
-            </li>
-            <li><a href="http://www.slideshare.net/jpvincent/performances-web-quoi-de-neuf">KiwiParty 2014</a>
-            </li>
-          </ul>
-        </section>
-        <section>
-          <h3>Des outils matures</h3>
-          <ul>
-            <li><a href="http://www.webpagetest.org/">WebPageTest</a>
-            </li>
-            <li><a href="http://newrelic.com/">NewRelic</a>
-            </li>
-            <li><a href="http://appurify.com/">Appurify</a>
-            </li>
-            <li><a href="https://www.dareboost.com/en/home">Dareboost</a>
-            </li>
-          </ul>
-        </section>
-
-        <section>
-          <h1>Serveur</h1>
-        </section>
-
-        <section>
-          <h3>DNS, le goulet d'étranglement</h3>
-          <ul>
-            <li>Passage obligatoire de toute requête</li>
-            <li>Zone grise entre le client et le serveur</li>
-            <li>Limite de connections simultanées coté client</li>
-            <li>Peu de solutions (limiter le nombre de domaines)</li>
-          </ul>
-        </section>
-
-        <section>
-          <h3>Le CDN est la dernière étape, pas la première</h3>
-          <ul>
-            <li>Souvent utilisé comme solution de facilité</li>
-            <li>Gains plus importants sur les autres points</li>
-          </ul>
-        </section>
-
-        <section>
-          <h3>Adaptez à votre cas de figure</h3>
-          <ul>
-            <li><a href="http://www.jonathanklein.net/2014/02/revisiting-cookieless-domain.html">Etsy</a> charge ses assets statiques depuis le même domaine que le site principal</li>
-          </ul>
-        </section>
-
-        <section>
-          <h1>Sources</h1>
-          <ul>
-            <li>
-              <a href="http://www.ravelrumba.com/blog/static-cookieless-domain/">Serving Static Content from a Cookieless Domain</a>
-            </li>
-            <li>
-              <a href="https://groups.google.com/forum/?fromgroups=#!topic/speedtracer/MlF_gTvMRD8">What exactly does blocking under a network resource refer to ?</a>
-            </li>
-            <li><a href="http://calendar.perfplanet.com/2013/slow-pages-damage-perception/">Slow Pages Damage How Users Perceive Your Content, Design, and Navigation</a>
-            </li>
-            <li><a href="https://www.youtube.com/watch?v=enKJMUArlV4">Frontend at the Engineering Level</a></li>
-            <li><a href="https://www.youtube.com/watch?v=-W0FBNbMLs0">CSS And The Critical Path</a></li>
-            <li><a href="http://www.html5rocks.com/en/tutorials/speed/script-loading/">Async & Defer</a></li>
-          </ul>
-        </section>
       </section>
     </div>
 

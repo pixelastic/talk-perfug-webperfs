@@ -71,6 +71,9 @@
           <li><h4>CSS</h4></li>
           <li><h4>Perception</h4></li>
         </ol>
+        <aside class="notes">
+          <p>Chapitres par ordre d'importance. Plus gros gains au début qu'à la fin.</p>
+        </aside>
       </section>
 
 
@@ -78,6 +81,10 @@
       <!--SERVEUR-->
       <section data-background="/img/server-background.jpg">
         <h1>Serveur</h1>
+        <section class="notes">
+          <p>On considère que toute l'optim DB et back est déjà ok (php, ruby, node, java).</p>
+          <p>On s'occupe de ce qui va quitter le serveur vers le client.</p>
+        </section>
       </section>
       <section>
         <h2>Concatenate</h2>
@@ -102,9 +109,10 @@
         <section>
           <h3>Goulot d'étranglement</h3>
           <ul>
-            <li>Maximum de connections parallèlles</li>
             <li>Latence DNS</li>
             <li>TCP Slow-start</li>
+            <li>Overhead SSL</li>
+            <li>Maximum de connections parallèlles</li>
           </ul>
         </section>
       </section>
@@ -123,7 +131,7 @@
         <section>
           <h3>GZIP : La formule magique</h3>
           <ul>
-            <li>Gain de 66% en moyenne (france.fr : 81%)</li>
+            <li>Gain de 66% en moyenne</li>
             <li>Assets textuels : HTML, CSS, Javascript, XML, JSON</li>
             <li>Serveur : Apache, Lighttpd, Nginx, IIS</li>
             <li>Browser : IE5.5+</li>
@@ -174,25 +182,25 @@ gzip_types application/javascript application/json text/css text/html text/xml [
         <section>
           <div class="row col3">
             <div class="column">
-              <h3>clean-css</h3>
+              <h3>cleancss</h3>
               <p><code>main.css</code>
               </p>
               <pre><code class="expanded">apachesolr_autocomplete.message{font-size:80%;color:#888}.apachesolr_autocomplete.count{float:right}div.apachesolr_autocomplete.suggestion{display:inline;float:left}div.ac_results li{list-style:none;background-image:none!important}</code></pre>
-              <p>154K ⇒ 111K</p>
+              <p>147Ko ⇒ 28Ko ⇒ 21Ko</p>
             </div>
             <div class="column">
-              <h3>uglify-js</h3>
+              <h3>uglifyjs</h3>
               <p><code>main.js</code>
               </p>
               <pre><code class="expanded">apachesolr_ajax={};apachesolr_ajax.finalize=function(settings){pm.maps();$("#tooltip").hide();pm.tooltips();pm.jScrollPane();pm.carousels();pm.datepicker();pm.chooseLanguage();pm.popins();$("#filters-nav li").find(".indicator").hide();$("#overlay").hide();$("#filters-nav li").removeClass("active");$(".item a").hover(function(){$(this).find(".short").addClass("accessibility")},function(){$(this).find(".short").removeClass("accessibility")})};</code></pre>
-              <p>428K ⇒ 331K</p>
+              <p>428Ko ⇒ 128Ko ⇒ 102Ko</p>
             </div>
             <div class="column">
               <h3>html-minifier</h3>
               <p><code>index.html</code>
               </p>
               <pre><code class="expanded">&lt;body class=layout-home&gt;&lt;div class=apachesolr_ajax&gt;&lt;/div&gt;&lt;div id=content class=gradient-1&gt;&lt;p id=access-keys&gt;&lt;a href=#page&gt;Allez au contenu&lt;/a&gt; &lt;a href=#nav&gt;Allez à la navigation&lt;/a&gt; &lt;a href=#search&gt;Allez à la recherche&lt;/a&gt; &lt;a href=#lang lang=en&gt;Change language&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;/body&gt; </code></pre>
-              <p>50K ⇒ 39K</p>
+              <p>50Ko ⇒ 11Ko ⇒ 9.6Ko</p>
             </div>
           </div>
         </section>
@@ -256,6 +264,7 @@ gzip_types application/javascript application/json text/css text/html text/xml [
           <h3>Invalidation</h3>
           <blockquote>There are only two hard things in Computer Science: cache invalidation and naming things.</blockquote>
           <ul>
+            <li>Cache max (1 an)</li>
             <li>
               <p>Nouvelles urls (timestamp, hash, etc)</p>
               <ul>
@@ -291,9 +300,9 @@ gzip_types application/javascript application/json text/css text/html text/xml [
         </section>
         <section>
           <p>
-            <img src="/img/server/jpg-original.jpg" alt="JPG de france.fr" />
+            <img src="/img/image-jpg.jpg" alt="JPG de france.fr" />
           </p>
-          <p><code>117Ko</code></p>
+          <p><code>155Ko</code></p>
         </section>
 
         <!--LOSSLESS-->
@@ -309,25 +318,30 @@ gzip_types application/javascript application/json text/css text/html text/xml [
         </section>
         <section>
           <code>exiftool</code>
-          <pre><code>Global Angle             : 30
-Global Altitude          : 30
-Photoshop Quality        : 8
-Photoshop Format         : Standard
-Progressive Scans        : 3 Scans
-Creator Tool             : Adobe Photoshop CS5 Windows
-Metadata Date            : 2012:03:07 14:30:01+01:00
-Document ID              : xmp.did:95857168571111E19FCB8718798C7280
-Original Document ID     : xmp.did:95857168571111E19FCB8718798C7280
-Color Mode               : RGB
-History Action           : saved
-History Instance ID      : xmp.iid:2D7184A45968E1119E06F8EC5C23B74C
-History When             : 2012:03:07 14:30:01+01:00
-History Software Agent   : Adobe Photoshop CS5 Windows
-History Changed          : /
-Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
-          <p><code>jpegtran</code>
+          <pre><code>Color Space Data                : RGB
+Profile Date Time               : 1998:02:09 06:49:00
+Primary Platform                : Microsoft Corporation
+Device Manufacturer             : IEC
+Device Attributes               : Reflective, Glossy, Positive, Color
+Rendering Intent                : Perceptual
+Connection Space Illuminant     : 0.9642 1 0.82491
+Profile Creator                 : HP
+Profile Copyright               : Copyright (c) 1998 Hewlett-Packard Company
+Red Matrix Column               : 0.43607 0.22249 0.01392
+Green Matrix Column             : 0.38515 0.71687 0.09708
+Blue Matrix Column              : 0.14307 0.06061 0.7141
+Device Mfg Desc                 : IEC http://www.iec.ch
+Viewing Cond Illuminant Type    : D50
+Luminance                       : 76.03647 80 87.12462
+Measurement Flare               : 0.999%
+Measurement Illuminant          : D65
+Technology                      : Cathode Ray Tube Display
+Red Tone Reproduction Curve     : (Binary data 2060 bytes, use -b option to extract)
+Green Tone Reproduction Curve   : (Binary data 2060 bytes, use -b option to extract)
+Blue Tone Reproduction Curve    : (Binary data 2060 bytes, use -b option to extract)</code></pre>
+          <p><code>jpegtran -optimize -copy none</code>
           </p>
-          <p>31Ko ⇒ 3.9Ko</p>
+          <p>155Ko ⇒ 152Ko</p>
           <aside class="notes">
             <p>Contient les données photographiques, coordonnées GPS, date, thumbnail, tags, commentaires</p>
             <p>Attention à ne pas supprimer le copyright</p>
@@ -349,18 +363,18 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
         <section>
           <div class="row col2">
             <div class="column">
-              <img src="/img/server/jpg-original.jpg" width="328" alt="JPG original" />
-              <p><code>117Ko</code>
+              <img src="/img/image-lossless.jpg" width="428" alt="Lossless" />
+              <p><code>152Ko</code>
               </p>
             </div>
             <div class="column">
-              <img src="/img/server/jpg-lossy.jpg" width="328" alt="JPG compressé en lossy" />
+              <img src="/img/image-lossy.jpg" width="428" alt="Lossless + lossy" />
               <p><code>41Ko</code>
               </p>
             </div>
           </div>
           <p>
-            <code>jpegoptim</code>
+            <code>jpegoptim -m80 --strip-all</code>
           </p>
         </section>
       </section>
@@ -394,7 +408,7 @@ Thumbnail Image          : (Binary data 2692 bytes)</code></pre>
 a:hover {
   background-position:0px -15px;
 }</code></pre>
-          <p><code>grunt spritesmith</code>, Compass, www.spritecow.com</p>
+          <p><code>grunt spritely</code>, Compass, www.spritecow.com</p>
           <aside class="notes">
             Attention aux dimensions, marche sur dimensions fixes.<br />
             Possible de faire des repeat-x ou repeat-y, mais sprite spécial<br />
@@ -422,7 +436,7 @@ a:hover {
             <li><code>&lt;script&gt;</code> bloque le parsing</li>
             <li>Mettre en bas de page, avant <code>&lt;/body&gt;</code></li>
             <li><code>async</code> sur scripts indépendants</li>
-            <li>Charger scripts secondaires (pub, tracking, sharing) plus tard</li>
+            <li>Script1 charge script2 (pub, tracking, sharing)</li>
           </ul>
           <aside class="notes">
             <p>Javascript est bloquant car il peut potentiellement contenir un <code>document.write</code> qui va modifier le DOM</p>
@@ -503,12 +517,51 @@ a:hover {
           </ul>
         </section>
         <section>
+          <h3>Lecture de droite à gauche</h3>
+          <div class="row col2">
+            <div class="column">
+              <pre><code>&lt;div id="header"&gt;
+  &lt;h1&gt;Company&lt;/h1&gt;
+  &lt;ul id="menu"&gt;
+    &lt;li&gt;&lt;a href="#"&gt;AAA&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#" class="menu-item"&gt;BBB&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;
+&lt;div id="content"&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="#"&gt;CCC&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;a href="#"&gt;DDD&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/div&gt;</code></pre>
+            </div>
+            <div class="column">
+              <pre><code>#header h1 { /* Bad key */
+  font-size:3rem;
+}
+ul#menu &gt; li { /* overspecify. child ok */
+  float:left
+}
+#menu li a { /* Bad key, too broad */
+  background:red;
+}
+.menu-item { /* good */
+  background:green;
+}
+#content ul * { /* Arrghhhh */
+  display:block;
+}</code></pre>
+            </div>
+          </div>
+          
+        </section>
+        <section>
           <h3>Bonnes pratiques</h3>
           <ul>
+            <li>Utiliser des classes plutôt que des tags</li>
+            <li>Pas plus de trois niveaux</li>
             <li>Pas de sélecteur universel <code>.menu *</code></li>
             <li>Pas de regexp d'attribut <code>a[href^="http://"]</code></li>
-            <li>Pas plus de trois niveaux</li>
-            <li>Utiliser des classes plutôt que des tags</li>
+            <li>Lisibilité et maintenabilité du code avant tout</li>
           </ul>
           <aside class="notes">
             <p>On peut optimiser encore plus (en mettant des classes sur tout par exemple), mais il faut trouver le juste milieu entre la perf

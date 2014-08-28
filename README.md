@@ -1,3 +1,6 @@
 ### Les webperfs pour les nuls
 
-Présentation qui devra être jouée au perfUG le 28 Aout 2014.
+Présentation jouée au perfUG le 28 aout 2014.
+
+Lancez `grunt serve` pour exposer la présentation sur
+[http://localhost:8000/]()

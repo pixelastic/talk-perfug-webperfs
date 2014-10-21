@@ -8,6 +8,6 @@ rsync \
   --prune-empty-dirs \
   --compress \
   ./css ./fonts ./img ./js ./lib ./plugin ./index.html \
-  pixelastic:/var/www/pixelastic.com/talks.pixelastic.com/webperfs
+  pixelastic:/var/www/pixelastic.com/talks.pixelastic.com/webperfs-takeofftalks
 
 

@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Les webperfs pour les nuls</title>
+  <title>Webperfs 101</title>
   <meta name="description" content="Présentation PerfUG Août 2014">
   <meta name="author" content="Timothée Carry">
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,7 @@
 
       <!--HOME-->
       <section>
-        <h1>Les webperfs<br />pour les nuls</h1>
+        <h1>Webperfs 101</h1>
       </section>
 
       <!--WHO AM I ?-->
@@ -41,7 +41,7 @@
         <h2>Timothée Carry</h2>
         <ul>
           <li>Consultant Octo Technology</li>
-          <li>Spécialiste en Web Front</li>
+          <li>Spécialiste front-end Web</li>
           <li><a href="https://twitter.com/pixelastic/">@pixelastic</a> à l'extérieur</li>
         </ul>
       </section>
@@ -56,40 +56,22 @@
           <li>Nouvelle génération habituée à l'instantané</li>
           <li>Explosion du nombre de terminaux mobiles</li>
         </ul>
-        <aside class="notes">
-          <p>Expérience en ajoutant 500ms sur un site de démo, les feedbacks utilisateurs passent de "Simple, facile à utiliser" à "Basique, complexe"</p>
-        </aside>
+      </section>
+
+      <section>
+        Plein de sujets à aborder, peut pas tous y toucher en 25 mn, donc essentiel
       </section>
 
       <!--SOMMAIRE-->
       <section>
         <h2>Sommaire</h2>
         <ol>
-          <li><h4>Serveur</h4></li>
-          <li><h4>Images</h4></li>
-          <li><h4>Javascript</h4></li>
-          <li><h4>CSS</h4></li>
-          <li><h4>Perception</h4></li>
+          <li><h4>Concatenate</h4></li>
+          <li><h4>Compress</h4></li>
+          <li><h4>Cache</h4></li>
+          <li><h4>Cut</h4></li>
+          <li><h4>Cheat</h4></li>
         </ol>
-        <aside class="notes">
-          <p>Chapitres par ordre d'importance. Plus gros gains au début qu'à la fin.</p>
-        </aside>
-      </section>
-
-
-
-      <!--SERVEUR-->
-      <section data-background="./img/server-bg.jpg">
-        <h1>Serveur</h1>
-        <aside class="notes">
-          <p>On considère que toute l'optim DB et back est déjà ok (php, ruby, node, java).</p>
-          <p>On s'occupe de ce qui va quitter le serveur vers le client.</p>
-        </aside>
-      </section>
-      <section>
-        <h2>Concatenate</h2>
-        <h2>Compress</h2>
-        <h2>Cache</h2>
       </section>
 
       <!--CONCATENATE-->
@@ -136,10 +118,6 @@
             <li>Serveur : Apache, Lighttpd, Nginx, IIS</li>
             <li>Browser : IE5.5+</li>
           </ul>
-          <aside class="notes">
-            <p>Attention aux proxies.</p>
-            <p>Peuvent décompresser à la volée ou supprimer <code>Accept-Encoding</code> requête, ou <code>Content-Encoding</code> réponse</p>
-          </aside>
         </section>
 
         <section>
@@ -159,51 +137,24 @@ compress.filetype  = ("application/javascript", "application/json", \
 gzip_types application/javascript application/json text/css text/html text/xml [...]; </code></pre>
         </section>
 
-        <!--MINIFICATION-->
-        <section data-background="./img/minification-bg.jpg">
-          <h1>Minification</h1>
-        </section>
-
         <section>
-          <h3>Spécifique à chaque langage</h3>
+          <h3>Enlever le surpoids</h3>
           <ul>
-            <li>Suppression</li>
-            <li>Mutualisation</li>
-            <li>Obfuscation</li>
+            <li>Minification</li>
+            <li>UnCSS</li>
+            <li>Enlever code de debug, écrit, téléchargé, executé</li>
           </ul>
-          <aside class="notes">
-            <p>Suppression des whitespaces et commentaires</p>
-            <p>Mutualisation de règles, sélecteurs CSS</p>
-            <p>Utilisation de valeurs par défaut HTML</p>
-            <p>Réecriture de variables Javascript</p>
-          </aside>
         </section>
 
         <section>
-          <div class="row col3">
-            <div class="column">
-              <h3>cleancss</h3>
-              <p><code>main.css</code>
-              </p>
-              <pre><code class="expanded">apachesolr_autocomplete.message{font-size:80%;color:#888}.apachesolr_autocomplete.count{float:right}div.apachesolr_autocomplete.suggestion{display:inline;float:left}div.ac_results li{list-style:none;background-image:none!important}</code></pre>
-              <p>147Ko ⇒ 28Ko ⇒ 21Ko</p>
-            </div>
-            <div class="column">
-              <h3>uglifyjs</h3>
-              <p><code>main.js</code>
-              </p>
-              <pre><code class="expanded">apachesolr_ajax={};apachesolr_ajax.finalize=function(settings){pm.maps();$("#tooltip").hide();pm.tooltips();pm.jScrollPane();pm.carousels();pm.datepicker();pm.chooseLanguage();pm.popins();$("#filters-nav li").find(".indicator").hide();$("#overlay").hide();$("#filters-nav li").removeClass("active");$(".item a").hover(function(){$(this).find(".short").addClass("accessibility")},function(){$(this).find(".short").removeClass("accessibility")})};</code></pre>
-              <p>428Ko ⇒ 128Ko ⇒ 102Ko</p>
-            </div>
-            <div class="column">
-              <h3>html-minifier</h3>
-              <p><code>index.html</code>
-              </p>
-              <pre><code class="expanded">&lt;body class=layout-home&gt;&lt;div class=apachesolr_ajax&gt;&lt;/div&gt;&lt;div id=content class=gradient-1&gt;&lt;p id=access-keys&gt;&lt;a href=#page&gt;Allez au contenu&lt;/a&gt; &lt;a href=#nav&gt;Allez à la navigation&lt;/a&gt; &lt;a href=#search&gt;Allez à la recherche&lt;/a&gt; &lt;a href=#lang lang=en&gt;Change language&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;/body&gt; </code></pre>
-              <p>50Ko ⇒ 11Ko ⇒ 9.6Ko</p>
-            </div>
-          </div>
+          <h3>Images</h3>
+          <ul>
+            <li>Lossless</li>
+            <li>Lossy</li>
+            <li>ImageOptim</li>
+          </ul>
         </section>
+
 
       </section>
 
@@ -227,11 +178,6 @@ gzip_types application/javascript application/json text/css text/html text/xml [
               </ul>
             </li>
           </ul>
-          <aside class="notes">
-            <p>Expires accepte une date absolue, GMT</p>
-            <p>Cache-Control accepte une date relative, forcer avec <code>no-cache</code></p>
-            <p>Toujours mettre <code>must-revalidate</code> pour être sur de ne pas servir du pas frais</p>
-          </aside>
         </section>
 
         <section>
@@ -253,13 +199,7 @@ gzip_types application/javascript application/json text/css text/html text/xml [
               </ul>
             </li>
           </ul>
-          <aside class="notes">
-            <p>Browser recoit <code>Last-Modified</code> en réponse, et renvoie <code>If-Modified-Since</code> en requete</p>
-            <p>Attention <code>ETag : collisions, génération en fonction inode, donc différent si shardé.</code></p>
-            <p><code>Pragma: no-cache</code> n'est pas un header de response</p>
-          </aside>
         </section>
-
 
         <section>
           <h3>Un beau dessin</h3>
@@ -282,322 +222,36 @@ gzip_types application/javascript application/json text/css text/html text/xml [
         </section>
       </section>
 
-
-
-      <!--IMAGES-->
-      <section data-background="./img/images-bg.jpg">
-        <h1>Images</h1>
-      </section>
-      <section>
-        <h3>Poids lourd de la page</h3>
-
-        <ul>
-          <li>+50% du poids des pages (Alexa top 100 2013)</li>
-          <li>800Ko en moyenne (2.4Mo sur france.fr)</li>
-          <li>Différents formats / usages</li>
-        </ul>
-      </section>
-
-      <!--JPG-->
+      <!--CUT-->
       <section>
         <section>
-          <h1>JPG</h1>
-          <h3>Deux compressions</h3>
-        </section>
-        <section>
-          <p>
-            <img src="./img/images-jpg.jpg" alt="JPG de france.fr" />
-          </p>
-          <p><code>155Ko</code></p>
+          <h1>Cut</h1>
+          <h3>Télécharger en plusieurs morceaux</h3>
         </section>
 
-        <!--LOSSLESS-->
         <section>
-          <h3>Lossless : suppression de metadatas</h3>
+          <h3>Time to first byte</h3>
           <ul>
-            <li>Orientation, exposition, flash, focale, etc</li>
-            <li>Date, coordonnées GPS</li>
-            <li>Modèle, marque de l'appareil</li>
-            <li>Aperçu, historique</li>
-            <li>Tags, commentaires</li>
+            <li>Flush après le head, pour parser plus rapidement</li>
+            <li>Envoyer en moins de 15Ko pour TCP congestion</li>
           </ul>
         </section>
-        <section>
-          <code>exiftool</code>
-          <pre><code>Color Space Data                : RGB
-Profile Date Time               : 1998:02:09 06:49:00
-Primary Platform                : Microsoft Corporation
-Device Manufacturer             : IEC
-Device Attributes               : Reflective, Glossy, Positive, Color
-Rendering Intent                : Perceptual
-Connection Space Illuminant     : 0.9642 1 0.82491
-Profile Creator                 : HP
-Profile Copyright               : Copyright (c) 1998 Hewlett-Packard Company
-Red Matrix Column               : 0.43607 0.22249 0.01392
-Green Matrix Column             : 0.38515 0.71687 0.09708
-Blue Matrix Column              : 0.14307 0.06061 0.7141
-Device Mfg Desc                 : IEC http://www.iec.ch
-Viewing Cond Illuminant Type    : D50
-Luminance                       : 76.03647 80 87.12462
-Measurement Flare               : 0.999%
-Measurement Illuminant          : D65
-Technology                      : Cathode Ray Tube Display
-Red Tone Reproduction Curve     : (Binary data 2060 bytes, use -b option to extract)
-Green Tone Reproduction Curve   : (Binary data 2060 bytes, use -b option to extract)
-Blue Tone Reproduction Curve    : (Binary data 2060 bytes, use -b option to extract)</code></pre>
-          <p><code>jpegtran -optimize -copy none</code>
-          </p>
-          <p>155Ko ⇒ 152Ko</p>
-          <aside class="notes">
-            <p>Contient les données photographiques, coordonnées GPS, date, thumbnail, tags, commentaires</p>
-            <p>Attention à ne pas supprimer le copyright</p>
-          </aside>
-        </section>
 
-        <!--LOSSY-->
         <section>
-          <h3>Lossy : suppression d'informations</h3>
+          <h3>Time to start render</h3>
           <ul>
-            <li>Moins de détails</li>
-            <li>Limite de la perception humaine</li>
-            <li>80% acceptable en moyenne</li>
-          </ul>
-          <aside class="notes">
-            Les graphistes ont un oeil plus aiguisé que le notre là dessus
-          </aside>
-        </section>
-        <section>
-          <div class="row col2">
-            <div class="column">
-              <img src="./img/images-lossless.jpg" width="428" alt="Lossless" />
-              <p><code>152Ko</code>
-              </p>
-            </div>
-            <div class="column">
-              <img src="./img/images-lossy.jpg" width="428" alt="Lossless + lossy" />
-              <p><code>41Ko</code>
-              </p>
-            </div>
-          </div>
-          <p>
-            <code>jpegoptim -m80 --strip-all</code>
-          </p>
-        </section>
-      </section>
-
-      <!--SPRITES-->
-      <section>
-        <section>
-          <h1>Sprites</h1>
-          <h3>Concaténation d'images</h3>
-        </section>
-        <section>
-          <div class="row col2">
-            <div class="column">
-              <img src="./img/sprite-secret-of-mana.png" />
-              <p>Secret of Mana</p>
-            </div>
-            <div class="column">
-              <img src="./img/sprite-google.png" alt="Google sprite" style="background:white"/>;
-              <p>Google</p>
-            </div>
-          </div>
-        </section>
-        <section>
-          <p>On joue sur background-position en CSS</p>
-          <pre><code>a {
-  display:block;
-  width:15px;
-  height:15px;
-  background:url(image.png) 0px 0px no-repeat;
-}
-a:hover {
-  background-position:0px -15px;
-}</code></pre>
-          <p><code>grunt spritely</code>, Compass, www.spritecow.com</p>
-          <aside class="notes">
-            Attention aux dimensions, marche sur dimensions fixes.<br />
-            Possible de faire des repeat-x ou repeat-y, mais sprite spécial<br />
-            Possible aussi d'utiliser une icon-font dans certains cas
-          </aside>
-        </section>
-      </section>
-
-
-
-      <!--JAVASCRIPT-->
-      <section data-background="./img/javascript-bg.jpg">
-        <h1>Javascript</h1>
-      </section>
-
-      <!--CHARGEMENT-->
-      <section>
-        <section>
-          <h1>Chargement</h1>
-          <h3>Retarder jusqu'au bout</h3>
-        </section>
-        <section>
-          <h3>Téléchargement bloquant</h3>
-          <ul>
-            <li><code>&lt;script&gt;</code> bloque le parsing</li>
-            <li>Mettre en bas de page, avant <code>&lt;/body&gt;</code></li>
-            <li><code>async</code> sur scripts indépendants</li>
-            <li>Script1 charge script2 (pub, tracking, sharing)</li>
-          </ul>
-          <aside class="notes">
-            <p>Javascript est bloquant car il peut potentiellement contenir un <code>document.write</code> qui va modifier le DOM</p>
-            <p><code>defer</code> doit mettre en bas de page, mais buggué sous IE9 (charge dans le désordre)<br /></p>
-            <p><code>async</code> laisse le browser charger quand il peut et executé une fois retourné</p>
-          </aside>
-        </section>
-      </section>
-
-      <!--SURPOIDS-->
-      <section>
-        <section>
-          <h1>Surpoids</h1>
-          <h3>Garder le minimum</h3>
-        </section>
-        <section>
-          <h3>Langage non compilé</h3>
-          <ul>
-            <li>Code écrit = code téléchargé = code exécuté</li>
-            <li>Utiliser les builds sur mesure (jQuery, Bootstrap, etc)</li>
-            <li><a href="http://microjs.com/">microjs.com</a></li>
-          </ul>
-          <aside class="notes">
-            Ne pas mettre de "mode debug" en prod. Code executé
-          </aside>
-        </section>
-      </section>
-
-
-
-
-      <!--CSS-->
-      <section data-background="./img/css-bg.jpg">
-        <h1>CSS</h1>
-      </section>
-
-      <!-- REPAINTS & REFLOWS -->
-      <section>
-        <section>
-          <h1>Affichage</h1>
-          <h3>Les reflows sont lents</h3>
-        </section>
-        <section>
-          <h3>Repaints et Reflows</h3>
-          <ul>
-            <li>Repaint : Changer la couleur des pixels</li>
-            <li>Reflow : Changer les dimensions des éléments</li>
-            <li><a href="http://csstriggers.com/">csstriggers.com</a></li>
+            <li>CSS Critical Path</li>
+            <li>Découper le Js en must-have et should-have async</li>
+            <li>defer/async, bloquant</li>
+            <li>lazyloading images sous le fold</li>
           </ul>
         </section>
+
         <section>
-          <h3>Limiter les reflows</h3>
+          <h3>FTL (Faster Than Light)</h3>
           <ul>
-            <li>CSS en haut de page</li>
-            <li>Insérer dans le DOM en batch</li>
-            <li>Taille des images dans le HTML</li>
-            <li><code>border: 1px solid transparent</code></li>
-          </ul>
-          <aside class="notes">
-            <p>Avec un border transparent, lui ajouter une couleur ne coute qu'un repaint plutot qu'un reflow si le border n'était pas là.</p>
-          </aside>
-        </section>
-      </section>
-
-      <!--CSS PARSER-->
-      <section>
-        <section>
-          <h1>Parseur</h1>
-          <h3>Comment ça marche ?</h3>
-        </section>
-        <section>
-          <h3>Mode de fonctionnement</h3>
-          <ul>
-            <li>Contre-intuitif</li>
-            <li>Boucle sur tous les éléments</li>
-            <li>Lecture de droite à gauche des sélecteurs</li>
-            <li>Sélecteur clé (à droite) doit donc être le plus précis</li>
-          </ul>
-        </section>
-        <section>
-          <h3>Lecture de droite à gauche</h3>
-          <div class="row col2">
-            <div class="column">
-              <pre><code>&lt;div id="header"&gt;
-  &lt;h1&gt;Company&lt;/h1&gt;
-  &lt;ul id="menu"&gt;
-    &lt;li&gt;&lt;a href="#"&gt;AAA&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#" class="menu-item"&gt;BBB&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;
-&lt;div id="content"&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;a href="#"&gt;CCC&lt;/a&gt;&lt;/li&gt;
-    &lt;li&gt;&lt;a href="#"&gt;DDD&lt;/a&gt;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/div&gt;</code></pre>
-            </div>
-            <div class="column">
-              <pre><code>#header h1 { /* Bad key */
-  font-size:3rem;
-}
-ul#menu &gt; li { /* overspecify. child ok */
-  float:left
-}
-#menu li a { /* Bad key, too broad */
-  background:red;
-}
-.menu-item { /* good */
-  background:green;
-}
-#content ul * { /* Arrghhhh */
-  display:block;
-}</code></pre>
-            </div>
-          </div>
-          
-        </section>
-        <section>
-          <h3>Bonnes pratiques</h3>
-          <ul>
-            <li>Utiliser des classes plutôt que des tags</li>
-            <li>Pas plus de trois niveaux</li>
-            <li>Pas de sélecteur universel <code>.menu *</code></li>
-            <li>Pas de regexp d'attribut <code>a[href^="http://"]</code></li>
-            <li>Lisibilité et maintenabilité du code avant tout</li>
-          </ul>
-          <aside class="notes">
-            <p>On peut optimiser encore plus (en mettant des classes sur tout par exemple), mais il faut trouver le juste milieu entre la perf
-              et la facilité d'utilisation.</p>
-            <p>Si on ne devait faire attention qu'à la performance, on ne pourrait rien utiliser de CSS3.</p>
-          </aside>
-        </section>
-      </section>
-
-
-
-
-
-      <!--PERCEPTION-->
-      <section data-background="./img/perception-bg.jpg">
-        <h1>Perception</h1>
-      </section>
-
-      <!--PROGRESSIVE-->
-      <section>
-        <section>
-          <h1>Progression</h1>
-          <h3>Afficher petit à petit</h3>
-        </section>
-        <section>
-          <blockquote>Un tiens vaut mieux que deux tu l'auras.</blockquote>
-          <ul>
-            <li><code>startRender</code> rapide</li>
-            <li>Affichage progressif (jpg, placeholders)</li>
-            <li>Lazyloading</li>
+            <li>Latence vitesse de la lumière incompressible</li>
+            <li>Mettre sur CDN, plus proche, plus rapide. Suite du trajet sur toutes internes</li>
           </ul>
         </section>
       </section>
@@ -605,7 +259,7 @@ ul#menu &gt; li { /* overspecify. child ok */
       <!--CHEAT-->
       <section>
         <section>
-          <h1>Tricher</h1>
+          <h1>Cheat</h1>
           <h3>Tout le monde le fait...</h3>
         </section>
         <!--CHEAT-->
@@ -638,8 +292,7 @@ ul#menu &gt; li { /* overspecify. child ok */
       <section>
         <h3>Notes</h3>
         <ul>
-          <li><a href="http://talks.pixelastic.com/webperfs/#/">Slides</a></li>
-          <li><a href="http://octo.ubicast.tv/permalink/v12516c17909efi73ga5/">Vidéo</a></li>
+          <li><a href="http://talks.pixelastic.com/webperfs-takeofftalks/#/">Slides</a></li>
         </ul>
       </section>
     </div>

@@ -60,11 +60,14 @@
 
       <!--SOMMAIRE-->
       <section>
-        <h1>Concatenate</h1>
-        <h1>Compress</h1>
-        <h1>Cache</h1>
-        <h1>Cut</h1>
-        <!-- <h2>Cheat</h2> -->
+        <h1>Sommaire</h1>
+        <ol>
+          <li><h3>Concatenate</h3></li>
+          <li><h3>Compress</h3></li>
+          <li><h3>Cache</h3></li>
+          <li><h3>Cut</h3></li>
+          <li><h3>Cheat</h3></li>
+        </ol>
         <aside class="notes">
           <p>Trop de sujets à aborder en 25mn, essentiel par ordre d'importance.</p>
         </aside>
@@ -72,7 +75,7 @@
 
       <!--CONCATENATE-->
       <section>
-        <section>
+        <section data-background="./img/concatenate-bg.jpg">
           <h1>Concatenate</h1>
           <h3>Télécharger moins de fichiers</h3>
         </section>
@@ -87,17 +90,16 @@
         <section>
           <h3>Goulot d'étranglement</h3>
           <ul>
-            <li>Latence DNS</li>
+            <li>Maximum de connections parallèlles</li>
             <li>TCP Slow-start</li>
             <li>Overhead SSL</li>
-            <li>Maximum de connections parallèlles</li>
           </ul>
         </section>
       </section>
 
       <!--COMPRESS-->
       <section>
-        <section>
+        <section data-background="./img/compress-bg.jpg">
           <h1>Compress</h1>
           <h3>Télécharger des fichiers plus légers</h3>
         </section>
@@ -135,28 +137,22 @@ gzip_types application/javascript application/json text/css text/html text/xml [
 
         <section>
           <h3>Enlever le surpoids</h3>
+          <blockquote>En webperf, tout ce que vous avez écrit sera téléchargé et pourra être utilisé contre vous.</blockquote>
           <ul>
             <li>Minification</li>
-            <li>UnCSS</li>
-            <li>Enlever code de debug, écrit, téléchargé, executé</li>
+            <li>production != debug</li>
+            <li>Suppression du code mort</li>
           </ul>
+          <aside class="notes">
+            <p>Au dela du poids à télécharger, du JS inutilisé est quand même executé et du CSS est quand même parsé</p>
+          </aside>
         </section>
-
-        <section>
-          <h3>Images</h3>
-          <ul>
-            <li>Lossless</li>
-            <li>Lossy</li>
-            <li>ImageOptim</li>
-          </ul>
-        </section>
-
 
       </section>
 
       <!--CACHE-->
       <section>
-        <section>
+        <section data-background="./img/cache-bg.jpg">
           <h1>Cache</h1>
           <h3>Télécharger moins souvent</h3>
         </section>
@@ -227,29 +223,52 @@ gzip_types application/javascript application/json text/css text/html text/xml [
 
         <section>
           <h3>Time to first byte</h3>
+          <blockquote>Un tiens vaut mieux que deux tu l'auras</blockquote>
           <ul>
-            <li>Flush après le head, pour parser plus rapidement</li>
-            <li>Envoyer en moins de 15Ko pour TCP congestion</li>
+            <li>Retour rapide, puis itération</li>
+            <li>Servir depuis CDN</li>
+            <li>Découper JS/CSS en fichiers de 15Ko</li>
+            <li>Flush après le <code>&lt;head&gt;</code></li>
           </ul>
         </section>
 
         <section>
           <h3>Time to start render</h3>
-          <ul>
-            <li>CSS Critical Path</li>
-            <li>Découper le Js en must-have et should-have async</li>
-            <li>defer/async, bloquant</li>
-            <li>lazyloading images sous le fold</li>
-          </ul>
+          <blockquote>Prioriser</blockquote>
+
+          <table>
+            <thead>
+              <tr>
+                <td></td>
+                <td>Must Have</td>
+                <td>Nice to Have</td>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>CSS</td>
+                <td>inline</td>
+                <td>externe</td>
+              </tr>
+              <tr>
+                <td>Javascript</td>
+                <td><code>&lt;head&gt;</code></td>
+                <td><code>async</code></td>
+              </tr>
+              <tr>
+                <td>Image</td>
+                <td>inline</td>
+                <td>lazyloading</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <aside class="notes">
+            <p>Must Have CSS inline. Should have externe</p>
+            <p>Must Have JS head. Should have async</p>
+          </aside>
         </section>
 
-        <section>
-          <h3>FTL (Faster Than Light)</h3>
-          <ul>
-            <li>Latence vitesse de la lumière incompressible</li>
-            <li>Mettre sur CDN, plus proche, plus rapide. Suite du trajet sur toutes internes</li>
-          </ul>
-        </section>
       </section>
 
       <!--CHEAT-->
@@ -267,7 +286,7 @@ gzip_types application/javascript application/json text/css text/html text/xml [
             <li>Spinner plus rapide (Firefox)</li>
             <li>Spinner iOS (Facebook)</li>
           </ul>
-          <blockquote>If at first you don't succeed, blame it on your parents</blockquote>
+          <!-- <blockquote>If at first you don't succeed, blame it on your parents</blockquote> -->
           <aside class="notes">
             <p>Instagram indique que la photo est envoyée alors qu'elle n'est pas partie, mais il le fait en background.</p>
             <p>Gmail utilise des barres de progressions qui vont plus vite à la fin qu'au début</p>
@@ -277,7 +296,6 @@ gzip_types application/javascript application/json text/css text/html text/xml [
           </aside>
         </section>
       </section>
-
 
       <!--QUESTIONS-->
       <section data-background="./img/questions-bg.jpg">

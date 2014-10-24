@@ -32,7 +32,7 @@
     <div class="slides">
 
       <!--HOME-->
-      <section>
+      <section data-background="./img/intro-bg.jpg">
         <h1>Webperfs 101</h1>
       </section>
 
@@ -65,7 +65,6 @@
           <li><h3>Concatenate</h3></li>
           <li><h3>Compress</h3></li>
           <li><h3>Cache</h3></li>
-          <li><h3>Cut</h3></li>
           <li><h3>Cheat</h3></li>
         </ol>
         <aside class="notes">
@@ -214,66 +213,9 @@ gzip_types application/javascript application/json text/css text/html text/xml [
         </section>
       </section>
 
-      <!--CUT-->
-      <section>
-        <section>
-          <h1>Cut</h1>
-          <h3>Télécharger en plusieurs morceaux</h3>
-        </section>
-
-        <section>
-          <h3>Time to first byte</h3>
-          <blockquote>Un tiens vaut mieux que deux tu l'auras</blockquote>
-          <ul>
-            <li>Retour rapide, puis itération</li>
-            <li>Servir depuis CDN</li>
-            <li>Découper JS/CSS en fichiers de 15Ko</li>
-            <li>Flush après le <code>&lt;head&gt;</code></li>
-          </ul>
-        </section>
-
-        <section>
-          <h3>Time to start render</h3>
-          <blockquote>Prioriser</blockquote>
-
-          <table>
-            <thead>
-              <tr>
-                <td></td>
-                <td>Must Have</td>
-                <td>Nice to Have</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>CSS</td>
-                <td>inline</td>
-                <td>externe</td>
-              </tr>
-              <tr>
-                <td>Javascript</td>
-                <td><code>&lt;head&gt;</code></td>
-                <td><code>async</code></td>
-              </tr>
-              <tr>
-                <td>Image</td>
-                <td>inline</td>
-                <td>lazyloading</td>
-              </tr>
-            </tbody>
-          </table>
-
-          <aside class="notes">
-            <p>Must Have CSS inline. Should have externe</p>
-            <p>Must Have JS head. Should have async</p>
-          </aside>
-        </section>
-
-      </section>
-
       <!--CHEAT-->
       <section>
-        <section>
+        <section data-background="./img/cheat-bg.jpg">
           <h1>Cheat</h1>
           <h3>Tout le monde le fait...</h3>
         </section>
@@ -302,11 +244,15 @@ gzip_types application/javascript application/json text/css text/html text/xml [
         <h1>Questions ?</h1>
       </section>
 
-
       <section>
-        <h3>Notes</h3>
+        <h3>Photos</h3>
         <ul>
-          <li><a href="http://talks.pixelastic.com/webperfs-takeofftalks/#/">Slides</a></li>
+          <li><a href="https://unsplash.imgix.net/37/QAdTsSj8TOOWzlyLn3Rg_14248396556_aefcd9a926_o.jpg?q=75&fm=jpg&s=6403a6eaa6727c3b98629d9294f78b7b">Night highway</a> by <a href="http://caleb-morris.com/">Caleb George</a></li>
+          <li><a href="https://www.flickr.com/photos/pasukaru76/4728035718">Cockpit Box by pasukaru76</a></li>
+          <li><a href="https://www.flickr.com/photos/marcovdz/4520986339/">Compressed Car by marcovdz</a></li>
+          <li><a href="https://www.flickr.com/photos/34517490@N00/2743877537">Paris Clock by Nick</a></li>
+          <li><a href="http://www.flickr.com/photos/11371367@N08/1260802219/">Critical Miss by Scott Oggle</a></li>
+          <li><a href="http://unsplash.com/post/84391214384/download-by-keith-misner">Wood by Keith Misner</a></li>
         </ul>
       </section>
     </div>

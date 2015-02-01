@@ -3,7 +3,7 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Les webperfs pour les nuls</title>
+  <title>Introduction aux webperfs</title>
   <meta name="description" content="Présentation PerfUG Août 2014">
   <meta name="author" content="Timothée Carry">
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -33,7 +33,8 @@
 
       <!--HOME-->
       <section>
-        <h1>Les webperfs<br />pour les nuls</h1>
+        <h1>Introduction <br />
+          aux webperfs</h1>
       </section>
 
       <!--WHO AM I ?-->
@@ -49,77 +50,74 @@
       <!--POURQUOI-->
       <section>
         <h3>Pourquoi ?</h3>
-        <p><blockquote>On ne remarque pas quand c'est rapide,<br>
-            mais on ressent quand c'est lent.</blockquote></p>
+        <p>
+          <blockquote>On ne remarque pas quand c'est rapide,
+            <br>mais on ressent quand c'est lent.</blockquote>
+        </p>
         <ul>
           <li>Lenteur ressentie au bout de 4s en 2008, 3s en 2014</li>
           <li>Nouvelle génération habituée à l'instantané</li>
           <li>Explosion du nombre de terminaux mobiles</li>
         </ul>
-        <aside class="notes">
-          <p>Expérience en ajoutant 500ms sur un site de démo, les feedbacks utilisateurs passent de "Simple, facile à utiliser" à "Basique, complexe"</p>
-        </aside>
       </section>
 
       <!--SOMMAIRE-->
       <section>
         <h2>Sommaire</h2>
         <ol>
-          <li><h4>Serveur</h4></li>
-          <li><h4>Images</h4></li>
-          <li><h4>Javascript</h4></li>
-          <li><h4>CSS</h4></li>
-          <li><h4>Perception</h4></li>
+          <li>
+            <h4>Concatenate</h4>
+          </li>
+          <li>
+            <h4>Compress</h4>
+          </li>
+          <li>
+            <h4>Cache</h4>
+          </li>
+          <li>
+            <h4>Images</h4>
+          </li>
+          <li>
+            <h4>Cheat</h4>
+          </li>
         </ol>
+        <p>Bonus : Sprites, Javascript, CSS, Cookies.</p>
         <aside class="notes">
           <p>Chapitres par ordre d'importance. Plus gros gains au début qu'à la fin.</p>
         </aside>
       </section>
 
-
-
-      <!--SERVEUR-->
-      <section data-background="./img/server-bg.jpg">
-        <h1>Serveur</h1>
-        <aside class="notes">
-          <p>On considère que toute l'optim DB et back est déjà ok (php, ruby, node, java).</p>
-          <p>On s'occupe de ce qui va quitter le serveur vers le client.</p>
-        </aside>
-      </section>
-      <section>
-        <h2>Concatenate</h2>
-        <h2>Compress</h2>
-        <h2>Cache</h2>
-      </section>
-
       <!--CONCATENATE-->
       <section>
-        <section>
+        <section data-background="./img/concatenate-bg.jpg">
           <h1>Concatenate</h1>
           <h3>Télécharger moins de fichiers</h3>
         </section>
 
         <section>
           <h3>france.fr</h3>
-          <p><img src="./img/concatenate-france.png" alt="Waterfall france.fr" /></p>
+          <p>
+            <img src="./img/concatenate-france.png" alt="Waterfall france.fr" />
+          </p>
           <h3>github.com</h3>
-          <p><img src="./img/concatenate-github.png" alt="Waterfall github.com" /></p>
+          <p>
+            <img src="./img/concatenate-github.png" alt="Waterfall github.com" />
+          </p>
         </section>
 
         <section>
           <h3>Goulot d'étranglement</h3>
           <ul>
-            <li>Latence DNS</li>
+            <li>Maximum de connections parallèlles</li>
             <li>TCP Slow-start</li>
             <li>Overhead SSL</li>
-            <li>Maximum de connections parallèlles</li>
           </ul>
         </section>
       </section>
 
       <!--COMPRESS-->
       <section>
-        <section>
+        <section data-background="./img/compress-bg.jpg">
           <h1>Compress</h1>
           <h3>Télécharger des fichiers plus légers</h3>
         </section>
@@ -136,10 +134,6 @@
             <li>Serveur : Apache, Lighttpd, Nginx, IIS</li>
             <li>Browser : IE5.5+</li>
           </ul>
-          <aside class="notes">
-            <p>Attention aux proxies.</p>
-            <p>Peuvent décompresser à la volée ou supprimer <code>Accept-Encoding</code> requête, ou <code>Content-Encoding</code> réponse</p>
-          </aside>
         </section>
 
         <section>
@@ -162,54 +156,44 @@ gzip_types application/javascript application/json text/css text/html text/xml [
         <!--MINIFICATION-->
         <section data-background="./img/minification-bg.jpg">
           <h1>Minification</h1>
+          <h3>Cure d'amaigrissement</h3>
         </section>
 
         <section>
-          <h3>Spécifique à chaque langage</h3>
+          <h3>Enlever le surpoids</h3>
+          <blockquote>En webperf, tout ce que vous avez écrit sera téléchargé et pourra être utilisé contre vous.</blockquote>
           <ul>
             <li>Suppression</li>
             <li>Mutualisation</li>
             <li>Obfuscation</li>
           </ul>
-          <aside class="notes">
-            <p>Suppression des whitespaces et commentaires</p>
-            <p>Mutualisation de règles, sélecteurs CSS</p>
-            <p>Utilisation de valeurs par défaut HTML</p>
-            <p>Réecriture de variables Javascript</p>
-          </aside>
         </section>
 
         <section>
+          <h3>Spécifique à chaque langage</h3>
           <div class="row col3">
             <div class="column">
               <h3>cleancss</h3>
-              <p><code>main.css</code>
-              </p>
               <pre><code class="expanded">apachesolr_autocomplete.message{font-size:80%;color:#888}.apachesolr_autocomplete.count{float:right}div.apachesolr_autocomplete.suggestion{display:inline;float:left}div.ac_results li{list-style:none;background-image:none!important}</code></pre>
               <p>147Ko ⇒ 28Ko ⇒ 21Ko</p>
             </div>
             <div class="column">
               <h3>uglifyjs</h3>
-              <p><code>main.js</code>
-              </p>
               <pre><code class="expanded">apachesolr_ajax={};apachesolr_ajax.finalize=function(settings){pm.maps();$("#tooltip").hide();pm.tooltips();pm.jScrollPane();pm.carousels();pm.datepicker();pm.chooseLanguage();pm.popins();$("#filters-nav li").find(".indicator").hide();$("#overlay").hide();$("#filters-nav li").removeClass("active");$(".item a").hover(function(){$(this).find(".short").addClass("accessibility")},function(){$(this).find(".short").removeClass("accessibility")})};</code></pre>
               <p>428Ko ⇒ 128Ko ⇒ 102Ko</p>
             </div>
             <div class="column">
               <h3>html-minifier</h3>
-              <p><code>index.html</code>
-              </p>
               <pre><code class="expanded">&lt;body class=layout-home&gt;&lt;div class=apachesolr_ajax&gt;&lt;/div&gt;&lt;div id=content class=gradient-1&gt;&lt;p id=access-keys&gt;&lt;a href=#page&gt;Allez au contenu&lt;/a&gt; &lt;a href=#nav&gt;Allez à la navigation&lt;/a&gt; &lt;a href=#search&gt;Allez à la recherche&lt;/a&gt; &lt;a href=#lang lang=en&gt;Change language&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;/body&gt; </code></pre>
               <p>50Ko ⇒ 11Ko ⇒ 9.6Ko</p>
             </div>
           </div>
         </section>
-
       </section>
 
       <!--CACHE-->
       <section>
-        <section>
+        <section data-background="./img/cache-bg.jpg">
           <h1>Cache</h1>
           <h3>Télécharger moins souvent</h3>
         </section>
@@ -229,7 +213,8 @@ gzip_types application/javascript application/json text/css text/html text/xml [
           </ul>
           <aside class="notes">
             <p>Expires accepte une date absolue, GMT</p>
-            <p>Cache-Control accepte une date relative, forcer avec <code>no-cache</code></p>
+            <p>Cache-Control accepte une date relative, forcer avec <code>no-cache</code>
+            </p>
             <p>Toujours mettre <code>must-revalidate</code> pour être sur de ne pas servir du pas frais</p>
           </aside>
         </section>
@@ -255,15 +240,17 @@ gzip_types application/javascript application/json text/css text/html text/xml [
           </ul>
           <aside class="notes">
             <p>Browser recoit <code>Last-Modified</code> en réponse, et renvoie <code>If-Modified-Since</code> en requete</p>
-            <p>Attention <code>ETag : collisions, génération en fonction inode, donc différent si shardé.</code></p>
+            <p>Attention <code>ETag : collisions, génération en fonction inode, donc différent si shardé.</code>
+            </p>
             <p><code>Pragma: no-cache</code> n'est pas un header de response</p>
           </aside>
         </section>
 
-
         <section>
           <h3>Un beau dessin</h3>
-          <p><img src="./img/cache-graph.png" alt="Le cache dans un beau dessin" /></p>
+          <p>
+            <img src="./img/cache-graph.png" alt="Le cache dans un beau dessin" />
+          </p>
         </section>
 
         <section>
@@ -280,27 +267,57 @@ gzip_types application/javascript application/json text/css text/html text/xml [
             </li>
           </ul>
         </section>
+
+        <section>
+          <h3>Récapitulatif</h3>
+          <div class="row col2">
+            <div class="column">
+              <h4>HTML, API</h4>
+              <ul>
+                <li>URL significative</li>
+                <li>Fraicheur faible (minutes, heures)</li>
+                <li>Validation <code>Last-Modified</code>
+                </li>
+              </ul>
+            </div>
+            <div class="column">
+              <h4>CSS, Javascript, Images, Fonts</h4>
+              <ul>
+                <li>URL non-significative</li>
+                <li>Fraicheur maximum (1 an)</li>
+                <li>Hash dans l'url</li>
+                <li>Nouvelle version = nouvelle url</li>
+              </ul>
+            </div>
+          </div>
+        </section>
       </section>
-
-
 
       <!--IMAGES-->
-      <section data-background="./img/images-bg.jpg">
-        <h1>Images</h1>
-      </section>
       <section>
-        <h3>Poids lourd de la page</h3>
-
-        <ul>
-          <li>+50% du poids des pages (Alexa top 100 2013)</li>
-          <li>800Ko en moyenne (2.4Mo sur france.fr)</li>
-          <li>Différents formats / usages</li>
-        </ul>
-      </section>
-
-      <!--JPG-->
-      <section>
+        <section data-background="./img/images-bg.jpg">
+          <h1>Images</h1>
+        </section>
         <section>
+          <h3>Poids lourd de la page</h3>
+          <ul>
+            <li>+50% du poids des pages (Alexa top 100 2013)</li>
+            <li>800Ko en moyenne (2.4Mo sur france.fr)</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Différents formats,<br />
+            différents usages</h3>
+          <ul>
+            <li>jpg : photos</li>
+            <li>png : transparence</li>
+            <li>svg : vectoriel</li>
+            <li>gif : lolcats</li>
+          </ul>
+        </section>
+
+        <!--JPG-->
+        <section data-background="./img/jpg-bg.jpg">
           <h1>JPG</h1>
           <h3>Deux compressions</h3>
         </section>
@@ -308,7 +325,8 @@ gzip_types application/javascript application/json text/css text/html text/xml [
           <p>
             <img src="./img/images-jpg.jpg" alt="JPG de france.fr" />
           </p>
-          <p><code>155Ko</code></p>
+          <p><code>155Ko</code>
+          </p>
         </section>
 
         <!--LOSSLESS-->
@@ -383,11 +401,105 @@ Blue Tone Reproduction Curve    : (Binary data 2060 bytes, use -b option to extr
             <code>jpegoptim -m80 --strip-all</code>
           </p>
         </section>
+
+        <!--PNG-->
+        <section>
+          <h2>PNG, polyvalent</h2>
+          <ul>
+            <li>Transparence alpha</li>
+            <li>Palette 256 couleurs (PNG8) ou infinité (PNG24)</li>
+          </ul>
+          <div class="row col2">
+            <div class="column">
+              <p>
+                <img src="/img/png-france.png" alt="original" style="background:white" />
+              </p>
+              <p><code>5.7Ko</code>
+              </p>
+            </div>
+            <div class="column">
+              <p>
+                <img src="/img/png-pngquant.png" alt="après pngquant" style="background:white" />
+              </p>
+              <p><code>4.4Ko</code>
+              </p>
+            </div>
+          </div>
+          <p>
+            <code>pngquant</code>
+          </p>
+          <aside class="notes">
+            Format de référence. A privilégier.
+          </aside>
+        </section>
+
+        <!--SVG-->
+        <section>
+          <h2>SVG, l'image en XML</h2>
+          <img src="/img/starbucks.svg" alt="logo Starbucks en SVG" />
+          <pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
+ "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"&gt;
+&lt;svg  version="1.1" xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" width="200" height="200.395" viewBox="274.62 554.459 200 200.395"
+	 overflow="visible" enable-background="new 274.62 554.459 200 200.395" xml:space="preserve"&gt;
+&lt;path id="R_mark" fill="#010101" d="M439.469,737.486c3.126,0,5.808,2.431,5.808,5.73c0,3.33-2.679,5.759-5.808,5.759
+	C444.159,740.476,442.102,738.415,439.469,738.415z M438.243,746.547h-1.021v-6.629h2.538c1.58,0,2.354,0.588,2.354,1.888
+	c0,1.194-0.744,1.704-1.735,1.827l1.89,2.913h-1.114l-1.766-2.881h-1.147L438.243,746.547L438.243,746.547L438.243,746.547z
+   M438.243,742.83h1.21c1.238,0,1.641-0.357,1.641-1.086c0-0.634-0.31-0.991-1.472-0.991h-1.379V742.83L438.243,742.83z"/&gt;</code></pre>
+          <p>SVG : <code>18Ko</code>, <code>7.9Ko</code> gzippé</p>
+          <p>PNG : <code>14Ko</code>
+          </p>
+        </section>
+
+        <!--GIF-->
+        <section>
+          <h2>GIF, à oublier</h2>
+          <div class="row col2">
+            <div class="column">
+              <img src="/img/gif-nyancat.gif" height="250">
+            </div>
+            <div class="column">
+              <ul>
+                <li>256 couleurs max</li>
+                <li>Transparence simple</li>
+                <li>Pas de compression</li>
+                <li>Animation en boucle</li>
+                <li>Filesize plus faible uniquement sur petits fichiers</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!--CHEAT-->
+      <section>
+        <section data-background="./img/cheat-bg.jpg">
+          <h1>Cheat</h1>
+          <h3>Tout le monde le fait...</h3>
+        </section>
+        <!--CHEAT-->
+        <section>
+          <h3>Faire illusion</h3>
+          <ul>
+            <li>Feedback en avance (Instagram)</li>
+            <li>Illusion d'optique (Gmail)</li>
+            <li>Spinner plus rapide (Firefox)</li>
+            <li>Spinner iOS (Facebook)</li>
+          </ul>
+          <!-- <blockquote>If at first you don't succeed, blame it on your parents</blockquote> -->
+          <aside class="notes">
+            <p>Instagram indique que la photo est envoyée alors qu'elle n'est pas partie, mais il le fait en background.</p>
+            <p>Gmail utilise des barres de progressions qui vont plus vite à la fin qu'au début</p>
+            <p>Possible aussi d'utiliser des progressbar animées qui tournent dans le sens inverse</p>
+            <p>Firefox accélérait la vitesse du spinner à chaque release</p>
+            <p>Quand Facebook utilise le spinner iOS, on crois que c'est le téléphone qui est lent</p>
+          </aside>
+        </section>
       </section>
 
       <!--SPRITES-->
       <section>
-        <section>
+        <section data-background="./img/sprite-bg.png" data-background-size="640px" data-background-repeat="repeat" class="sprites">
           <h1>Sprites</h1>
           <h3>Concaténation d'images</h3>
         </section>
@@ -398,7 +510,7 @@ Blue Tone Reproduction Curve    : (Binary data 2060 bytes, use -b option to extr
               <p>Secret of Mana</p>
             </div>
             <div class="column">
-              <img src="./img/sprite-google.png" alt="Google sprite" style="background:white"/>;
+              <img src="./img/sprite-google.png" alt="Google sprite" style="background:white" />
               <p>Google</p>
             </div>
           </div>
@@ -416,54 +528,39 @@ a:hover {
 }</code></pre>
           <p><code>grunt spritely</code>, Compass, www.spritecow.com</p>
           <aside class="notes">
-            Attention aux dimensions, marche sur dimensions fixes.<br />
-            Possible de faire des repeat-x ou repeat-y, mais sprite spécial<br />
-            Possible aussi d'utiliser une icon-font dans certains cas
+            Attention aux dimensions, marche sur dimensions fixes.
+            <br />Possible de faire des repeat-x ou repeat-y, mais sprite spécial
+            <br />Possible aussi d'utiliser une icon-font dans certains cas
           </aside>
         </section>
       </section>
 
-
-
       <!--JAVASCRIPT-->
-      <section data-background="./img/javascript-bg.jpg">
-        <h1>Javascript</h1>
-      </section>
-
-      <!--CHARGEMENT-->
       <section>
-        <section>
-          <h1>Chargement</h1>
-          <h3>Retarder jusqu'au bout</h3>
+        <section data-background="./img/javascript-bg.jpg">
+          <h1>Javascript</h1>
         </section>
+
+        <!--CHARGEMENT-->
         <section>
           <h3>Téléchargement bloquant</h3>
           <ul>
             <li><code>&lt;script&gt;</code> bloque le parsing</li>
-            <li>Mettre en bas de page, avant <code>&lt;/body&gt;</code></li>
+            <li>Mettre en bas de page, avant <code>&lt;/body&gt;</code>
+            </li>
             <li><code>async</code> sur scripts indépendants</li>
             <li>Script1 charge script2 (pub, tracking, sharing)</li>
           </ul>
-          <aside class="notes">
-            <p>Javascript est bloquant car il peut potentiellement contenir un <code>document.write</code> qui va modifier le DOM</p>
-            <p><code>defer</code> doit mettre en bas de page, mais buggué sous IE9 (charge dans le désordre)<br /></p>
-            <p><code>async</code> laisse le browser charger quand il peut et executé une fois retourné</p>
-          </aside>
         </section>
-      </section>
 
-      <!--SURPOIDS-->
-      <section>
+        <!--SURPOIDS-->
         <section>
-          <h1>Surpoids</h1>
-          <h3>Garder le minimum</h3>
-        </section>
-        <section>
-          <h3>Langage non compilé</h3>
+          <h3>Langage non-compilé</h3>
           <ul>
             <li>Code écrit = code téléchargé = code exécuté</li>
             <li>Utiliser les builds sur mesure (jQuery, Bootstrap, etc)</li>
-            <li><a href="http://microjs.com/">microjs.com</a></li>
+            <li><a href="http://microjs.com/">microjs.com</a>
+            </li>
           </ul>
           <aside class="notes">
             Ne pas mettre de "mode debug" en prod. Code executé
@@ -471,26 +568,20 @@ a:hover {
         </section>
       </section>
 
-
-
-
       <!--CSS-->
-      <section data-background="./img/css-bg.jpg">
-        <h1>CSS</h1>
-      </section>
-
-      <!-- REPAINTS & REFLOWS -->
       <section>
-        <section>
-          <h1>Affichage</h1>
-          <h3>Les reflows sont lents</h3>
+        <section data-background="./img/css-bg.jpg">
+          <h1>CSS</h1>
         </section>
+
+        <!-- REPAINTS & REFLOWS -->
         <section>
           <h3>Repaints et Reflows</h3>
           <ul>
             <li>Repaint : Changer la couleur des pixels</li>
             <li>Reflow : Changer les dimensions des éléments</li>
-            <li><a href="http://csstriggers.com/">csstriggers.com</a></li>
+            <li><a href="http://csstriggers.com/">csstriggers.com</a>
+            </li>
           </ul>
         </section>
         <section>
@@ -499,22 +590,18 @@ a:hover {
             <li>CSS en haut de page</li>
             <li>Insérer dans le DOM en batch</li>
             <li>Taille des images dans le HTML</li>
-            <li><code>border: 1px solid transparent</code></li>
+            <li><code>border: 1px solid transparent</code>
+            </li>
           </ul>
           <aside class="notes">
             <p>Avec un border transparent, lui ajouter une couleur ne coute qu'un repaint plutot qu'un reflow si le border n'était pas là.</p>
           </aside>
         </section>
-      </section>
 
-      <!--CSS PARSER-->
-      <section>
+        <!--CSS PARSER-->
         <section>
-          <h1>Parseur</h1>
-          <h3>Comment ça marche ?</h3>
-        </section>
-        <section>
-          <h3>Mode de fonctionnement</h3>
+          <h3>Le parseur CSS,<br />
+            comment ça marche ?</h3>
           <ul>
             <li>Contre-intuitif</li>
             <li>Boucle sur tous les éléments</li>
@@ -541,107 +628,111 @@ a:hover {
 &lt;/div&gt;</code></pre>
             </div>
             <div class="column">
-              <pre><code>#header h1 { /* Bad key */
-  font-size:3rem;
-}
-ul#menu &gt; li { /* overspecify. child ok */
-  float:left
-}
-#menu li a { /* Bad key, too broad */
+              <pre><code>ul#menu li a { /* Arghhhh */
   background:red;
 }
-.menu-item { /* good */
-  background:green;
+#menu li a { /* Bof */
+  background:red;
 }
-#content ul * { /* Arrghhhh */
-  display:block;
+#menu li &gt; a { /* Mouais, mieux */
+  background:red;
+}
+.menu-item { /* Perfect */
+  background:red;
 }</code></pre>
             </div>
           </div>
-          
+
         </section>
         <section>
           <h3>Bonnes pratiques</h3>
           <ul>
             <li>Utiliser des classes plutôt que des tags</li>
             <li>Pas plus de trois niveaux</li>
-            <li>Pas de sélecteur universel <code>.menu *</code></li>
-            <li>Pas de regexp d'attribut <code>a[href^="http://"]</code></li>
+            <li>Pas de sélecteur universel <code>.menu *</code>
+            </li>
+            <li>Pas de regexp d'attribut <code>a[href^="http://"]</code>
+            </li>
             <li>Lisibilité et maintenabilité du code avant tout</li>
           </ul>
           <aside class="notes">
-            <p>On peut optimiser encore plus (en mettant des classes sur tout par exemple), mais il faut trouver le juste milieu entre la perf
-              et la facilité d'utilisation.</p>
+            <p>On peut optimiser encore plus (en mettant des classes sur tout par exemple), mais il faut trouver le juste milieu entre la perf et la facilité d'utilisation.</p>
             <p>Si on ne devait faire attention qu'à la performance, on ne pourrait rien utiliser de CSS3.</p>
           </aside>
         </section>
       </section>
 
-
-
-
-
-      <!--PERCEPTION-->
-      <section data-background="./img/perception-bg.jpg">
-        <h1>Perception</h1>
-      </section>
-
-      <!--PROGRESSIVE-->
+      <!--COOKIELESS-->
       <section>
-        <section>
-          <h1>Progression</h1>
-          <h3>Afficher petit à petit</h3>
+        <section data-background="./img/cookies-bg.jpg">
+          <h1>Cookies</h1>
         </section>
         <section>
-          <blockquote>Un tiens vaut mieux que deux tu l'auras.</blockquote>
+          <p>
+            <img src="./img/cookies.jpg" alt="U eated my cookie ?" width="450" />
+          </p>
           <ul>
-            <li><code>startRender</code> rapide</li>
-            <li>Affichage progressif (jpg, placeholders)</li>
-            <li>Lazyloading</li>
+            <li>Envoyé sur chaque requête (300B en moyenne)</li>
+            <li>Inutile pour les assets statiques</li>
           </ul>
         </section>
-      </section>
+        <section>
+          <h2>france.fr</h2>
+          <div class="row col2">
+            <div class="column">
+              <h3>fieldgroup.css</h3>
+              <pre><code>div.fieldgroup {
+margin:.5em 0 1em 0;
+}
+div.fieldgroup .content {
+  padding-left:1em;/*LTR*/
+}</code></pre>
+              <p>454B</p>
 
-      <!--CHEAT-->
-      <section>
-        <section>
-          <h1>Tricher</h1>
-          <h3>Tout le monde le fait...</h3>
+            </div>
+            <div class="column">
+              <h3>Cookie header</h3>
+              <pre><code class="cropped">has_js=1;
+xtvrn=$499610$;
+xtan499610=-;
+xtant499610=1;
+__utma=132163929.1854756013.1405454567.1405454567.1405454567.1;
+__utmb=132163929.1.10.1405454567;
+__utmc=132163929;
+__utmz=132163929.1405454567.1.1.utmcsr=(direct)|utmccn=(direct)|utmcmd=(none)</code></pre>
+              <p>249B</p>
+            </div>
+          </div>
         </section>
-        <!--CHEAT-->
         <section>
-          <h3>Faire illusion</h3>
-          <ul>
-            <li>Feedback en avance (Instagram)</li>
-            <li>Illusion d'optique (Gmail)</li>
-            <li>Spinner plus rapide (Firefox)</li>
-            <li>Spinner iOS (Facebook)</li>
-          </ul>
-          <blockquote>If at first you don't succeed, blame it on your parents</blockquote>
+          <h3>Simple redirection CNAME</h3>
+          <pre><code>static.france.fr 10800 IN CNAME www.france.fr.</code></pre>
+          <p>ou</p>
+          <pre><code>static-france.fr 10800 IN CNAME www.france.fr.</code></pre>
           <aside class="notes">
-            <p>Instagram indique que la photo est envoyée alors qu'elle n'est pas partie, mais il le fait en background.</p>
-            <p>Gmail utilise des barres de progressions qui vont plus vite à la fin qu'au début</p>
-            <p>Possible aussi d'utiliser des progressbar animées qui tournent dans le sens inverse</p>
-            <p>Firefox accélérait la vitesse du spinner à chaque release</p>
-            <p>Quand Facebook utilise le spinner iOS, on crois que c'est le téléphone qui est lent</p>
+            Faire pointer sous-domaine, ou domaine externe vers même site
+            <br />Rien de spécial à faire
+          </aside>
+        </section>
+        <section>
+          <h3>www.domain.com > domain.com</h3>
+          <ul>
+            <li>Cookies sur <code>domain.com</code> s'étendent sur <code>*.domain.com</code>
+            </li>
+            <li><code>_setDomainName</code> pour Google Analytics</li>
+          </ul>
+          <aside class="notes">
+            Les cookies d'un domain parent s'étendent à tous les domaines enfants
+            <br />D'où, utiliser un www pour le site, pour pas que cookies envoyés sur assets
           </aside>
         </section>
       </section>
-
 
       <!--QUESTIONS-->
       <section data-background="./img/questions-bg.jpg">
         <h1>Questions ?</h1>
       </section>
 
-
-      <section>
-        <h3>Notes</h3>
-        <ul>
-          <li><a href="http://talks.pixelastic.com/webperfs/#/">Slides</a></li>
-          <li><a href="http://octo.ubicast.tv/permalink/v12516c17909efi73ga5/">Vidéo</a></li>
-        </ul>
-      </section>
     </div>
 
   </div>
@@ -651,7 +742,7 @@ ul#menu &gt; li { /* overspecify. child ok */
 
   <script>
     // Full list of configuration options available here:
-     // https://github.com/hakimel/reveal.js#configuration
+    // https://github.com/hakimel/reveal.js#configuration
     Reveal.initialize({
       controls: false,
       progress: true,

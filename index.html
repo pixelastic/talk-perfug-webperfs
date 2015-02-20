@@ -32,9 +32,8 @@
     <div class="slides">
 
       <!--HOME-->
-      <section>
-        <h1>Introduction <br />
-          aux webperfs</h1>
+      <section data-background="./img/intro-bg.jpg">
+        <h1>Webperfs 101</h1>
       </section>
 
       <!--WHO AM I ?-->
@@ -43,6 +42,7 @@
         <ul>
           <li>Consultant Octo Technology</li>
           <li>Spécialiste en Web Front</li>
+          <li>Équipe Sunrise, 3e étage</li>
           <li><a href="https://twitter.com/pixelastic/">@pixelastic</a> à l'extérieur</li>
         </ul>
       </section>
@@ -55,7 +55,7 @@
             <br>mais on ressent quand c'est lent.</blockquote>
         </p>
         <ul>
-          <li>Lenteur ressentie au bout de 4s en 2008, 3s en 2014</li>
+          <li>Lenteur ressentie au bout de 4s en 2008, 2s en 2015</li>
           <li>Nouvelle génération habituée à l'instantané</li>
           <li>Explosion du nombre de terminaux mobiles</li>
         </ul>
@@ -66,10 +66,10 @@
         <h2>Sommaire</h2>
         <ol>
           <li>
-            <h4>Concatenate</h4>
+            <h4>Concatenation</h4>
           </li>
           <li>
-            <h4>Compress</h4>
+            <h4>Compression</h4>
           </li>
           <li>
             <h4>Cache</h4>
@@ -90,7 +90,7 @@
       <!--CONCATENATE-->
       <section>
         <section data-background="./img/concatenate-bg.jpg">
-          <h1>Concatenate</h1>
+          <h1>Concatenation</h1>
           <h3>Télécharger moins de fichiers</h3>
         </section>
 
@@ -108,9 +108,9 @@
         <section>
           <h3>Goulot d'étranglement</h3>
           <ul>
-            <li>Maximum de connections parallèlles</li>
             <li>TCP Slow-start</li>
             <li>Overhead SSL</li>
+            <li>Maximum de connections parallèles</li>
           </ul>
         </section>
       </section>
@@ -118,7 +118,7 @@
       <!--COMPRESS-->
       <section>
         <section data-background="./img/compress-bg.jpg">
-          <h1>Compress</h1>
+          <h1>Compression</h1>
           <h3>Télécharger des fichiers plus légers</h3>
         </section>
 
@@ -150,13 +150,14 @@ compress.filetype  = ("application/javascript", "application/json", \
 "text/css", "text/html", "text/xml", [...] )</code></pre>
           <h4>nginx</h4>
           <pre><code>gzip on;
+gzip_comp_level 6;
 gzip_types application/javascript application/json text/css text/html text/xml [...]; </code></pre>
         </section>
 
         <!--MINIFICATION-->
         <section data-background="./img/minification-bg.jpg">
           <h1>Minification</h1>
-          <h3>Cure d'amaigrissement</h3>
+          <h3>Cure d'amaigrissement secondaire</h3>
         </section>
 
         <section>
@@ -190,6 +191,7 @@ gzip_types application/javascript application/json text/css text/html text/xml [
           </div>
         </section>
       </section>
+
 
       <!--CACHE-->
       <section>
@@ -495,6 +497,11 @@ Blue Tone Reproduction Curve    : (Binary data 2060 bytes, use -b option to extr
             <p>Quand Facebook utilise le spinner iOS, on crois que c'est le téléphone qui est lent</p>
           </aside>
         </section>
+      </section>
+
+      <!--BONUS ?-->
+      <section data-background="./img/questions-bg.jpg">
+        <h1>Bonus time ?</h1>
       </section>
 
       <!--SPRITES-->

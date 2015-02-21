@@ -19,3 +19,16 @@
 .reveal .sprite-fun.visible.current-fragment {
   display:block;
 }
+
+.reveal .thumbnails {
+  list-style:none;
+  overflow:hidden;
+  margin-top:-30px;
+}
+.reveal .thumbnails li {
+  float:left;
+  width:300px;
+  font-size:0.6em;
+  text-align:center;
+
+}

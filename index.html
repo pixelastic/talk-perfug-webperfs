@@ -3,8 +3,8 @@
 
 <head>
   <meta charset="utf-8">
-  <title>Introduction aux webperfs</title>
-  <meta name="description" content="Présentation PerfUG Août 2014">
+  <title>Bonnes pratiques webperfs</title>
+  <meta name="description" content="BBL Meetic 2015">
   <meta name="author" content="Timothée Carry">
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -33,7 +33,7 @@
 
       <!--HOME-->
       <section data-background="./img/intro-bg.jpg">
-        <h1>Webperfs 101</h1>
+        <h1>Bonnes pratiques webperfs</h1>
       </section>
 
       <!--WHO AM I ?-->
@@ -81,10 +81,7 @@
             <h4>Cheat</h4>
           </li>
         </ol>
-        <p>Bonus : Sprites, Javascript, CSS, Cookies.</p>
-        <aside class="notes">
-          <p>Chapitres par ordre d'importance. Plus gros gains au début qu'à la fin.</p>
-        </aside>
+        <p>Bonus : Sprites, JavaScript, CSS, Cookies.</p>
       </section>
 
       <!--CONCATENATE-->
@@ -95,9 +92,9 @@
         </section>
 
         <section>
-          <h3>france.fr</h3>
+          <h3>meetic.fr</h3>
           <p>
-            <img src="./img/concatenate-france.png" alt="Waterfall france.fr" />
+            <img src="./img/concatenate-meetic.png" alt="Waterfall france.fr" />
           </p>
           <h3>github.com</h3>
           <p>
@@ -130,7 +127,7 @@
           <h3>GZIP : La formule magique</h3>
           <ul>
             <li>Gain de 66% en moyenne</li>
-            <li>Assets textuels : HTML, CSS, Javascript, XML, JSON</li>
+            <li>Assets textuels : HTML, CSS, JavaScript, XML, JSON</li>
             <li>Serveur : Apache, Lighttpd, Nginx, IIS</li>
             <li>Browser : IE5.5+</li>
           </ul>
@@ -175,18 +172,21 @@ gzip_types application/javascript application/json text/css text/html text/xml [
           <div class="row col3">
             <div class="column">
               <h3>cleancss</h3>
-              <pre><code class="expanded">apachesolr_autocomplete.message{font-size:80%;color:#888}.apachesolr_autocomplete.count{float:right}div.apachesolr_autocomplete.suggestion{display:inline;float:left}div.ac_results li{list-style:none;background-image:none!important}</code></pre>
-              <p>147Ko ⇒ 28Ko ⇒ 21Ko</p>
+              <pre><code class="expanded">.i-btn-1{background:url(../../../../img/themes/aurora/common/buttons.png) 0 -1035px repeat-x;border:1px solid #266099;color:#fff;cursor:pointer;display:inline-block;font-size:13px;font-weight:700;height:24px;line-height:24px;padding:0 10px;text-align:center;text-decoration:none;text-shadow:1px 1px 1px #3c90e3}</code></pre>
+              <p><code>buttons.css</code></p>
+              <p>15Ko ⇒ 1.6Ko ⇒ 1.1Ko</p>
             </div>
             <div class="column">
               <h3>uglifyjs</h3>
-              <pre><code class="expanded">apachesolr_ajax={};apachesolr_ajax.finalize=function(settings){pm.maps();$("#tooltip").hide();pm.tooltips();pm.jScrollPane();pm.carousels();pm.datepicker();pm.chooseLanguage();pm.popins();$("#filters-nav li").find(".indicator").hide();$("#overlay").hide();$("#filters-nav li").removeClass("active");$(".item a").hover(function(){$(this).find(".short").addClass("accessibility")},function(){$(this).find(".short").removeClass("accessibility")})};</code></pre>
-              <p>428Ko ⇒ 128Ko ⇒ 102Ko</p>
+              <pre><code class="expanded">(function(){var method;var noop=function(){};var methods=["assert","clear","count","debug","dir","dirxml","error","exception","group","groupCollapsed","groupEnd","info","log","markTimeline","profile","profileEnd","table","time","timeEnd","timeStamp","trace","warn"];var length=methods.length;var console=window.console=window.console</code></pre>
+              <p><code>common.js</code></p>
+              <p>43Ko ⇒ 11Ko ⇒ 7.2Ko</p>
             </div>
             <div class="column">
               <h3>html-minifier</h3>
-              <pre><code class="expanded">&lt;body class=layout-home&gt;&lt;div class=apachesolr_ajax&gt;&lt;/div&gt;&lt;div id=content class=gradient-1&gt;&lt;p id=access-keys&gt;&lt;a href=#page&gt;Allez au contenu&lt;/a&gt; &lt;a href=#nav&gt;Allez à la navigation&lt;/a&gt; &lt;a href=#search&gt;Allez à la recherche&lt;/a&gt; &lt;a href=#lang lang=en&gt;Change language&lt;/a&gt;&lt;/p&gt;&lt;/div&gt;&lt;/body&gt; </code></pre>
-              <p>50Ko ⇒ 11Ko ⇒ 9.6Ko</p>
+              <pre><code class="expanded">&lt;body&gt;&lt;div class=i-body&gt;&lt;div class=i-clearer&gt;&lt;/div&gt;&lt;div class=i-nav&gt;&lt;div class=i-header-wrapper&gt;&lt;div class="i-container i-clearfix"&gt;&lt;div class="i-logo i-png"&gt;&lt;/div&gt;&lt;div&gt;&lt;div class="i-login-form-default i-login-form-twoline" id=i_login&gt;&lt;div class=i-login-form-left&gt;&lt;label class="i-label i-member-login" for=txtHandle&gt;Déjà Membre&lt;/label&gt;</code></pre>
+              <p><code>index.html</code></p>
+              <p>64Ko ⇒ 18Ko ⇒ 16Ko</p>
             </div>
           </div>
         </section>
@@ -204,7 +204,7 @@ gzip_types application/javascript application/json text/css text/html text/xml [
           <h3>Fraicheur</h3>
           <ul>
             <li>Date limite de consommation</li>
-            <li>Rapide, pas de requete si encore frais</li>
+            <li>Rapide, pas de requête si encore frais</li>
             <li>
               <p>Deux headers</p>
               <ul>
@@ -241,7 +241,7 @@ gzip_types application/javascript application/json text/css text/html text/xml [
             </li>
           </ul>
           <aside class="notes">
-            <p>Browser recoit <code>Last-Modified</code> en réponse, et renvoie <code>If-Modified-Since</code> en requete</p>
+            <p>Browser recoit <code>Last-Modified</code> en réponse, et renvoie <code>If-Modified-Since</code> en requête</p>
             <p>Attention <code>ETag : collisions, génération en fonction inode, donc différent si shardé.</code>
             </p>
             <p><code>Pragma: no-cache</code> n'est pas un header de response</p>
@@ -249,7 +249,6 @@ gzip_types application/javascript application/json text/css text/html text/xml [
         </section>
 
         <section>
-          <h3>Un beau dessin</h3>
           <p>
             <img src="./img/cache-graph.png" alt="Le cache dans un beau dessin" />
           </p>
@@ -274,18 +273,18 @@ gzip_types application/javascript application/json text/css text/html text/xml [
           <h3>Récapitulatif</h3>
           <div class="row col2">
             <div class="column">
-              <h4>HTML, API</h4>
+              <h4>URL significative</h4>
               <ul>
-                <li>URL significative</li>
+                <li>ex: HTML, API</li>
                 <li>Fraicheur faible (minutes, heures)</li>
                 <li>Validation <code>Last-Modified</code>
                 </li>
               </ul>
             </div>
             <div class="column">
-              <h4>CSS, Javascript, Images, Fonts</h4>
+              <h4>Url non-significative</h4>
               <ul>
-                <li>URL non-significative</li>
+                <li>ex: CSS, JavaScript, Images, Fonts</li>
                 <li>Fraicheur maximum (1 an)</li>
                 <li>Hash dans l'url</li>
                 <li>Nouvelle version = nouvelle url</li>
@@ -303,8 +302,8 @@ gzip_types application/javascript application/json text/css text/html text/xml [
         <section>
           <h3>Poids lourd de la page</h3>
           <ul>
-            <li>+50% du poids des pages (Alexa top 100 2013)</li>
-            <li>800Ko en moyenne (2.4Mo sur france.fr)</li>
+            <li>+50% du poids des pages (30% sur meetic.fr)</li>
+            <li>800Ko en moyenne (1.3Mo sur meetic.fr)</li>
           </ul>
         </section>
         <section>
@@ -323,12 +322,8 @@ gzip_types application/javascript application/json text/css text/html text/xml [
           <h1>JPG</h1>
           <h3>Deux compressions</h3>
         </section>
-        <section>
-          <p>
-            <img src="./img/images-jpg.jpg" alt="JPG de france.fr" />
-          </p>
-          <p><code>155Ko</code>
-          </p>
+        <section data-background="./img/jpg-original.jpg" data-background-size="1000px">
+          <h2>494Ko</h2>
         </section>
 
         <!--LOSSLESS-->
@@ -344,34 +339,31 @@ gzip_types application/javascript application/json text/css text/html text/xml [
         </section>
         <section>
           <code>exiftool</code>
-          <pre><code>Color Space Data                : RGB
-Profile Date Time               : 1998:02:09 06:49:00
-Primary Platform                : Microsoft Corporation
-Device Manufacturer             : IEC
-Device Attributes               : Reflective, Glossy, Positive, Color
-Rendering Intent                : Perceptual
-Connection Space Illuminant     : 0.9642 1 0.82491
-Profile Creator                 : HP
-Profile Copyright               : Copyright (c) 1998 Hewlett-Packard Company
-Red Matrix Column               : 0.43607 0.22249 0.01392
-Green Matrix Column             : 0.38515 0.71687 0.09708
-Blue Matrix Column              : 0.14307 0.06061 0.7141
-Device Mfg Desc                 : IEC http://www.iec.ch
-Viewing Cond Illuminant Type    : D50
-Luminance                       : 76.03647 80 87.12462
-Measurement Flare               : 0.999%
-Measurement Illuminant          : D65
-Technology                      : Cathode Ray Tube Display
-Red Tone Reproduction Curve     : (Binary data 2060 bytes, use -b option to extract)
-Green Tone Reproduction Curve   : (Binary data 2060 bytes, use -b option to extract)
-Blue Tone Reproduction Curve    : (Binary data 2060 bytes, use -b option to extract)</code></pre>
-          <p><code>jpegtran -optimize -copy none</code>
-          </p>
-          <p>155Ko ⇒ 152Ko</p>
-          <aside class="notes">
-            <p>Contient les données photographiques, coordonnées GPS, date, thumbnail, tags, commentaires</p>
-            <p>Attention à ne pas supprimer le copyright</p>
-          </aside>
+          <pre><code>File Size                       : 494 kB
+Image Size                      : 1920x1265
+File Type                       : JPEG
+MIME Type                       : image/jpeg
+Exif Byte Order                 : Little-endian (Intel, II)
+XMP Toolkit                     : Adobe XMP Core 5.3-c011 66.145661, 2012/02/06-14:56:27
+Original Document ID            : xmp.did:999DEC701EB0E311801EFDD03E7C1154
+Document ID                     : xmp.did:6C302F067BD111E4A0FFFBC0293A508B
+Instance ID                     : xmp.iid:6C302F057BD111E4A0FFFBC0293A508B
+Creator Tool                    : Adobe Photoshop CS6 (Windows)
+Derived From Instance ID        : xmp.iid:25D692D731CB11E4BB03A7E70526CA15
+Derived From Document ID        : xmp.did:25D692D831CB11E4BB03A7E70526CA15
+DCT Encode Version              : 100
+APP14 Flags 0                   : [14], Encoded with Blend=1 downsampling
+APP14 Flags 1                   : (none)
+Color Transform                 : YCbCr
+Encoding Process                : Baseline DCT, Huffman coding
+Bits Per Sample                 : 8
+Color Components                : 3
+Y Cb Cr Sub Sampling            : YCbCr4:4:4 (1 1)</code></pre>
+          <p><code>jpegtran -optimize -copy none</code></p>
+        </section>
+
+        <section data-background="./img/jpg-lossless.jpg" data-background-size="1000px">
+          <h2>494Ko ⇒ 493Ko</h2>
         </section>
 
         <!--LOSSY-->
@@ -380,96 +372,55 @@ Blue Tone Reproduction Curve    : (Binary data 2060 bytes, use -b option to extr
           <ul>
             <li>Moins de détails</li>
             <li>Limite de la perception humaine</li>
-            <li>80% acceptable en moyenne</li>
+            <li>Apparition d'artefacts</li>
           </ul>
-          <aside class="notes">
-            Les graphistes ont un oeil plus aiguisé que le notre là dessus
-          </aside>
-        </section>
-        <section>
-          <div class="row col2">
-            <div class="column">
-              <img src="./img/images-lossless.jpg" width="428" alt="Lossless" />
-              <p><code>152Ko</code>
-              </p>
-            </div>
-            <div class="column">
-              <img src="./img/images-lossy.jpg" width="428" alt="Lossless + lossy" />
-              <p><code>41Ko</code>
-              </p>
-            </div>
-          </div>
-          <p>
-            <code>jpegoptim -m80 --strip-all</code>
-          </p>
+          <p><code>jpegotim -m80 --strip-all</code></p>
+          <p><code>cjpeg-dssim jpegoptim</code></p>
         </section>
 
-        <!--PNG-->
         <section>
-          <h2>PNG, polyvalent</h2>
-          <ul>
-            <li>Transparence alpha</li>
-            <li>Palette 256 couleurs (PNG8) ou infinité (PNG24)</li>
+          <ul class="thumbnails">
+            <li>
+              <p><img src="./img/jpg-lossy-90.jpg" alt="Lossy compression 90" /></p>
+              <p><code>-m90</code>, 342Ko, 0.000528</p>
+            </li>
+            <li>
+              <p><img src="./img/jpg-lossy-80.jpg" alt="Lossy compression 80" /></p>
+              <p><code>-m80</code>, 219Ko, 0.001259</p>
+            </li>
+            <li>
+              <p><img src="./img/jpg-lossy-70.jpg" alt="Lossy compression 70" /></p>
+              <p><code>-m70</code>, 172Ko, 0.002076</p>
+            </li>
+            <li>
+              <p><img src="./img/jpg-lossy-60.jpg" alt="Lossy compression 60" /></p>
+              <p><code>-m60</code>, 141Ko, 0.003032</p>
+            </li>
+            <li>
+              <p><img src="./img/jpg-lossy-50.jpg" alt="Lossy compression 50" /></p>
+              <p><code>-m50</code>, 121Ko, 0.003785</p>
+            </li>
+            <li>
+              <p><img src="./img/jpg-lossy-40.jpg" alt="Lossy compression 40" /></p>
+              <p><code>-m40</code>, 104Ko, 0.005191</p>
+            </li>
+            <li>
+              <p><img src="./img/jpg-lossy-30.jpg" alt="Lossy compression 30" /></p>
+              <p><code>-m30</code>, 86Ko, 0.007569</p>
+            </li>
+            <li>
+              <p><img src="./img/jpg-lossy-20.jpg" alt="Lossy compression 20" /></p>
+              <p><code>-m20</code>, 64Ko, 0.013038</p>
+            </li>
+            <li>
+              <p><img src="./img/jpg-lossy-10.jpg" alt="Lossy compression 10" /></p>
+              <p><code>-m10</code>, 38Ko, 0.034276</p>
+            </li>
           </ul>
-          <div class="row col2">
-            <div class="column">
-              <p>
-                <img src="./img/png-france.png" alt="original" style="background:white" />
-              </p>
-              <p><code>5.7Ko</code>
-              </p>
-            </div>
-            <div class="column">
-              <p>
-                <img src="./img/png-pngquant.png" alt="après pngquant" style="background:white" />
-              </p>
-              <p><code>4.4Ko</code>
-              </p>
-            </div>
-          </div>
-          <p>
-            <code>pngquant</code>
-          </p>
-          <aside class="notes">
-            Format de référence. A privilégier.
-          </aside>
         </section>
 
-        <!--SVG-->
-        <section>
-          <h2>SVG, l'image en XML</h2>
-          <img src="./img/starbucks.svg" alt="logo Starbucks en SVG" />
-          <pre><code>&lt;?xml version="1.0" encoding="utf-8"?&gt;
-&lt;!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN"
- "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd"&gt;
-&lt;svg  version="1.1" xmlns="&ns_svg;" xmlns:xlink="&ns_xlink;" width="200" height="200.395" viewBox="274.62 554.459 200 200.395"
-	 overflow="visible" enable-background="new 274.62 554.459 200 200.395" xml:space="preserve"&gt;
-&lt;path id="R_mark" fill="#010101" d="M439.469,737.486c3.126,0,5.808,2.431,5.808,5.73c0,3.33-2.679,5.759-5.808,5.759
-	C444.159,740.476,442.102,738.415,439.469,738.415z M438.243,746.547h-1.021v-6.629h2.538c1.58,0,2.354,0.588,2.354,1.888
-	c0,1.194-0.744,1.704-1.735,1.827l1.89,2.913h-1.114l-1.766-2.881h-1.147L438.243,746.547L438.243,746.547L438.243,746.547z
-   M438.243,742.83h1.21c1.238,0,1.641-0.357,1.641-1.086c0-0.634-0.31-0.991-1.472-0.991h-1.379V742.83L438.243,742.83z"/&gt;</code></pre>
-          <p>SVG : <code>18Ko</code>, <code>7.9Ko</code> gzippé</p>
-          <p>PNG : <code>14Ko</code>
-          </p>
-        </section>
-
-        <!--GIF-->
-        <section>
-          <h2>GIF, à oublier</h2>
-          <div class="row col2">
-            <div class="column">
-              <img src="./img/gif-nyancat.gif" height="250">
-            </div>
-            <div class="column">
-              <ul>
-                <li>256 couleurs max</li>
-                <li>Transparence simple</li>
-                <li>Pas de compression</li>
-                <li>Animation en boucle</li>
-                <li>Filesize plus faible uniquement sur petits fichiers</li>
-              </ul>
-            </div>
-          </div>
+        <section data-background="./img/jpg-dssim.jpg" data-background-size="1000px">
+          <h2>493Ko ⇒ 137Ko</h2>
         </section>
       </section>
 
@@ -501,7 +452,7 @@ Blue Tone Reproduction Curve    : (Binary data 2060 bytes, use -b option to extr
 
       <!--BONUS ?-->
       <section data-background="./img/questions-bg.jpg">
-        <h1>Bonus time ?</h1>
+        <h1>Questions ?</h1>
       </section>
 
       <!--SPRITES-->
@@ -545,7 +496,7 @@ a:hover {
       <!--JAVASCRIPT-->
       <section>
         <section data-background="./img/javascript-bg.jpg">
-          <h1>Javascript</h1>
+          <h1>JavaScript</h1>
         </section>
 
         <!--CHARGEMENT-->

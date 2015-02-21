@@ -117,7 +117,7 @@ body {
 /* Progress bar */
 
 .reveal .progress {
-  background: url('../../img/ui-octo-pattern.png') 0 5px repeat-x #030e2b;
+  background: url('../../img/ui/ui-octo-pattern.png') 0 5px repeat-x #030e2b;
   height: 30px;
 }
 .reveal .progress span {
